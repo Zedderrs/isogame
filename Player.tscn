@@ -1,309 +1,666 @@
-[gd_scene load_steps=171 format=2]
+[gd_scene load_steps=71 format=2]
 
-[ext_resource path="res://assets/human_tiles/Human_0_Run6.png" type="Texture" id=1]
-[ext_resource path="res://assets/human_tiles/Human_0_Run0.png" type="Texture" id=2]
-[ext_resource path="res://assets/human_tiles/Human_0_Run8.png" type="Texture" id=3]
-[ext_resource path="res://assets/human_tiles/Human_0_Run5.png" type="Texture" id=4]
-[ext_resource path="res://assets/human_tiles/Human_0_Run7.png" type="Texture" id=5]
-[ext_resource path="res://assets/human_tiles/Human_0_Run1.png" type="Texture" id=6]
-[ext_resource path="res://assets/human_tiles/Human_0_Run2.png" type="Texture" id=7]
-[ext_resource path="res://assets/human_tiles/Human_0_Run3.png" type="Texture" id=8]
-[ext_resource path="res://assets/human_tiles/Human_0_Run9.png" type="Texture" id=9]
-[ext_resource path="res://assets/human_tiles/Human_0_Run4.png" type="Texture" id=10]
-[ext_resource path="res://assets/human_tiles/Human_0_Pickup2.png" type="Texture" id=11]
-[ext_resource path="res://assets/human_tiles/Human_0_Pickup7.png" type="Texture" id=12]
-[ext_resource path="res://assets/human_tiles/Human_0_Pickup6.png" type="Texture" id=13]
-[ext_resource path="res://assets/human_tiles/Human_0_Pickup8.png" type="Texture" id=14]
-[ext_resource path="res://assets/human_tiles/Human_0_Pickup4.png" type="Texture" id=15]
-[ext_resource path="res://assets/human_tiles/Human_0_Pickup5.png" type="Texture" id=16]
-[ext_resource path="res://assets/human_tiles/Human_0_Pickup1.png" type="Texture" id=17]
-[ext_resource path="res://assets/human_tiles/Human_0_Pickup9.png" type="Texture" id=18]
-[ext_resource path="res://assets/human_tiles/Human_0_Pickup0.png" type="Texture" id=19]
-[ext_resource path="res://assets/human_tiles/Human_0_Pickup3.png" type="Texture" id=20]
-[ext_resource path="res://assets/human_tiles/Human_0_Idle0.png" type="Texture" id=21]
-[ext_resource path="res://assets/human_tiles/Human_7_Run2.png" type="Texture" id=22]
-[ext_resource path="res://assets/human_tiles/Human_7_Run6.png" type="Texture" id=23]
-[ext_resource path="res://assets/human_tiles/Human_7_Run7.png" type="Texture" id=24]
-[ext_resource path="res://assets/human_tiles/Human_7_Run3.png" type="Texture" id=25]
-[ext_resource path="res://assets/human_tiles/Human_7_Run5.png" type="Texture" id=26]
-[ext_resource path="res://assets/human_tiles/Human_7_Run9.png" type="Texture" id=27]
-[ext_resource path="res://assets/human_tiles/Human_7_Pickup9.png" type="Texture" id=28]
-[ext_resource path="res://assets/human_tiles/Human_7_Run8.png" type="Texture" id=29]
-[ext_resource path="res://assets/human_tiles/Human_7_Run1.png" type="Texture" id=30]
-[ext_resource path="res://assets/human_tiles/Human_7_Run4.png" type="Texture" id=31]
-[ext_resource path="res://assets/human_tiles/Human_7_Run0.png" type="Texture" id=32]
-[ext_resource path="res://assets/human_tiles/Human_7_Pickup4.png" type="Texture" id=33]
-[ext_resource path="res://assets/human_tiles/Human_6_Pickup4.png" type="Texture" id=34]
-[ext_resource path="res://assets/human_tiles/Human_6_Pickup8.png" type="Texture" id=35]
-[ext_resource path="res://assets/human_tiles/Human_7_Idle0.png" type="Texture" id=36]
-[ext_resource path="res://assets/human_tiles/Human_6_Run3.png" type="Texture" id=37]
-[ext_resource path="res://assets/human_tiles/Human_7_Pickup6.png" type="Texture" id=38]
-[ext_resource path="res://assets/human_tiles/Human_7_Pickup7.png" type="Texture" id=39]
-[ext_resource path="res://assets/human_tiles/Human_7_Pickup8.png" type="Texture" id=40]
-[ext_resource path="res://assets/human_tiles/Human_6_Pickup5.png" type="Texture" id=41]
-[ext_resource path="res://assets/human_tiles/Human_6_Run7.png" type="Texture" id=42]
-[ext_resource path="res://assets/human_tiles/Human_6_Run8.png" type="Texture" id=43]
-[ext_resource path="res://assets/human_tiles/Human_6_Pickup3.png" type="Texture" id=44]
-[ext_resource path="res://assets/human_tiles/Human_6_Run4.png" type="Texture" id=45]
-[ext_resource path="res://assets/human_tiles/Human_6_Pickup1.png" type="Texture" id=46]
-[ext_resource path="res://assets/human_tiles/Human_6_Pickup9.png" type="Texture" id=47]
-[ext_resource path="res://assets/human_tiles/Human_6_Run5.png" type="Texture" id=48]
-[ext_resource path="res://assets/human_tiles/Human_6_Run6.png" type="Texture" id=49]
-[ext_resource path="res://assets/human_tiles/Human_6_Run9.png" type="Texture" id=50]
-[ext_resource path="res://assets/human_tiles/Human_6_Idle0.png" type="Texture" id=51]
-[ext_resource path="res://assets/human_tiles/Human_6_Pickup7.png" type="Texture" id=52]
-[ext_resource path="res://assets/human_tiles/Human_6_Pickup0.png" type="Texture" id=53]
-[ext_resource path="res://assets/human_tiles/Human_6_Run1.png" type="Texture" id=54]
-[ext_resource path="res://assets/human_tiles/Human_6_Run2.png" type="Texture" id=55]
-[ext_resource path="res://assets/human_tiles/Human_7_Pickup1.png" type="Texture" id=56]
-[ext_resource path="res://assets/human_tiles/Human_6_Run0.png" type="Texture" id=57]
-[ext_resource path="res://assets/human_tiles/Human_6_Pickup6.png" type="Texture" id=58]
-[ext_resource path="res://assets/human_tiles/Human_7_Pickup5.png" type="Texture" id=59]
-[ext_resource path="res://assets/human_tiles/Human_7_Pickup0.png" type="Texture" id=60]
-[ext_resource path="res://assets/human_tiles/Human_6_Pickup2.png" type="Texture" id=61]
-[ext_resource path="res://assets/human_tiles/Human_7_Pickup2.png" type="Texture" id=62]
-[ext_resource path="res://assets/human_tiles/Human_7_Pickup3.png" type="Texture" id=63]
-[ext_resource path="res://assets/human_tiles/Human_2_Pickup3.png" type="Texture" id=64]
-[ext_resource path="res://assets/human_tiles/Human_1_Pickup2.png" type="Texture" id=65]
-[ext_resource path="res://assets/human_tiles/Human_1_Run6.png" type="Texture" id=66]
-[ext_resource path="res://assets/human_tiles/Human_2_Idle0.png" type="Texture" id=67]
-[ext_resource path="res://assets/human_tiles/Human_2_Pickup2.png" type="Texture" id=68]
-[ext_resource path="res://assets/human_tiles/Human_2_Pickup4.png" type="Texture" id=69]
-[ext_resource path="res://assets/human_tiles/Human_2_Pickup5.png" type="Texture" id=70]
-[ext_resource path="res://assets/human_tiles/Human_1_Run3.png" type="Texture" id=71]
-[ext_resource path="res://assets/human_tiles/Human_1_Pickup6.png" type="Texture" id=72]
-[ext_resource path="res://assets/human_tiles/Human_1_Pickup0.png" type="Texture" id=73]
-[ext_resource path="res://assets/human_tiles/Human_1_Pickup7.png" type="Texture" id=74]
-[ext_resource path="res://assets/human_tiles/Human_1_Pickup1.png" type="Texture" id=75]
-[ext_resource path="res://assets/human_tiles/Human_1_Pickup9.png" type="Texture" id=76]
-[ext_resource path="res://assets/human_tiles/Human_1_Pickup4.png" type="Texture" id=77]
-[ext_resource path="res://assets/human_tiles/Human_1_Run4.png" type="Texture" id=78]
-[ext_resource path="res://assets/human_tiles/Human_1_Pickup5.png" type="Texture" id=79]
-[ext_resource path="res://assets/human_tiles/Human_1_Run5.png" type="Texture" id=80]
-[ext_resource path="res://assets/human_tiles/Human_1_Pickup8.png" type="Texture" id=81]
-[ext_resource path="res://assets/human_tiles/Human_1_Run7.png" type="Texture" id=82]
-[ext_resource path="res://assets/human_tiles/Human_1_Run9.png" type="Texture" id=83]
-[ext_resource path="res://assets/human_tiles/Human_1_Run2.png" type="Texture" id=84]
-[ext_resource path="res://assets/human_tiles/Human_1_Run1.png" type="Texture" id=85]
-[ext_resource path="res://assets/human_tiles/Human_1_Pickup3.png" type="Texture" id=86]
-[ext_resource path="res://assets/human_tiles/Human_1_Idle0.png" type="Texture" id=87]
-[ext_resource path="res://assets/human_tiles/Human_1_Run0.png" type="Texture" id=88]
-[ext_resource path="res://assets/human_tiles/Human_2_Pickup0.png" type="Texture" id=89]
-[ext_resource path="res://assets/human_tiles/Human_2_Pickup1.png" type="Texture" id=90]
-[ext_resource path="res://assets/human_tiles/Human_1_Run8.png" type="Texture" id=91]
-[ext_resource path="res://assets/human_tiles/Human_2_Run6.png" type="Texture" id=92]
-[ext_resource path="res://assets/human_tiles/Human_2_Pickup7.png" type="Texture" id=93]
-[ext_resource path="res://assets/human_tiles/Human_2_Run2.png" type="Texture" id=94]
-[ext_resource path="res://assets/human_tiles/Human_2_Run3.png" type="Texture" id=95]
-[ext_resource path="res://assets/human_tiles/Human_2_Run9.png" type="Texture" id=96]
-[ext_resource path="res://assets/human_tiles/Human_3_Pickup3.png" type="Texture" id=97]
-[ext_resource path="res://assets/human_tiles/Human_3_Pickup4.png" type="Texture" id=98]
-[ext_resource path="res://assets/human_tiles/Human_2_Pickup8.png" type="Texture" id=99]
-[ext_resource path="res://assets/human_tiles/Human_3_Pickup5.png" type="Texture" id=100]
-[ext_resource path="res://assets/human_tiles/Human_3_Run4.png" type="Texture" id=101]
-[ext_resource path="res://assets/human_tiles/Human_3_Run5.png" type="Texture" id=102]
-[ext_resource path="res://assets/human_tiles/Human_3_Run1.png" type="Texture" id=103]
-[ext_resource path="res://assets/human_tiles/Human_3_Run3.png" type="Texture" id=104]
-[ext_resource path="res://assets/human_tiles/Human_3_Run0.png" type="Texture" id=105]
-[ext_resource path="res://assets/human_tiles/Human_2_Run7.png" type="Texture" id=106]
-[ext_resource path="res://assets/human_tiles/Human_3_Pickup6.png" type="Texture" id=107]
-[ext_resource path="res://assets/human_tiles/Human_2_Run4.png" type="Texture" id=108]
-[ext_resource path="res://assets/human_tiles/Human_3_Pickup2.png" type="Texture" id=109]
-[ext_resource path="res://assets/human_tiles/Human_3_Run6.png" type="Texture" id=110]
-[ext_resource path="res://assets/human_tiles/Human_3_Idle0.png" type="Texture" id=111]
-[ext_resource path="res://assets/human_tiles/Human_3_Pickup0.png" type="Texture" id=112]
-[ext_resource path="res://assets/human_tiles/Human_2_Pickup9.png" type="Texture" id=113]
-[ext_resource path="res://assets/human_tiles/Human_3_Pickup8.png" type="Texture" id=114]
-[ext_resource path="res://assets/human_tiles/Human_3_Pickup9.png" type="Texture" id=115]
-[ext_resource path="res://assets/human_tiles/Human_3_Run2.png" type="Texture" id=116]
-[ext_resource path="res://assets/human_tiles/Human_2_Run1.png" type="Texture" id=117]
-[ext_resource path="res://assets/human_tiles/Human_2_Run8.png" type="Texture" id=118]
-[ext_resource path="res://assets/human_tiles/Human_3_Pickup1.png" type="Texture" id=119]
-[ext_resource path="res://assets/human_tiles/Human_2_Run5.png" type="Texture" id=120]
-[ext_resource path="res://assets/human_tiles/Human_3_Pickup7.png" type="Texture" id=121]
-[ext_resource path="res://assets/human_tiles/Human_2_Pickup6.png" type="Texture" id=122]
-[ext_resource path="res://assets/human_tiles/Human_2_Run0.png" type="Texture" id=123]
-[ext_resource path="res://assets/human_tiles/Human_5_Pickup5.png" type="Texture" id=124]
-[ext_resource path="res://assets/human_tiles/Human_5_Pickup6.png" type="Texture" id=125]
-[ext_resource path="res://assets/human_tiles/Human_4_Pickup0.png" type="Texture" id=126]
-[ext_resource path="res://assets/human_tiles/Human_4_Pickup6.png" type="Texture" id=127]
-[ext_resource path="res://assets/human_tiles/Human_4_Pickup9.png" type="Texture" id=128]
-[ext_resource path="res://assets/human_tiles/Human_4_Pickup1.png" type="Texture" id=129]
-[ext_resource path="res://assets/human_tiles/Human_4_Run2.png" type="Texture" id=130]
-[ext_resource path="res://assets/human_tiles/Human_4_Run5.png" type="Texture" id=131]
-[ext_resource path="res://assets/human_tiles/Human_4_Run8.png" type="Texture" id=132]
-[ext_resource path="res://assets/human_tiles/Human_4_Pickup3.png" type="Texture" id=133]
-[ext_resource path="res://assets/human_tiles/Human_5_Pickup2.png" type="Texture" id=134]
-[ext_resource path="res://assets/human_tiles/Human_4_Run1.png" type="Texture" id=135]
-[ext_resource path="res://assets/human_tiles/Human_4_Run3.png" type="Texture" id=136]
-[ext_resource path="res://assets/human_tiles/Human_4_Run4.png" type="Texture" id=137]
-[ext_resource path="res://assets/human_tiles/Human_5_Idle0.png" type="Texture" id=138]
-[ext_resource path="res://assets/human_tiles/Human_4_Pickup7.png" type="Texture" id=139]
-[ext_resource path="res://assets/human_tiles/Human_3_Run9.png" type="Texture" id=140]
-[ext_resource path="res://assets/human_tiles/Human_4_Run7.png" type="Texture" id=141]
-[ext_resource path="res://assets/human_tiles/Human_4_Pickup5.png" type="Texture" id=142]
-[ext_resource path="res://assets/human_tiles/Human_3_Run7.png" type="Texture" id=143]
-[ext_resource path="res://assets/human_tiles/Human_4_Pickup4.png" type="Texture" id=144]
-[ext_resource path="res://assets/human_tiles/Human_5_Pickup1.png" type="Texture" id=145]
-[ext_resource path="res://assets/human_tiles/Human_3_Run8.png" type="Texture" id=146]
-[ext_resource path="res://assets/human_tiles/Human_5_Pickup0.png" type="Texture" id=147]
-[ext_resource path="res://assets/human_tiles/Human_4_Idle0.png" type="Texture" id=148]
-[ext_resource path="res://assets/human_tiles/Human_4_Pickup8.png" type="Texture" id=149]
-[ext_resource path="res://assets/human_tiles/Human_4_Run9.png" type="Texture" id=150]
-[ext_resource path="res://assets/human_tiles/Human_4_Run0.png" type="Texture" id=151]
-[ext_resource path="res://assets/human_tiles/Human_5_Pickup3.png" type="Texture" id=152]
-[ext_resource path="res://assets/human_tiles/Human_5_Pickup4.png" type="Texture" id=153]
-[ext_resource path="res://assets/human_tiles/Human_4_Run6.png" type="Texture" id=154]
-[ext_resource path="res://assets/human_tiles/Human_4_Pickup2.png" type="Texture" id=155]
-[ext_resource path="res://assets/human_tiles/Human_5_Run8.png" type="Texture" id=156]
-[ext_resource path="res://assets/human_tiles/Human_5_Pickup9.png" type="Texture" id=157]
-[ext_resource path="res://assets/human_tiles/Human_5_Run0.png" type="Texture" id=158]
-[ext_resource path="res://assets/human_tiles/Human_5_Pickup8.png" type="Texture" id=159]
-[ext_resource path="res://assets/human_tiles/Human_5_Run5.png" type="Texture" id=160]
-[ext_resource path="res://assets/human_tiles/Human_5_Run4.png" type="Texture" id=161]
-[ext_resource path="res://assets/human_tiles/Human_5_Run9.png" type="Texture" id=162]
-[ext_resource path="res://assets/human_tiles/Human_5_Pickup7.png" type="Texture" id=163]
-[ext_resource path="res://assets/human_tiles/Human_5_Run1.png" type="Texture" id=164]
-[ext_resource path="res://assets/human_tiles/Human_5_Run6.png" type="Texture" id=165]
-[ext_resource path="res://assets/human_tiles/Human_5_Run3.png" type="Texture" id=166]
-[ext_resource path="res://assets/human_tiles/Human_5_Run2.png" type="Texture" id=167]
-[ext_resource path="res://assets/human_tiles/Human_5_Run7.png" type="Texture" id=168]
+[ext_resource path="res://assets/elf_test_spritesheet/elf_test/elf_test_Run.png" type="Texture" id=1]
+[ext_resource path="res://assets/elf_test_spritesheet/elf_test/elf_test_Idle1.png" type="Texture" id=2]
+[ext_resource path="res://assets/animations/elf/body_run/elf_body_run_e.tres" type="Animation" id=3]
+[ext_resource path="res://assets/animations/elf/body_run/elf_body_run_nw.tres" type="Animation" id=4]
+[ext_resource path="res://assets/animations/elf/body_run/elf_body_run_ne.tres" type="Animation" id=5]
+[ext_resource path="res://assets/animations/elf/body_run/elf_body_run_sw.tres" type="Animation" id=6]
+[ext_resource path="res://assets/animations/elf/body_idle/elf_body_idle_se.tres" type="Animation" id=7]
+[ext_resource path="res://assets/animations/elf/body_idle/elf_body_idle_sw.tres" type="Animation" id=8]
+[ext_resource path="res://assets/animations/elf/body_idle/elf_body_idle_n.tres" type="Animation" id=9]
+[ext_resource path="res://assets/animations/elf/body_run/elf_body_run_se.tres" type="Animation" id=10]
+[ext_resource path="res://assets/animations/elf/body_run/elf_body_run_w.tres" type="Animation" id=11]
+[ext_resource path="res://assets/animations/elf/body_idle/elf_body_idle_ne.tres" type="Animation" id=12]
+[ext_resource path="res://assets/animations/elf/body_run/elf_body_run_s.tres" type="Animation" id=13]
+[ext_resource path="res://assets/animations/elf/body_idle/elf_body_idle_nw.tres" type="Animation" id=14]
+[ext_resource path="res://assets/animations/elf/body_idle/elf_body_idle_s.tres" type="Animation" id=15]
+[ext_resource path="res://assets/animations/elf/body_run/elf_body_run_n.tres" type="Animation" id=16]
+[ext_resource path="res://assets/animations/elf/body_idle/elf_body_idle_e.tres" type="Animation" id=17]
+[ext_resource path="res://assets/animations/elf/body_idle/elf_body_idle_w.tres" type="Animation" id=18]
+[ext_resource path="res://assets/elf_test_spritesheet/elf_test/Male_ArcherElven_Hair_Run.png" type="Texture" id=19]
+[ext_resource path="res://assets/animations/elf/hair_run/elf_hair_run_s.tres" type="Animation" id=20]
+[ext_resource path="res://assets/animations/elf/hair_run/elf_hair_run_n.tres" type="Animation" id=21]
+[ext_resource path="res://assets/animations/elf/hair_run/elf_hair_run_se.tres" type="Animation" id=22]
+[ext_resource path="res://assets/animations/elf/hair_run/elf_hair_run_sw.tres" type="Animation" id=23]
+[ext_resource path="res://assets/animations/elf/hair_run/elf_hair_run_w.tres" type="Animation" id=24]
+[ext_resource path="res://assets/animations/elf/hair_run/elf_hair_run_nw.tres" type="Animation" id=25]
+[ext_resource path="res://assets/animations/elf/hair_run/elf_hair_run_ne.tres" type="Animation" id=26]
+[ext_resource path="res://assets/animations/elf/hair_run/elf_hair_run_e.tres" type="Animation" id=27]
+[ext_resource path="res://assets/elf_test_spritesheet/elf_test/Male_ArcherElven_Hair_Idle1.png" type="Texture" id=28]
+[ext_resource path="res://assets/animations/elf/hair_idle/elf_hair_idle_s.tres" type="Animation" id=29]
+[ext_resource path="res://assets/animations/elf/hair_idle/elf_hair_idle_sw.tres" type="Animation" id=30]
+[ext_resource path="res://assets/animations/elf/hair_idle/elf_hair_idle_se.tres" type="Animation" id=31]
+[ext_resource path="res://assets/animations/elf/hair_idle/elf_hair_idle_w.tres" type="Animation" id=32]
+[ext_resource path="res://assets/animations/elf/hair_idle/elf_hair_idle_n.tres" type="Animation" id=33]
+[ext_resource path="res://assets/animations/elf/hair_idle/elf_hair_idle_ne.tres" type="Animation" id=34]
+[ext_resource path="res://assets/animations/elf/hair_idle/elf_hair_idle_e.tres" type="Animation" id=35]
+[ext_resource path="res://assets/animations/elf/hair_idle/elf_hair_idle_nw.tres" type="Animation" id=36]
 [ext_resource path="res://Player.gd" type="Script" id=169]
 
-[sub_resource type="SpriteFrames" id=1]
-animations = [ {
-"frames": [ ExtResource( 60 ), ExtResource( 56 ), ExtResource( 62 ), ExtResource( 63 ), ExtResource( 33 ), ExtResource( 59 ), ExtResource( 38 ), ExtResource( 39 ), ExtResource( 40 ), ExtResource( 28 ) ],
-"loop": true,
-"name": "pickup_up",
-"speed": 10.0
-}, {
-"frames": [ ExtResource( 111 ) ],
-"loop": true,
-"name": "idle_down",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 51 ) ],
-"loop": true,
-"name": "idle_up_left",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 19 ), ExtResource( 17 ), ExtResource( 11 ), ExtResource( 20 ), ExtResource( 15 ), ExtResource( 16 ), ExtResource( 13 ), ExtResource( 12 ), ExtResource( 14 ), ExtResource( 18 ) ],
-"loop": true,
-"name": "pickup_up_right",
-"speed": 10.0
-}, {
-"frames": [ ExtResource( 89 ), ExtResource( 90 ), ExtResource( 68 ), ExtResource( 64 ), ExtResource( 69 ), ExtResource( 70 ), ExtResource( 122 ), ExtResource( 93 ), ExtResource( 99 ), ExtResource( 113 ) ],
-"loop": true,
-"name": "pickup_down_right",
-"speed": 10.0
-}, {
-"frames": [ ExtResource( 126 ), ExtResource( 129 ), ExtResource( 155 ), ExtResource( 133 ), ExtResource( 144 ), ExtResource( 142 ), ExtResource( 127 ), ExtResource( 139 ), ExtResource( 149 ), ExtResource( 128 ) ],
-"loop": true,
-"name": "pickup_down_left",
-"speed": 10.0
-}, {
-"frames": [ ExtResource( 36 ) ],
-"loop": true,
-"name": "idle_up",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 88 ), ExtResource( 85 ), ExtResource( 84 ), ExtResource( 71 ), ExtResource( 78 ), ExtResource( 80 ), ExtResource( 66 ), ExtResource( 82 ), ExtResource( 91 ), ExtResource( 83 ) ],
-"loop": true,
-"name": "run_right",
-"speed": 10.0
-}, {
-"frames": [ ExtResource( 53 ), ExtResource( 46 ), ExtResource( 61 ), ExtResource( 44 ), ExtResource( 34 ), ExtResource( 41 ), ExtResource( 58 ), ExtResource( 52 ), ExtResource( 35 ), ExtResource( 47 ) ],
-"loop": true,
-"name": "pickup_up_left",
-"speed": 10.0
-}, {
-"frames": [ ExtResource( 57 ), ExtResource( 54 ), ExtResource( 55 ), ExtResource( 37 ), ExtResource( 45 ), ExtResource( 48 ), ExtResource( 49 ), ExtResource( 42 ), ExtResource( 43 ), ExtResource( 50 ) ],
-"loop": true,
-"name": "run_up_left",
-"speed": 10.0
-}, {
-"frames": [ ExtResource( 148 ) ],
-"loop": true,
-"name": "idle_down_left",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 112 ), ExtResource( 119 ), ExtResource( 109 ), ExtResource( 97 ), ExtResource( 98 ), ExtResource( 100 ), ExtResource( 107 ), ExtResource( 121 ), ExtResource( 114 ), ExtResource( 115 ) ],
-"loop": true,
-"name": "pickup_down",
-"speed": 10.0
-}, {
-"frames": [ ExtResource( 147 ), ExtResource( 145 ), ExtResource( 134 ), ExtResource( 152 ), ExtResource( 153 ), ExtResource( 124 ), ExtResource( 125 ), ExtResource( 163 ), ExtResource( 159 ), ExtResource( 157 ) ],
-"loop": true,
-"name": "pickup_left",
-"speed": 10.0
-}, {
-"frames": [ ExtResource( 138 ) ],
-"loop": true,
-"name": "idle_left",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 32 ), ExtResource( 30 ), ExtResource( 22 ), ExtResource( 25 ), ExtResource( 31 ), ExtResource( 26 ), ExtResource( 23 ), ExtResource( 24 ), ExtResource( 29 ), ExtResource( 27 ) ],
-"loop": true,
-"name": "run_up",
-"speed": 10.0
-}, {
-"frames": [ ExtResource( 151 ), ExtResource( 135 ), ExtResource( 130 ), ExtResource( 136 ), ExtResource( 137 ), ExtResource( 131 ), ExtResource( 154 ), ExtResource( 141 ), ExtResource( 132 ), ExtResource( 150 ) ],
-"loop": true,
-"name": "run_down_left",
-"speed": 10.0
-}, {
-"frames": [ ExtResource( 73 ), ExtResource( 75 ), ExtResource( 65 ), ExtResource( 86 ), ExtResource( 77 ), ExtResource( 79 ), ExtResource( 72 ), ExtResource( 74 ), ExtResource( 81 ), ExtResource( 76 ) ],
-"loop": true,
-"name": "pickup_right",
-"speed": 10.0
-}, {
-"frames": [ ExtResource( 67 ) ],
-"loop": true,
-"name": "idle_down_right",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 2 ), ExtResource( 6 ), ExtResource( 7 ), ExtResource( 8 ), ExtResource( 10 ), ExtResource( 4 ), ExtResource( 1 ), ExtResource( 5 ), ExtResource( 3 ), ExtResource( 9 ) ],
-"loop": true,
-"name": "run_up_right",
-"speed": 10.0
-}, {
-"frames": [ ExtResource( 105 ), ExtResource( 103 ), ExtResource( 116 ), ExtResource( 104 ), ExtResource( 101 ), ExtResource( 102 ), ExtResource( 110 ), ExtResource( 143 ), ExtResource( 146 ), ExtResource( 140 ) ],
-"loop": true,
-"name": "run_down",
-"speed": 10.0
-}, {
-"frames": [ ExtResource( 158 ), ExtResource( 164 ), ExtResource( 167 ), ExtResource( 166 ), ExtResource( 161 ), ExtResource( 160 ), ExtResource( 165 ), ExtResource( 168 ), ExtResource( 156 ), ExtResource( 162 ) ],
-"loop": true,
-"name": "run_left",
-"speed": 10.0
-}, {
-"frames": [ ExtResource( 21 ) ],
-"loop": true,
-"name": "idle_up_right",
-"speed": 1.0
-}, {
-"frames": [ ExtResource( 87 ) ],
-"loop": true,
-"name": "idle_right",
-"speed": 1.0
-}, {
-"frames": [ ExtResource( 123 ), ExtResource( 117 ), ExtResource( 94 ), ExtResource( 95 ), ExtResource( 108 ), ExtResource( 120 ), ExtResource( 92 ), ExtResource( 106 ), ExtResource( 118 ), ExtResource( 96 ) ],
-"loop": true,
-"name": "run_down_right",
-"speed": 10.0
-} ]
+[sub_resource type="CapsuleShape2D" id=1]
+radius = 16.0
+height = 0.0
+
+[sub_resource type="Animation" id=2]
+resource_name = "elf_body_idle_s"
+step = 0.333333
+tracks/0/type = "value"
+tracks/0/path = NodePath("BodyIdle:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 1.11759e-08, 0.333333, 0.666667 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ 6, 7, 8 ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "elf_body_idle_s"
+step = 0.333333
+tracks/0/type = "value"
+tracks/0/path = NodePath("BodyIdle:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 1.11759e-08, 0.333333, 0.666667 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ 9, 10, 11 ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "elf_body_idle_s"
+step = 0.333333
+tracks/0/type = "value"
+tracks/0/path = NodePath("BodyIdle:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 3.72529e-09, 0.333333, 0.666667 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ 21, 22, 23 ]
+}
+
+[sub_resource type="Animation" id=5]
+resource_name = "elf_body_idle_s"
+step = 0.333333
+tracks/0/type = "value"
+tracks/0/path = NodePath("BodyIdle:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 1.11759e-08, 0.333333, 0.666667 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ 15, 16, 17 ]
+}
+
+[sub_resource type="Animation" id=6]
+resource_name = "elf_body_idle_s"
+step = 0.333333
+tracks/0/type = "value"
+tracks/0/path = NodePath("BodyIdle:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 2.79397e-07, 0.333333, 0.666667 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2 ]
+}
+
+[sub_resource type="Animation" id=7]
+resource_name = "elf_body_idle_s"
+step = 0.333333
+tracks/0/type = "value"
+tracks/0/path = NodePath("BodyIdle:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 3.72529e-09, 0.333333, 0.666667 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ 18, 19, 20 ]
+}
+
+[sub_resource type="Animation" id=8]
+resource_name = "elf_body_idle_s"
+step = 0.333333
+tracks/0/type = "value"
+tracks/0/path = NodePath("BodyIdle:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 1.11759e-08, 0.333333, 0.666667 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ 12, 13, 14 ]
+}
+
+[sub_resource type="Animation" id=9]
+resource_name = "elf_body_idle_s"
+step = 0.333333
+tracks/0/type = "value"
+tracks/0/path = NodePath("BodyIdle:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 3.72529e-09, 0.333333, 0.666667 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ 3, 4, 5 ]
+}
+
+[sub_resource type="Animation" id=10]
+resource_name = "elf_body_run_w"
+step = 0.125
+tracks/0/type = "value"
+tracks/0/path = NodePath("BodyRun:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 1.11759e-08, 0.125, 0.25, 0.375, 0.5, 0.625, 0.75, 0.875 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 16, 17, 18, 19, 20, 21, 22, 23 ]
+}
+
+[sub_resource type="Animation" id=11]
+resource_name = "elf_body_run_w"
+step = 0.125
+tracks/0/type = "value"
+tracks/0/path = NodePath("BodyRun:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 1.11759e-08, 0.125, 0.25, 0.375, 0.5, 0.625, 0.75, 0.875 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 24, 25, 26, 27, 28, 29, 30, 31 ]
+}
+
+[sub_resource type="Animation" id=12]
+resource_name = "elf_body_run_w"
+step = 0.125
+tracks/0/type = "value"
+tracks/0/path = NodePath("BodyRun:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 1.11759e-08, 0.125, 0.25, 0.375, 0.5, 0.625, 0.75, 0.875 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 56, 57, 58, 59, 60, 61, 62, 63 ]
+}
+
+[sub_resource type="Animation" id=13]
+resource_name = "elf_body_run_w"
+step = 0.125
+tracks/0/type = "value"
+tracks/0/path = NodePath("BodyRun:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 1.11759e-08, 0.125, 0.25, 0.375, 0.5, 0.625, 0.75, 0.875 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 40, 41, 42, 43, 44, 45, 46, 47 ]
+}
+
+[sub_resource type="Animation" id=14]
+resource_name = "elf_body_run_s"
+step = 0.125
+tracks/0/type = "value"
+tracks/0/path = NodePath("BodyRun:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.125, 0.25, 0.375, 0.5, 0.625, 0.75, 0.875 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3, 4, 5, 6, 7 ]
+}
+
+[sub_resource type="Animation" id=15]
+resource_name = "elf_body_run_w"
+step = 0.125
+tracks/0/type = "value"
+tracks/0/path = NodePath("BodyRun:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 1.11759e-08, 0.125, 0.25, 0.375, 0.5, 0.625, 0.75, 0.875 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 48, 49, 50, 51, 52, 53, 54, 55 ]
+}
+
+[sub_resource type="Animation" id=16]
+resource_name = "elf_body_run_w"
+step = 0.125
+tracks/0/type = "value"
+tracks/0/path = NodePath("BodyRun:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 1.11759e-08, 0.125, 0.25, 0.375, 0.5, 0.625, 0.75, 0.875 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 32, 33, 34, 35, 36, 37, 38, 39 ]
+}
+
+[sub_resource type="Animation" id=17]
+resource_name = "elf_body_run_w"
+step = 0.125
+tracks/0/type = "value"
+tracks/0/path = NodePath("BodyRun:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 1.11759e-08, 0.125, 0.25, 0.375, 0.5, 0.625, 0.75, 0.875 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 8, 9, 10, 11, 12, 13, 14, 15 ]
+}
+
+[sub_resource type="Animation" id=18]
+resource_name = "elf_hair_idle_s"
+step = 0.333333
+tracks/0/type = "value"
+tracks/0/path = NodePath("HairIdle:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 1.11759e-08, 0.333333, 0.666667 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ 6, 7, 8 ]
+}
+
+[sub_resource type="Animation" id=19]
+resource_name = "elf_hair_idle_s"
+step = 0.333333
+tracks/0/type = "value"
+tracks/0/path = NodePath("HairIdle:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 3.72529e-09, 0.333333, 0.666667 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ 9, 10, 11 ]
+}
+
+[sub_resource type="Animation" id=20]
+resource_name = "elf_hair_idle_s"
+step = 0.333333
+tracks/0/type = "value"
+tracks/0/path = NodePath("HairIdle:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 3.72529e-09, 0.333333, 0.666667 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ 21, 22, 23 ]
+}
+
+[sub_resource type="Animation" id=21]
+resource_name = "elf_hair_idle_s"
+step = 0.333333
+tracks/0/type = "value"
+tracks/0/path = NodePath("HairIdle:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 1.11759e-08, 0.333333, 0.666667 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ 15, 16, 17 ]
+}
+
+[sub_resource type="Animation" id=22]
+resource_name = "elf_hair_idle_s"
+step = 0.333333
+tracks/0/type = "value"
+tracks/0/path = NodePath("HairIdle:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 1.11759e-08, 0.333333, 0.666667 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2 ]
+}
+
+[sub_resource type="Animation" id=23]
+resource_name = "elf_hair_idle_s"
+step = 0.333333
+tracks/0/type = "value"
+tracks/0/path = NodePath("HairIdle:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 3.72529e-09, 0.333333, 0.666667 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ 18, 19, 20 ]
+}
+
+[sub_resource type="Animation" id=24]
+resource_name = "elf_hair_idle_s"
+step = 0.333333
+tracks/0/type = "value"
+tracks/0/path = NodePath("HairIdle:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 1.11759e-08, 0.333333, 0.666667 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ 12, 13, 14 ]
+}
+
+[sub_resource type="Animation" id=25]
+resource_name = "elf_hair_idle_s"
+step = 0.333333
+tracks/0/type = "value"
+tracks/0/path = NodePath("HairIdle:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 2.79397e-07, 0.333333, 0.666667 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ 3, 4, 5 ]
+}
+
+[sub_resource type="Animation" id=26]
+resource_name = "elf_hair_run_s"
+step = 0.125
+tracks/0/type = "value"
+tracks/0/path = NodePath("HairRun:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 1.11759e-08, 0.125, 0.25, 0.375, 0.5, 0.625, 0.75, 0.875 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 16, 17, 18, 19, 20, 21, 22, 23 ]
+}
+
+[sub_resource type="Animation" id=27]
+resource_name = "elf_hair_run_s"
+step = 0.125
+tracks/0/type = "value"
+tracks/0/path = NodePath("HairRun:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 1.11759e-08, 0.125, 0.25, 0.375, 0.5, 0.625, 0.75, 0.875 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 24, 25, 26, 27, 28, 29, 30, 31 ]
+}
+
+[sub_resource type="Animation" id=28]
+resource_name = "elf_hair_run_s"
+step = 0.125
+tracks/0/type = "value"
+tracks/0/path = NodePath("HairRun:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 1.11759e-08, 0.125, 0.25, 0.375, 0.5, 0.625, 0.75, 0.875 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 56, 57, 58, 59, 60, 61, 62, 63 ]
+}
+
+[sub_resource type="Animation" id=29]
+resource_name = "elf_hair_run_s"
+step = 0.125
+tracks/0/type = "value"
+tracks/0/path = NodePath("HairRun:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 3.72529e-09, 0.125, 0.25, 0.375, 0.5, 0.625, 0.75, 0.875 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 40, 41, 42, 43, 44, 45, 46, 47 ]
+}
+
+[sub_resource type="Animation" id=30]
+resource_name = "elf_run_s"
+step = 0.125
+tracks/0/type = "value"
+tracks/0/path = NodePath("HairRun:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.125, 0.25, 0.375, 0.5, 0.625, 0.75, 0.875 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3, 4, 5, 6, 7 ]
+}
+
+[sub_resource type="Animation" id=31]
+resource_name = "elf_hair_run_s"
+step = 0.125
+tracks/0/type = "value"
+tracks/0/path = NodePath("HairRun:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 1.11759e-08, 0.125, 0.25, 0.375, 0.5, 0.625, 0.75, 0.875 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 48, 49, 50, 51, 52, 53, 54, 55 ]
+}
+
+[sub_resource type="Animation" id=32]
+resource_name = "elf_hair_run_s"
+step = 0.125
+tracks/0/type = "value"
+tracks/0/path = NodePath("HairRun:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 3.72529e-09, 0.125, 0.25, 0.375, 0.5, 0.625, 0.75, 0.875 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 32, 33, 34, 35, 36, 37, 38, 39 ]
+}
+
+[sub_resource type="Animation" id=33]
+resource_name = "elf_hair_run_s"
+step = 0.125
+tracks/0/type = "value"
+tracks/0/path = NodePath("HairRun:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 1.11759e-08, 0.125, 0.25, 0.375, 0.5, 0.625, 0.75, 0.875 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 8, 9, 10, 11, 12, 13, 14, 15 ]
+}
 
 [node name="Player" type="KinematicBody2D"]
 script = ExtResource( 169 )
 
-[node name="PlayerSprite" type="AnimatedSprite" parent="."]
-frames = SubResource( 1 )
-animation = "idle_down"
-playing = true
-offset = Vector2( 0, -192 )
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+rotation = 1.5708
+shape = SubResource( 1 )
 
-[node name="PlayerCamera" type="Camera2D" parent="."]
+[node name="Camera2D" type="Camera2D" parent="."]
 current = true
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
-polygon = PoolVector2Array( 0, 16, -32, 0, 0, -16, 32, 0, 0, 16 )
+[node name="BodyPlayer" type="AnimationPlayer" parent="."]
+playback_process_mode = 0
+anims/elf_body_idle_e = ExtResource( 17 )
+anims/elf_body_idle_n = ExtResource( 9 )
+anims/elf_body_idle_ne = ExtResource( 12 )
+anims/elf_body_idle_nw = ExtResource( 14 )
+anims/elf_body_idle_s = ExtResource( 15 )
+anims/elf_body_idle_se = ExtResource( 7 )
+anims/elf_body_idle_sw = ExtResource( 8 )
+anims/elf_body_idle_w = ExtResource( 18 )
+anims/elf_body_run_e = ExtResource( 3 )
+anims/elf_body_run_n = ExtResource( 16 )
+anims/elf_body_run_ne = ExtResource( 5 )
+anims/elf_body_run_nw = ExtResource( 4 )
+anims/elf_body_run_s = ExtResource( 13 )
+anims/elf_body_run_se = ExtResource( 10 )
+anims/elf_body_run_sw = ExtResource( 6 )
+anims/elf_body_run_w = ExtResource( 11 )
+anims/elf_hair_idle_e = ExtResource( 35 )
+anims/elf_hair_idle_n = ExtResource( 33 )
+anims/elf_hair_idle_ne = ExtResource( 34 )
+anims/elf_hair_idle_nw = ExtResource( 36 )
+anims/elf_hair_idle_s = ExtResource( 29 )
+anims/elf_hair_idle_se = ExtResource( 31 )
+anims/elf_hair_idle_sw = ExtResource( 30 )
+anims/elf_hair_idle_w = ExtResource( 32 )
+anims/elf_hair_run_e = ExtResource( 27 )
+anims/elf_hair_run_n = ExtResource( 21 )
+anims/elf_hair_run_ne = ExtResource( 26 )
+anims/elf_hair_run_nw = ExtResource( 25 )
+anims/elf_hair_run_s = ExtResource( 20 )
+anims/elf_hair_run_se = ExtResource( 22 )
+anims/elf_hair_run_sw = ExtResource( 23 )
+anims/elf_hair_run_w = ExtResource( 24 )
+
+[node name="HairPlayer" type="AnimationPlayer" parent="."]
+playback_process_mode = 0
+anims/elf_body_idle_e = SubResource( 2 )
+anims/elf_body_idle_n = SubResource( 3 )
+anims/elf_body_idle_ne = SubResource( 4 )
+anims/elf_body_idle_nw = SubResource( 5 )
+anims/elf_body_idle_s = SubResource( 6 )
+anims/elf_body_idle_se = SubResource( 7 )
+anims/elf_body_idle_sw = SubResource( 8 )
+anims/elf_body_idle_w = SubResource( 9 )
+anims/elf_body_run_e = SubResource( 10 )
+anims/elf_body_run_n = SubResource( 11 )
+anims/elf_body_run_ne = SubResource( 12 )
+anims/elf_body_run_nw = SubResource( 13 )
+anims/elf_body_run_s = SubResource( 14 )
+anims/elf_body_run_se = SubResource( 15 )
+anims/elf_body_run_sw = SubResource( 16 )
+anims/elf_body_run_w = SubResource( 17 )
+anims/elf_hair_idle_e = SubResource( 18 )
+anims/elf_hair_idle_n = SubResource( 19 )
+anims/elf_hair_idle_ne = SubResource( 20 )
+anims/elf_hair_idle_nw = SubResource( 21 )
+anims/elf_hair_idle_s = SubResource( 22 )
+anims/elf_hair_idle_se = SubResource( 23 )
+anims/elf_hair_idle_sw = SubResource( 24 )
+anims/elf_hair_idle_w = SubResource( 25 )
+anims/elf_hair_run_e = SubResource( 26 )
+anims/elf_hair_run_n = SubResource( 27 )
+anims/elf_hair_run_ne = SubResource( 28 )
+anims/elf_hair_run_nw = SubResource( 29 )
+anims/elf_hair_run_s = SubResource( 30 )
+anims/elf_hair_run_se = SubResource( 31 )
+anims/elf_hair_run_sw = SubResource( 32 )
+anims/elf_hair_run_w = SubResource( 33 )
+
+[node name="BodyRun" type="Sprite" parent="."]
+visible = false
+texture = ExtResource( 1 )
+offset = Vector2( 0, -40 )
+vframes = 8
+hframes = 8
+frame = 15
+
+[node name="BodyIdle" type="Sprite" parent="."]
+visible = false
+texture = ExtResource( 2 )
+offset = Vector2( 0, -40 )
+vframes = 8
+hframes = 3
+frame = 8
+
+[node name="HairRun" type="Sprite" parent="."]
+visible = false
+texture = ExtResource( 19 )
+offset = Vector2( 0, -40 )
+vframes = 8
+hframes = 8
+frame = 7
+
+[node name="HairIdle" type="Sprite" parent="."]
+visible = false
+texture = ExtResource( 28 )
+offset = Vector2( 0, -40 )
+vframes = 8
+hframes = 3

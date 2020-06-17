@@ -72,11 +72,12 @@ func _ready():
 
 func _input(event):
 	if event.is_action("ui_accept"):
-		var x = 0
-		var y = 0
-		var position = map.map_to_world(Vector2(x, y))
-		player.position.x = position.x
-		player.position.y = position.y
+		player.animation_player.play("elf_run_e")
+#		var x = 0
+#		var y = 0
+#		var position = map.map_to_world(Vector2(x, y))
+#		player.position.x = position.x
+#		player.position.y = position.y
 
 
 # Construct one stage based on the stage number

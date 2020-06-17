@@ -1,0 +1,17 @@
+[gd_resource type="Animation" format=2]
+
+[resource]
+resource_name = "elf_hair_idle_s"
+step = 0.333333
+tracks/0/type = "value"
+tracks/0/path = NodePath("HairIdle:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 1.11759e-08, 0.333333, 0.666667 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2 ]
+}
