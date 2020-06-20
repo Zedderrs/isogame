@@ -1,29 +1,39 @@
 extends KinematicBody2D
 
-# scene components
-onready var body_player = $BodyPlayer
-onready var hair_player = $HairPlayer
-onready var body_run = $BodyRun
-onready var body_idle = $BodyIdle
-onready var hair_run = $HairRun
-onready var hair_idle = $HairIdle
+# animation nodes
+onready var body_animation_player = $BodySprite/BodyAnimationPlayer
+onready var hair_animation_player = $HairSprite/HairAnimationPlayer
+onready var top_animation_player = $TopSprite/TopAnimationPlayer
+onready var bottom_animation_player = $BottomSprite/BottomAnimationPlayer
+onready var weapon_animation_player = $WeaponSprite/WeaponAnimationPlayer
+onready var slash_animation_player = $SlashSprite/SlashAnimationPlayer
 
 # animation dictionary
+var Gender = {"Male": "male_"}
 var Body = {"Elf": "elf_body"}
+var Top = {"Elf": "elf_top"}
 var Hair = {"Elf": "elf_hair"}
-var Action = {"Idle": "_idle", "Run": "_run"} 
+var Bottom = {"Elf": "elf_bottom"}
+var Weapon = {"Sword": "weapon_sword"}
+var Action = {"Idle": "_idle", "Run": "_run", "Attack": "_1h_attack"} 
 var Dir = {"N":"_n", "NE":"_ne", "E":"_e", "SE":"_se", "S":"_s", "SW":"_sw", "W":"_w", "NW":"_nw"}
+
 # scene constants
 const SPEED = 250 # How fast the player will move (pixels/sec).
 
-# player vars
+# player state vars
 var velocity
-var player_body
-var player_hair
-var player_action
-var player_direction
-var current_player_action
-var current_player_direction
+var gender
+var body
+var hair
+var top
+var bottom
+var weapon
+var action
+var direction
+var current_action
+var current_direction
+
 # scene vars
 var game
 var screen_size
@@ -36,73 +46,79 @@ var current_body_animation
 func _ready():
 	screen_size = OS.get_screen_size()
 	game = get_tree().get_root().get_node("Game")
-	
 	# player animations
-	player_body = Body.Elf
-	player_hair = Hair.Elf
+	gender = Gender.Male
+	body = Body.Elf
+	hair = Hair.Elf
+	top = Top.Elf
+	bottom = Bottom.Elf
+	weapon = Weapon.Sword
 	# player state
-	player_action = Action.Idle
-	player_direction = Dir.S
-	current_player_action = player_action
-	current_player_direction = player_direction
+	action = Action.Idle
+	direction = Dir.S
+	current_action = action
+	current_direction = direction
 
-func _input(event):
-	# don't process echo events
-	if (event.is_echo()): return
-	
 func _physics_process(_delta):
-	# set the current animation to play
-#	animation_player.play("elf_idle_e")
-	
 	# set the current velocity
 	velocity = Vector2()  
-	if Input.is_action_pressed("ui_right"):
+	if Input.is_action_pressed("right"):
 		velocity.x += 1
-	if Input.is_action_pressed("ui_left"):
+	if Input.is_action_pressed("left"):
 		velocity.x -= 1
-	if Input.is_action_pressed("ui_down"):
+	if Input.is_action_pressed("down"):
 		velocity.y += 0.5
-	if Input.is_action_pressed("ui_up"):
+	if Input.is_action_pressed("up"):
 		velocity.y -= 0.5
-
-	if velocity.length() > 0:
+	if Input.is_action_pressed("attack"):
+		action = Action.Attack
+		velocity = Vector2(0, 0)
+	elif velocity.length() > 0:
 		var previous_position = position
 		velocity = velocity.normalized() * SPEED
-		# move and slide player
-		move_and_slide(velocity)
-		# open the door if player collides with a door
-		open_door()
-		if previous_position.distance_squared_to(position) < 2:
-			player_action = Action.Idle
-		else:
-			player_action = Action.Run
+		# warning-ignore:return_value_discarded
+		if !is_attacking(): 
+			move_and_slide(velocity) # move and slide player
+			open_door() # open the door if player collides with a door
+			if previous_position.distance_squared_to(position) < 2:
+				action = Action.Idle
+			else:
+				action = Action.Run
 	else:
-		player_action = Action.Idle
-	
-	player_direction = get_cardinal_direction(velocity.normalized())
+		action = Action.Idle
+
+	direction = get_cardinal_direction(velocity.normalized())
 	set_animations()
 
 func set_animations():
-	if animation_changed():
-		print("animation changed: ", animation_changed())
-		set_animations_visiblities() # show relevant sprites for animation
+	if change_animation():
 		play_animations()
 
-func animation_changed(): # does the animation need to change?
-	return player_action != current_player_action || player_direction != current_player_direction || "" == body_player.get_current_animation()
-	
-func set_animations_visiblities(): # set which sprites are visible to show animations
-	body_run.visible = player_action == Action.Run
-	hair_run.visible = player_action == Action.Run
-	body_idle.visible = player_action == Action.Idle
-	hair_idle.visible = player_action == Action.Idle
+func change_animation(): # can the animation be changed?
+	var action_changed = action != current_action
+	var direction_changed = direction != current_direction
+	var no_animation_playing = "" == body_animation_player.get_current_animation()
+	if is_attacking(): return false
+	return action_changed || direction_changed || no_animation_playing
 
+func is_attacking():
+	return -1 != body_animation_player.get_current_animation().find("1h_attack")
+	
 func play_animations():
-	print("animation: ", player_body + player_action + player_direction)
-	body_player.play(player_body + player_action + player_direction) # animate body
-	hair_player.play(player_hair + player_action + player_direction) # animate hair
-	current_player_action = player_action
-	current_player_direction = player_direction
+	body_animation_player.play(gender + body + action + direction) # animate body
+	hair_animation_player.play(gender + hair + action + direction) # animate hair
+	top_animation_player.play(gender + top + action + direction) # animate top
+	bottom_animation_player.play(gender + bottom + action + direction) # animate bottom
+	weapon_animation_player.play(gender + weapon + action + direction) # animate weapon
+	
+	if is_attacking() && direction == Dir.S:
+		$SlashSprite.visible = true 
+		slash_animation_player.play("slash_s")
+	else:
+		$SlashSprite.visible = false
+	# update action and direction
+	current_action = action
+	current_direction = direction
 
 func get_cardinal_direction(p_dir_norm): # returns cardinal direction based on velocity vector
 	if p_dir_norm.is_equal_approx(Vector2(0, -1)):
@@ -122,11 +138,16 @@ func get_cardinal_direction(p_dir_norm): # returns cardinal direction based on v
 	elif p_dir_norm.x < 0 && p_dir_norm.y < 0:
 		return Dir.NW
 	elif p_dir_norm.is_equal_approx(Vector2(0, 0)):
-		return current_player_direction
+		return current_direction
 
 func open_door(): # opens the door if player collides with it
-		for i in get_slide_count():
-			var collider = get_slide_collision(i).collider
-			if game.is_door_closed(game.get_instance_type(collider)):
-				var map_coords = game.map.world_to_map(Vector2(collider.position.x, collider.position.y))
-				game.set_door_tile(map_coords.x, map_coords.y, true)
+	for i in get_slide_count():
+		var collider = get_slide_collision(i).collider
+		if game.is_door_closed(game.get_instance_type(collider)):
+			var map_coords = game.map.world_to_map(Vector2(collider.position.x, collider.position.y))
+			game.set_door_tile(map_coords.x, map_coords.y, true)
+
+func _on_WeaponCollision_body_entered(collider):
+	print("area entered: ", collider.get_instance_id(), " body type found: ", game.get_instance_type(collider))
+	if game.is_breakable_object(game.get_instance_type(collider)):
+		game.hurt(game.get_object_by_id(collider.get_instance_id()))

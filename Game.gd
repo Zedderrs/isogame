@@ -1,6 +1,6 @@
 extends Node2D
 
-# Scene objects 
+# Scene components 
 onready var map = $Map
 onready var visibility_map = $VisibilityMap
 onready var wall_map = $YSort/WallMap
@@ -25,10 +25,11 @@ const DoorOpenSE = preload("res://tile_scenes/DoorOpenSE.tscn")
 const DoorOpenSW = preload("res://tile_scenes/DoorOpenSW.tscn")
 const DoorOpenNW = preload("res://tile_scenes/DoorOpenNW.tscn")
 const StairsNE = preload("res://tile_scenes/StairsNE.tscn")
+const CeramicPot = preload("res://tile_scenes/CeramicPot.tscn")
 # Tile types
-enum Tile {Ground, Stairs_NE, Block, Fog, Door_NE, Door_SE, Door_SW, Door_NW, Door_Open_NE, Door_Open_SE, Door_Open_SW, Door_Open_NW, Wall_Half_N, Wall_Half_NE, Wall_Half_E, Wall_Half_SE, Wall_Half_S, Wall_Half_SW, Wall_Half_W, Wall_Half_NW}
-const TileScene = [-1, StairsNE, BlockHalf, -1, DoorNE, DoorSE, DoorSW, DoorNW, DoorOpenNE, DoorOpenSE, DoorOpenSW, DoorOpenNW, WallHalfN, WallHalfNE, WallHalfE, WallHalfSE, WallHalfS, WallHalfSW, WallHalfW, WallHalfNW]
-const TileOffset = [-1, Vector2(0, 32), Vector2(0, 64), -1, Vector2(0, 32), Vector2(0, 88), Vector2(0, 80), Vector2(0, 32), Vector2(0, 32), Vector2(0, 64), Vector2(0, 64), Vector2(0, 32), Vector2(0, 32), Vector2(0, 16), Vector2(0, 64), Vector2(0, 64), Vector2(0, 64), Vector2(0, 80), Vector2(0, 32), Vector2(0, 32)]
+enum Tile {Ground, Stairs_NE, Block, Fog, Door_NE, Door_SE, Door_SW, Door_NW, Door_Open_NE, Door_Open_SE, Door_Open_SW, Door_Open_NW, Wall_Half_N, Wall_Half_NE, Wall_Half_E, Wall_Half_SE, Wall_Half_S, Wall_Half_SW, Wall_Half_W, Wall_Half_NW, Ceramic_Pot}
+const TileScene = [-1, StairsNE, BlockHalf, -1, DoorNE, DoorSE, DoorSW, DoorNW, DoorOpenNE, DoorOpenSE, DoorOpenSW, DoorOpenNW, WallHalfN, WallHalfNE, WallHalfE, WallHalfSE, WallHalfS, WallHalfSW, WallHalfW, WallHalfNW, CeramicPot]
+const TileOffset = [-1, Vector2(0, 32), Vector2(0, 64), -1, Vector2(0, 32), Vector2(0, 88), Vector2(0, 80), Vector2(0, 32), Vector2(0, 32), Vector2(0, 64), Vector2(0, 64), Vector2(0, 32), Vector2(0, 32), Vector2(0, 16), Vector2(0, 64), Vector2(0, 64), Vector2(0, 64), Vector2(0, 80), Vector2(0, 32), Vector2(0, 32), Vector2(0, 0)]
 # Stage constants
 const TILE_SIZE = {x = 256.0, y = 128.0}
 const STAGE_SIZES = [
@@ -51,10 +52,15 @@ var player_tile
 var stage_num = 0
 var tile_map = []
 var tile_instance_map = []
+var object_list = []
+var object_instance_list = []
 var rooms = []
 var stage_size
 var pathfinding
 
+# Object vars
+var object
+var object_tile
 
 # ==============================================================================
 # ---------------------------- Stage Mechanics ---------------------------------
@@ -69,16 +75,6 @@ func _ready():
 	randomize() # randomize seed
 	build_stage() # build the stage
 	player.visible = true
-
-func _input(event):
-	if event.is_action("ui_accept"):
-		player.animation_player.play("elf_run_e")
-#		var x = 0
-#		var y = 0
-#		var position = map.map_to_world(Vector2(x, y))
-#		player.position.x = position.x
-#		player.position.y = position.y
-
 
 # Construct one stage based on the stage number
 func build_stage():
@@ -121,6 +117,11 @@ func build_stage():
 	var player_x = start_room.position.x + 1 + randi() % int(start_room.size.x - 2)
 	var player_y = start_room.position.y + 1 + randi() % int(start_room.size.y - 2)
 	player_tile = Vector2(player_x, player_y)
+	
+	# place an object in the start room
+	var object_x = start_room.position.x + 1 + randi() % int(start_room.size.x - 2)
+	var object_y = start_room.position.y + 1 + randi() % int(start_room.size.y - 2)
+	add_object(object_x, object_y, Tile.Ceramic_Pot)
 
 	# Place stairs to get to next stage
 	var end_room = rooms.back()
@@ -132,7 +133,6 @@ func build_stage():
 	yield(get_tree().create_timer(1), "timeout") ## gives time to update visuals
 	call_deferred("update_visuals")
 
-
 # Set visuals for current state
 func update_visuals():
 	# Update player position
@@ -140,6 +140,7 @@ func update_visuals():
 	player.position.x = position.x
 	player.position.y = position.y
 	
+
 # ==============================================================================
 # ------------------------- Stage Building Mechanics ---------------------------
 # ==============================================================================
@@ -194,6 +195,13 @@ func add_room(free_regions):
 
 	cut_regions(free_regions, room)
 
+# Add an object at location 
+func add_object(x, y, type):
+	var new_object = BreakableObject.new(self, x, y, type)
+	# add object to lists
+	object_instance_list.append(new_object)
+	object_list.append(type)
+
 # Place tile type at location
 func set_tile(x, y, type):
 	# delete tile instance at location
@@ -232,12 +240,22 @@ func create_tile(x, y, tile_type):
 
 # return the Tile type of the given instance
 func get_instance_type(instance):
-	# find location of instance in tile_instance_map
+	# find location of instance in tile_instance_map or object_instance_map
 	for x in range(stage_size.x):
 		for y in range(stage_size.y):
 			if typeof(tile_instance_map[x][y]) == TYPE_OBJECT:
 				if tile_instance_map[x][y].get_instance_id() == instance.get_instance_id():
 					return tile_map[x][y]
+	for i in range(object_instance_list.size()):
+		if object_instance_list[i].get_instance_id() == instance.get_instance_id():
+			print(object_list[i])
+			return object_list[i]
+
+# return the object by id
+func get_object_by_id(id):
+	for object in object_instance_list:
+		if object.get_instance_id() == id:
+			return object 
 
 # check if tile is a wall
 func is_wall(type):
@@ -366,6 +384,17 @@ func is_door(type):
 func is_door_closed(type):
 	return type == Tile.Door_NE || type == Tile.Door_SE || type == Tile.Door_SW || type == Tile.Door_NW
 
+func is_breakable_object(type):
+	return type == Tile.Ceramic_Pot
+
+func hurt(target):
+	target.health -= 1
+	if target.health <= 0:
+		target.remove()
+		var index = object_instance_list.find(target)
+		object_instance_list.erase(object_instance_list[index])
+		object_list.erase(object_list[index])
+
 func get_least_connected_point(graph):
 	var point_ids = graph.get_points()
 	
@@ -450,3 +479,31 @@ func cut_regions(free_regions, region_to_remove):
 		free_regions.erase(region)
 	for region in addition_queue:
 		free_regions.append(region)
+
+# ==============================================================================
+# ------------------------- Breakable Object Class -----------------------------
+# ==============================================================================
+
+class BreakableObject extends Reference:
+	
+	# Object variables
+	var node
+	var health
+	var position
+
+	# Called when the object is initialized.
+	func _init(game, x, y, type):
+		node = TileScene[type].instance()
+		health = 3
+		var world_pos = game.map.map_to_world(Vector2(x, y))
+		node.position.x = world_pos.x
+		node.position.y = world_pos.y
+		game.wall_map.add_child(node)
+		
+	func get_instance_id():
+		return node.get_instance_id()
+
+	# Remove the object node
+	func remove():
+		node.queue_free()
+	
