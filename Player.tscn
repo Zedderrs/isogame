@@ -1,4 +1,4 @@
-[gd_scene load_steps=144 format=2]
+[gd_scene load_steps=143 format=2]
 
 [ext_resource path="res://assets/animations/elf/male_elf_body_sprite.tres" type="SpriteFrames" id=1]
 [ext_resource path="res://assets/animations/elf/male_elf_hair_idle_e.tres" type="Animation" id=2]
@@ -309,9 +309,6 @@ animations = [ {
 "speed": 5.0
 } ]
 
-[sub_resource type="RectangleShape2D" id=19]
-extents = Vector2( 56, 72 )
-
 [node name="Player" type="KinematicBody2D"]
 script = ExtResource( 169 )
 
@@ -325,7 +322,7 @@ current = true
 
 [node name="BodySprite" type="AnimatedSprite" parent="."]
 frames = ExtResource( 1 )
-animation = "male_elf_body_1h_attack_e"
+animation = "male_elf_body_1h_attack_s"
 offset = Vector2( 0, -40 )
 
 [node name="BodyAnimationPlayer" type="AnimationPlayer" parent="BodySprite"]
@@ -357,7 +354,7 @@ anims/male_elf_body_run_w = ExtResource( 11 )
 
 [node name="HairSprite" type="AnimatedSprite" parent="."]
 frames = ExtResource( 23 )
-animation = "male_elf_hair_1h_attack_e"
+animation = "male_elf_hair_1h_attack_s"
 offset = Vector2( 0, -40 )
 
 [node name="HairAnimationPlayer" type="AnimationPlayer" parent="HairSprite"]
@@ -389,7 +386,7 @@ anims/male_elf_hair_run_w = ExtResource( 34 )
 
 [node name="TopSprite" type="AnimatedSprite" parent="."]
 frames = ExtResource( 24 )
-animation = "male_elf_top_1h_attack_e"
+animation = "male_elf_top_1h_attack_s"
 offset = Vector2( 0, -40 )
 
 [node name="TopAnimationPlayer" type="AnimationPlayer" parent="TopSprite"]
@@ -421,7 +418,7 @@ anims/male_elf_top_run_w = ExtResource( 50 )
 
 [node name="BottomSprite" type="AnimatedSprite" parent="."]
 frames = ExtResource( 52 )
-animation = "male_elf_bottom_1h_attack_e"
+animation = "male_elf_bottom_1h_attack_s"
 offset = Vector2( 0, -40 )
 
 [node name="BottomAnimationPlayer" type="AnimationPlayer" parent="BottomSprite"]
@@ -487,7 +484,6 @@ anims/male_weapon_sword_run_w = ExtResource( 80 )
 [node name="SlashSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 18 )
 animation = "slash_s"
-frame = 9
 offset = Vector2( 0, -40 )
 
 [node name="SlashAnimationPlayer" type="AnimationPlayer" parent="SlashSprite"]
@@ -496,7 +492,7 @@ anims/slash_s = ExtResource( 123 )
 
 [node name="WeaponCollision" type="Area2D" parent="SlashSprite"]
 
-[node name="WeaponHitBox" type="CollisionShape2D" parent="SlashSprite/WeaponCollision"]
-position = Vector2( -24, -32 )
-shape = SubResource( 19 )
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="SlashSprite/WeaponCollision"]
+position = Vector2( 0, -32 )
+polygon = PoolVector2Array( 0, 0, -64, 64, 64, 64 )
 [connection signal="body_entered" from="SlashSprite/WeaponCollision" to="." method="_on_WeaponCollision_body_entered"]

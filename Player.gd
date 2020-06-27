@@ -36,8 +36,10 @@ var current_direction
 
 # scene vars
 var game
+var space_graph
 var screen_size
 var current_body_animation
+var target
 
 # ==============================================================================
 # ------------------ Player Input and Movement Mechanics -----------------------
@@ -58,37 +60,35 @@ func _ready():
 	direction = Dir.S
 	current_action = action
 	current_direction = direction
+	velocity = Vector2()
 
+func _input(event):
+	if event.is_action_released("left_click"):
+		target = get_global_mouse_position()
+	
 func _physics_process(_delta):
-	# set the current velocity
-	velocity = Vector2()  
-	if Input.is_action_pressed("right"):
-		velocity.x += 1
-	if Input.is_action_pressed("left"):
-		velocity.x -= 1
-	if Input.is_action_pressed("down"):
-		velocity.y += 0.5
-	if Input.is_action_pressed("up"):
-		velocity.y -= 0.5
-	if Input.is_action_pressed("attack"):
-		action = Action.Attack
-		velocity = Vector2(0, 0)
-	elif velocity.length() > 0:
+	if Input.is_mouse_button_pressed(1):
+		target = get_global_mouse_position()
+	move_to_target()
+	direction = get_cardinal_direction(velocity)
+	set_animations()
+
+func move_to_target():
+	if !target: target = position
+	velocity = (target - position).normalized() * SPEED
+	if (target - position).length() > 5:
 		var previous_position = position
-		velocity = velocity.normalized() * SPEED
-		# warning-ignore:return_value_discarded
-		if !is_attacking(): 
-			move_and_slide(velocity) # move and slide player
-			open_door() # open the door if player collides with a door
-			if previous_position.distance_squared_to(position) < 2:
-				action = Action.Idle
+		velocity = move_and_slide(velocity)
+		open_door() # open the door if player collides with a door
+		if previous_position.distance_squared_to(position) < 2:
+			if hit():
+				action = Action.Attack
 			else:
-				action = Action.Run
+				action = Action.Idle
+		else:
+			action = Action.Run
 	else:
 		action = Action.Idle
-
-	direction = get_cardinal_direction(velocity.normalized())
-	set_animations()
 
 func set_animations():
 	if change_animation():
@@ -101,8 +101,6 @@ func change_animation(): # can the animation be changed?
 	if is_attacking(): return false
 	return action_changed || direction_changed || no_animation_playing
 
-func is_attacking():
-	return -1 != body_animation_player.get_current_animation().find("1h_attack")
 	
 func play_animations():
 	body_animation_player.play(gender + body + action + direction) # animate body
@@ -120,25 +118,19 @@ func play_animations():
 	current_action = action
 	current_direction = direction
 
-func get_cardinal_direction(p_dir_norm): # returns cardinal direction based on velocity vector
-	if p_dir_norm.is_equal_approx(Vector2(0, -1)):
-		return Dir.N
-	elif p_dir_norm.x > 0 && p_dir_norm.y < 0:
-		return Dir.NE
-	elif p_dir_norm.is_equal_approx(Vector2(1, 0)):
-		return Dir.E
-	elif p_dir_norm.x > 0 && p_dir_norm.y > 0:
-		return Dir.SE
-	elif p_dir_norm.is_equal_approx(Vector2(0, 1)):
-		return Dir.S
-	elif p_dir_norm.x < 0 && p_dir_norm.y > 0:
-		return Dir.SW
-	elif p_dir_norm.is_equal_approx(Vector2(-1, 0)):
-		return Dir.W
-	elif p_dir_norm.x < 0 && p_dir_norm.y < 0:
-		return Dir.NW
-	elif p_dir_norm.is_equal_approx(Vector2(0, 0)):
-		return current_direction
+func get_cardinal_direction(dir): # returns cardinal direction based on velocity vector
+	var dir_n = dir.normalized()
+	var x = dir_n.x
+	var y = -dir_n.y
+	if x >= cos(deg2rad(22.5)) && y >= sin(deg2rad(-22.5)) && y <= sin(deg2rad(22.5)): return Dir.E
+	elif x >= cos(deg2rad(67.5)) && x <= cos(deg2rad(22.5)) && y >= sin(deg2rad(22.5)) && y <= sin(deg2rad(67.5)): return Dir.NE
+	elif x >= cos(deg2rad(112.5)) && x <= cos(deg2rad(67.5)) && y >= sin(deg2rad(67.5)): return Dir.N
+	elif x >= cos(deg2rad(157.5)) && x <= cos(deg2rad(112.5)) && y >= sin(deg2rad(157.5)) && y <= sin(deg2rad(112.5)): return Dir.NW
+	elif x <= cos(deg2rad(157.5)) && y >= sin(deg2rad(202.5)) && y <= sin(deg2rad(157.5)): return Dir.W
+	elif x >= cos(deg2rad(202.5)) && x <= cos(deg2rad(247.5)) && y >= sin(deg2rad(247.5)) && y <= sin(deg2rad(202.5)): return Dir.SW
+	elif x >= cos(deg2rad(247.5)) && x <= cos(deg2rad(292.5)) && y <= sin(deg2rad(292.5)): return Dir.S
+	elif x >= cos(deg2rad(292.5)) && x <= cos(deg2rad(337.5)) && y >= sin(deg2rad(292.5)) && y <= sin(deg2rad(337.5)): return Dir.SE
+	else: return current_direction
 
 func open_door(): # opens the door if player collides with it
 	for i in get_slide_count():
@@ -147,7 +139,25 @@ func open_door(): # opens the door if player collides with it
 			var map_coords = game.map.world_to_map(Vector2(collider.position.x, collider.position.y))
 			game.set_door_tile(map_coords.x, map_coords.y, true)
 
+func is_attacking():
+	return -1 != body_animation_player.get_current_animation().find("1h_attack")
+
+func hit():
+	for i in get_slide_count():
+		var collider = get_slide_collision(i).collider
+		for enemy in game.enemies:
+			if enemy.get_instance_id() == collider.get_instance_id():
+				attack(enemy)
+				return true
+		return false
+
+func attack(enemy):
+	enemy.take_damage(1)
+
 func _on_WeaponCollision_body_entered(collider):
-	print("area entered: ", collider.get_instance_id(), " body type found: ", game.get_instance_type(collider))
+	#print("area entered: ", collider.get_instance_id(), " body type found: ", game.get_instance_type(collider))
 	if game.is_breakable_object(game.get_instance_type(collider)):
 		game.hurt(game.get_object_by_id(collider.get_instance_id()))
+
+func is_empty_tile(tile):
+	return tile != game.Tile.Block && !game.is_wall(tile) && (game.is_door(tile) && !game.is_closed_door(tile))

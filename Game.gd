@@ -6,6 +6,8 @@ onready var visibility_map = $VisibilityMap
 onready var wall_map = $YSort/WallMap
 onready var player = $YSort/Player
 
+# Enemy Scene
+const EnemyScene = preload("res://enemy_scenes/Enemy.tscn")
 # Tile scenes
 const BlockHalf = preload("res://tile_scenes/BlockHalf.tscn")
 const WallHalfN = preload("res://tile_scenes/WallHalfN.tscn")
@@ -55,6 +57,7 @@ var tile_instance_map = []
 var object_list = []
 var object_instance_list = []
 var rooms = []
+var enemies = []
 var stage_size
 var pathfinding
 
@@ -84,6 +87,11 @@ func build_stage():
 	tile_map.clear()
 	tile_instance_map.clear()
 	map.clear()
+	
+	# clear all enemies from map
+	for enemy in enemies:
+		enemy.remove()
+	enemies.clear()
 	
 	# new AStar graph for pathfinding
 	pathfinding = AStar.new()
@@ -117,6 +125,24 @@ func build_stage():
 	var player_x = start_room.position.x + 1 + randi() % int(start_room.size.x - 2)
 	var player_y = start_room.position.y + 1 + randi() % int(start_room.size.y - 2)
 	player_tile = Vector2(player_x, player_y)
+	
+	# Place enemies throughout stage
+	var num_enemies = STAGE_ENEMY_COUNTS[stage_num]
+	for _i in range(num_enemies):
+		var room = rooms[1 + randi() % (rooms.size() - 1)]
+		var x = room.position.x + 1 + randi() % int(room.size.x - 2)
+		var y = room.position.y + 1 + randi() % int(room.size.y - 2)
+		
+		var blocked = false
+		for enemy in enemies:
+			if enemy.tile.x == x && enemy.tile.y ==y:
+				blocked = true
+				break
+		
+		if !blocked:
+			var enemy = Enemy.new(self, 3, x, y)
+			enemies.append(enemy)
+
 	
 	# place an object in the start room
 	var object_x = start_room.position.x + 1 + randi() % int(start_room.size.x - 2)
@@ -221,7 +247,6 @@ func set_tile(x, y, type):
 		# fill ground undearneath the wall and tiles
 		if is_wall(type) || is_door(type):
 			map.set_cell(x, y, Tile.Ground)
-			
 
 # Create tile instance from scene and position it on the map
 func create_tile(x, y, tile_type):
@@ -248,7 +273,6 @@ func get_instance_type(instance):
 					return tile_map[x][y]
 	for i in range(object_instance_list.size()):
 		if object_instance_list[i].get_instance_id() == instance.get_instance_id():
-			print(object_list[i])
 			return object_list[i]
 
 # return the object by id
@@ -323,7 +347,6 @@ func is_everything_connected(graph):
 		var path = graph.get_point_path(start, point)
 		if !path:
 			return false
-		
 	return true
 
 func add_random_connections(block_graph, room_graph):
@@ -489,7 +512,6 @@ class BreakableObject extends Reference:
 	# Object variables
 	var node
 	var health
-	var position
 
 	# Called when the object is initialized.
 	func _init(game, x, y, type):
@@ -506,4 +528,65 @@ class BreakableObject extends Reference:
 	# Remove the object node
 	func remove():
 		node.queue_free()
+
+# ==============================================================================
+# ----------------------------- Physics Process --------------------------------
+# ==============================================================================
+
+#func _physics_process(delta):
+#	# move all enemies in map
+#	for enemy in enemies:
+#		enemy.move(delta)
+		
+# ==============================================================================
+# ------------------------------- Enemy Class ----------------------------------
+# ==============================================================================
+
+class Enemy extends Reference: 
+
+	# Enemy Constants
+	var SPEED = 100
+	# Enemy variables
+	var game
+	var node
+	var anim_player
+	var id
+	var level
+	var tile
+	var max_hp
+	var hp
+	var dead = false
+	var player_seen = false
+
+	# Called when the object is initialized.
+	func _init(game_state, enemy_level, x, y):
+		game = game_state
+		level = enemy_level
+		id = "brown_hellspawn"
+		max_hp = level
+		hp = max_hp
+		tile = Vector2(x, y)
+		node = EnemyScene.instance()
+		node.position = game.map.map_to_world(tile)
+		anim_player = node.get_node("EnemySprite/AnimationPlayer")
+		anim_player.play(id + "_idle_s")
+		game.add_child(node)
+
+	# Remove the item node after processing
+	func remove():
+		node.queue_free()
+
+	# Deal damage to this enemy
+	func take_damage(dmg):
+		if dead:
+			return
+		hp = max(0, hp - dmg)
+		node.get_node("EnemySprite/EnemyHP").rect_size.x = TILE_SIZE.x * hp / max_hp
+		if hp == 0:
+			dead = true
+			game.enemies.erase(self)
+			remove()
 	
+	# Get instance id
+	func get_instance_id():
+		return node.get_instance_id()
