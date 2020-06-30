@@ -1,4 +1,6 @@
-[gd_resource type="Animation" format=2]
+[gd_resource type="Animation" load_steps=2 format=2]
+
+[ext_resource path="res://WeaponAnimationPlayer.gd" type="Script" id=1]
 
 [resource]
 resource_name = "male_weapon_sword_1h_attack_n"
@@ -10,7 +12,7 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 1.11759e-08 ),
+"times": PoolRealArray( 3.72529e-09 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
 "values": [ "male_weapon_sword_1h_attack_n" ]
@@ -26,4 +28,16 @@ tracks/1/keys = {
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 1,
 "values": [ 0, 1, 2 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("WeaponAnimationPlayer:script")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.999999 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ ExtResource( 1 ) ]
 }

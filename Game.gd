@@ -6,46 +6,77 @@ onready var visibility_map = $VisibilityMap
 onready var wall_map = $YSort/WallMap
 onready var player = $YSort/Player
 
+# Cursors
+onready var NormalCursor = preload("res://assets/Cursors/normal.png")
+onready var AttackCursor = preload("res://assets/Cursors/attack.png")
+
+
 # Enemy Scene
-const EnemyScene = preload("res://enemy_scenes/Enemy.tscn")
+const EnemyScene = preload("res://Enemy.tscn")
 # Tile scenes
-const BlockHalf = preload("res://tile_scenes/BlockHalf.tscn")
-const WallHalfN = preload("res://tile_scenes/WallHalfN.tscn")
-const WallHalfS = preload("res://tile_scenes/WallHalfS.tscn")
-const WallHalfW = preload("res://tile_scenes/WallHalfW.tscn")
-const WallHalfE = preload("res://tile_scenes/WallHalfE.tscn")
-const WallHalfNE = preload("res://tile_scenes/WallHalfNE.tscn")
-const WallHalfNW = preload("res://tile_scenes/WallHalfNW.tscn")
-const WallHalfSE = preload("res://tile_scenes/WallHalfSE.tscn")
-const WallHalfSW = preload("res://tile_scenes/WallHalfSW.tscn")
-const DoorNE = preload("res://tile_scenes/DoorNE.tscn")
-const DoorNW = preload("res://tile_scenes/DoorNW.tscn")
-const DoorSE = preload("res://tile_scenes/DoorSE.tscn")
-const DoorSW = preload("res://tile_scenes/DoorSW.tscn")
-const DoorOpenNE = preload("res://tile_scenes/DoorOpenNE.tscn")
-const DoorOpenSE = preload("res://tile_scenes/DoorOpenSE.tscn")
-const DoorOpenSW = preload("res://tile_scenes/DoorOpenSW.tscn")
-const DoorOpenNW = preload("res://tile_scenes/DoorOpenNW.tscn")
-const StairsNE = preload("res://tile_scenes/StairsNE.tscn")
-const CeramicPot = preload("res://tile_scenes/CeramicPot.tscn")
-# Tile types
-enum Tile {Ground, Stairs_NE, Block, Fog, Door_NE, Door_SE, Door_SW, Door_NW, Door_Open_NE, Door_Open_SE, Door_Open_SW, Door_Open_NW, Wall_Half_N, Wall_Half_NE, Wall_Half_E, Wall_Half_SE, Wall_Half_S, Wall_Half_SW, Wall_Half_W, Wall_Half_NW, Ceramic_Pot}
-const TileScene = [-1, StairsNE, BlockHalf, -1, DoorNE, DoorSE, DoorSW, DoorNW, DoorOpenNE, DoorOpenSE, DoorOpenSW, DoorOpenNW, WallHalfN, WallHalfNE, WallHalfE, WallHalfSE, WallHalfS, WallHalfSW, WallHalfW, WallHalfNW, CeramicPot]
-const TileOffset = [-1, Vector2(0, 32), Vector2(0, 64), -1, Vector2(0, 32), Vector2(0, 88), Vector2(0, 80), Vector2(0, 32), Vector2(0, 32), Vector2(0, 64), Vector2(0, 64), Vector2(0, 32), Vector2(0, 32), Vector2(0, 16), Vector2(0, 64), Vector2(0, 64), Vector2(0, 64), Vector2(0, 80), Vector2(0, 32), Vector2(0, 32), Vector2(0, 0)]
+const Filler = preload("res://dungeon_tiles/Walls/StoneColumn.tscn")
+const StairsNE = preload("res://dungeon_tiles/Stairs/WoodStairsNE.tscn")
+const StairsSE = preload("res://dungeon_tiles/Stairs/WoodStairsNE.tscn")
+const StairsSW = preload("res://dungeon_tiles/Stairs/WoodStairsNE.tscn")
+const StairsNW = preload("res://dungeon_tiles/Stairs/WoodStairsNE.tscn")
+const DoorNE = preload("res://dungeon_tiles/Doors/WoodDoorNE.tscn")
+const DoorNW = preload("res://dungeon_tiles/Doors/WoodDoorNW.tscn")
+const DoorSE = preload("res://dungeon_tiles/Doors/WoodDoorSE.tscn")
+const DoorSW = preload("res://dungeon_tiles/Doors/WoodDoorSW.tscn")
+const DoorOpenNE = preload("res://dungeon_tiles/Doors/WoodDoorOpenNE.tscn")
+const DoorOpenNW = preload("res://dungeon_tiles/Doors/WoodDoorOpenNW.tscn")
+const DoorOpenSE = preload("res://dungeon_tiles/Doors/WoodDoorOpenSE.tscn")
+const DoorOpenSW = preload("res://dungeon_tiles/Doors/WoodDoorOpenSW.tscn")
+const WallN = preload("res://dungeon_tiles/Walls/WoodColumn.tscn")
+const WallS = preload("res://dungeon_tiles/Walls/WoodColumn.tscn")
+const WallW = preload("res://dungeon_tiles/Walls/WoodColumn.tscn")
+const WallE = preload("res://dungeon_tiles/Walls/WoodColumn.tscn")
+const WallNE = preload("res://dungeon_tiles/Walls/WoodColumn.tscn")
+const WallNW = preload("res://dungeon_tiles/Walls/WoodColumn.tscn")
+const WallSE = preload("res://dungeon_tiles/Walls/WoodColumn.tscn")
+const WallSW = preload("res://dungeon_tiles/Walls/WoodColumn.tscn")
+const CeramicPot = preload("res://dungeon_tiles/Objects/CeramicPot.tscn")
+# Tile Dictionary
+var Tile = {
+	"Ground": {"Type": 0, "Scene": null, "Offset": Vector2(0,0)},
+	"Filler": {"Type": 1, "Scene": Filler, "Offset": Vector2(0,32)},
+	"Fog": {"Type": 2, "Scene": null, "Offset": Vector2(0,0)},
+	"StairsNE": {"Type": 3, "Scene": StairsNE, "Offset": Vector2(0,32)},
+	"StairsSE": {"Type": 4, "Scene": StairsSE, "Offset": Vector2(0,32)},
+	"StairsSW": {"Type": 5, "Scene": StairsSW, "Offset": Vector2(0,32)},
+	"StairsNW": {"Type": 6, "Scene": StairsNW, "Offset": Vector2(0,32)},
+	"DoorNE": {"Type": 7, "Scene": DoorNE, "Offset": Vector2(0,48)},
+	"DoorSE": {"Type": 8, "Scene": DoorSE, "Offset": Vector2(0,4)},
+	"DoorSW": {"Type": 9, "Scene": DoorSW, "Offset": Vector2(0,4)},
+	"DoorNW": {"Type": 10, "Scene": DoorNW, "Offset": Vector2(0,48)},
+	"DoorOpenNE": {"Type": 11, "Scene": DoorOpenNE, "Offset": Vector2(0,64)},
+	"DoorOpenSE": {"Type": 12, "Scene": DoorOpenSE, "Offset": Vector2(0,64)},
+	"DoorOpenSW": {"Type": 13, "Scene": DoorOpenSW, "Offset": Vector2(0,64)},
+	"DoorOpenNW": {"Type": 14, "Scene": DoorOpenNW, "Offset": Vector2(0,64)},
+	"WallN": {"Type": 15, "Scene": WallN, "Offset": Vector2(0,32)},
+	"WallNE": {"Type": 16, "Scene": WallNE, "Offset": Vector2(0,32)},
+	"WallE": {"Type": 17, "Scene": WallE, "Offset": Vector2(0,32)},
+	"WallSE": {"Type": 18, "Scene": WallSE, "Offset": Vector2(0,32)},
+	"WallS": {"Type": 19, "Scene": WallS, "Offset": Vector2(0,32)},
+	"WallSW": {"Type": 20, "Scene": WallSW, "Offset": Vector2(0,32)},
+	"WallW": {"Type": 21, "Scene": WallW, "Offset": Vector2(0,32)},
+	"WallNW": {"Type": 22, "Scene": WallNW, "Offset": Vector2(0,32)},
+	"CeramicPot": {"Type": 23, "Scene": CeramicPot, "Offset": Vector2(0,0)},	
+}
 # Stage constants
-const TILE_SIZE = {x = 256.0, y = 128.0}
+const TILE_SIZE = {x = 64.0, y = 64.0}
 const STAGE_SIZES = [
-	Vector2(30, 30),
-	Vector2(35, 35),
-	Vector2(40, 40),
-	Vector2(45, 45),
-	Vector2(50, 50)
+	Vector2(60, 60),
+	Vector2(70, 70),
+	Vector2(80, 80),
+	Vector2(90, 90),
+	Vector2(100, 100)
 ]
 const STAGE_ROOM_COUNTS = [5,7,9,12,15]
 const STAGE_ENEMY_COUNTS = [5, 8, 12, 18, 26]
 const STAGE_ITEM_COUNTS = [2, 4, 6, 8, 10]
-const MIN_ROOM_DIMENSION = 5
-const MAX_ROOM_DIMENSION = 8
+const MIN_ROOM_DIMENSION = 10
+const MAX_ROOM_DIMENSION = 20
 
 # Player vars
 var player_tile
@@ -78,6 +109,10 @@ func _ready():
 	randomize() # randomize seed
 	build_stage() # build the stage
 	player.visible = true
+	# set cursors
+	Input.set_custom_mouse_cursor(NormalCursor, 0)
+	Input.set_custom_mouse_cursor(AttackCursor, 2)
+
 
 # Construct one stage based on the stage number
 func build_stage():
@@ -102,10 +137,9 @@ func build_stage():
 		tile_map.append([])
 		tile_instance_map.append([])
 		for y in range(stage_size.y):
-			tile_map[x].append(Tile.Block)
+			tile_map[x].append(Tile.Filler.Type)
 			tile_instance_map[x].append([])
-			set_tile(x, y, Tile.Block)
-
+			set_tile(x, y, Tile.Filler.Type)
 
 	# Calculate free regions around rooms based on stage size
 	var free_regions = [Rect2(Vector2(2, 2), stage_size - Vector2(4, 4))]
@@ -147,25 +181,32 @@ func build_stage():
 	# place an object in the start room
 	var object_x = start_room.position.x + 1 + randi() % int(start_room.size.x - 2)
 	var object_y = start_room.position.y + 1 + randi() % int(start_room.size.y - 2)
-	add_object(object_x, object_y, Tile.Ceramic_Pot)
+	add_object(object_x, object_y, Tile.CeramicPot.Type)
+	
+	
+	# place an enemy in the start room
+	var enemy_x = start_room.position.x + 1 + randi() % int(start_room.size.x - 2)
+	var enemy_y = start_room.position.y + 1 + randi() % int(start_room.size.y - 2)
+	var enemy = Enemy.new(self, 3, enemy_x, enemy_y)
+	enemies.append(enemy)
 
 	# Place stairs to get to next stage
 	var end_room = rooms.back()
 	var stairs_x = end_room.position.x + 1 + randi() % int(end_room.size.x - 2)
 	var stairs_y = end_room.position.y + 1 + randi() % int(end_room.size.y - 2)
-	set_tile(stairs_x, stairs_y, Tile.Stairs_NE)
+	set_tile(stairs_x, stairs_y, Tile.StairsNE.Type)
 
 	# Wait and update stage visuals 	
-	yield(get_tree().create_timer(1), "timeout") ## gives time to update visuals
+	yield(get_tree().create_timer(.1), "timeout") ## gives time to update visuals
 	call_deferred("update_visuals")
+	#update_visuals()
 
 # Set visuals for current state
 func update_visuals():
-	# Update player position
-	var position = map.map_to_world(player_tile)
-	player.position.x = position.x
-	player.position.y = position.y
-	
+	var player_position = map.map_to_world(player_tile)
+	player.position.x = player_position.x
+	player.position.y = player_position.y
+	player.destination = player.position
 
 # ==============================================================================
 # ------------------------- Stage Building Mechanics ---------------------------
@@ -199,25 +240,25 @@ func add_room(free_regions):
 	
 	for x in range(start_x, start_x + size_x):
 		if x == start_x: 
-			set_tile(x, start_y, Tile.Wall_Half_N) 
+			set_tile(x, start_y, Tile.WallN.Type) 
 		elif x == (start_x + size_x - 1): 
-			set_tile(x, start_y, Tile.Wall_Half_E)
+			set_tile(x, start_y, Tile.WallE.Type)
 		else: 
-			set_tile(x, start_y, Tile.Wall_Half_NE)
+			set_tile(x, start_y, Tile.WallNE.Type)
 			
 		if x == start_x:
-			set_tile(x, start_y + size_y - 1, Tile.Wall_Half_W)
+			set_tile(x, start_y + size_y - 1, Tile.WallW.Type)
 		elif x == (start_x + size_x - 1): 
-			set_tile(x, start_y + size_y - 1, Tile.Wall_Half_S)
+			set_tile(x, start_y + size_y - 1, Tile.WallS.Type)
 		else: 
-			set_tile(x, start_y + size_y - 1, Tile.Wall_Half_SW)
+			set_tile(x, start_y + size_y - 1, Tile.WallSW.Type)
 
 	for y in range(start_y + 1, start_y + size_y - 1):
-		set_tile(start_x, y, Tile.Wall_Half_NW)
-		set_tile(start_x + size_x -1, y, Tile.Wall_Half_SE)
+		set_tile(start_x, y, Tile.WallNW.Type)
+		set_tile(start_x + size_x -1, y, Tile.WallSE.Type)
 		
 		for x in range(start_x + 1, start_x + size_x - 1):
-			set_tile(x, y, Tile.Ground)
+			set_tile(x, y, Tile.Ground.Type)
 
 	cut_regions(free_regions, room)
 
@@ -238,7 +279,7 @@ func set_tile(x, y, type):
 	tile_map[x][y] = type
 	
 	# create tile on position x, y
-	if type == Tile.Ground:
+	if type == Tile.Ground.Type:
 		map.set_cell(x, y, type)
 		clear_path(Vector2(x, y))
 	else:
@@ -246,23 +287,28 @@ func set_tile(x, y, type):
 		
 		# fill ground undearneath the wall and tiles
 		if is_wall(type) || is_door(type):
-			map.set_cell(x, y, Tile.Ground)
+			map.set_cell(x, y, Tile.Ground.Type)
 
 # Create tile instance from scene and position it on the map
-func create_tile(x, y, tile_type):
+func create_tile(x, y, type):
 	
 	# create and add to map
-	var tile = TileScene[tile_type].instance()
+	var tile = get_tile_by_type(type).Scene.instance()
 	wall_map.add_child(tile)
 	
 	# set tile position with offset
 	var position = map.map_to_world(Vector2(x, y))
-	var tile_offset = TileOffset[tile_type]
+	var tile_offset = get_tile_by_type(type).Offset
 	tile.position.x = position.x + tile_offset.x
 	tile.position.y = position.y + tile_offset.y
 	tile_instance_map[x][y] = tile
 
-
+# return the Tile key in the dictionary
+func get_tile_by_type(type):
+	for key in Tile.keys():
+		if Tile[key].Type == type:
+			return Tile[key] 
+	
 # return the Tile type of the given instance
 func get_instance_type(instance):
 	# find location of instance in tile_instance_map or object_instance_map
@@ -283,7 +329,7 @@ func get_object_by_id(id):
 
 # check if tile is a wall
 func is_wall(type):
-	return type == Tile.Wall_Half_N || Tile.Wall_Half_NE || Tile.Wall_Half_E || Tile.Wall_Half_SE || Tile.Wall_Half_S || Tile.Wall_Half_SW || Tile.Wall_Half_W || Tile.Wall_Half_NW
+	return type == Tile.WallN.Type || Tile.WallNE.Type || Tile.WallE.Type || Tile.WallSE.Type || Tile.WallS.Type || Tile.WallSE.Type || Tile.WallW.Type || Tile.WallNW.Type
 	
 # clear path
 func clear_path(tile):
@@ -291,13 +337,13 @@ func clear_path(tile):
 	pathfinding.add_point(new_point, Vector3(tile.x, tile.y, 0))
 	var points_to_connect = []
 	
-	if tile.x > 0 && tile_map[tile.x -1][tile.y] == Tile.Ground:
+	if tile.x > 0 && tile_map[tile.x -1][tile.y] == Tile.Ground.Type:
 		points_to_connect.append(pathfinding.get_closest_point(Vector3(tile.x - 1, tile.y, 0)))
-	if tile.y > 0 && tile_map[tile.x][tile.y - 1] == Tile.Ground:
+	if tile.y > 0 && tile_map[tile.x][tile.y - 1] == Tile.Ground.Type:
 		points_to_connect.append(pathfinding.get_closest_point(Vector3(tile.x, tile.y - 1, 0)))
-	if tile.x < stage_size.x - 1 && tile_map[tile.x + 1][tile.y] == Tile.Ground:
+	if tile.x < stage_size.x - 1 && tile_map[tile.x + 1][tile.y] == Tile.Ground.Type:
 		points_to_connect.append(pathfinding.get_closest_point(Vector3(tile.x + 1, tile.y, 0)))
-	if tile.y < stage_size.y - 1 && tile_map[tile.x][tile.y + 1] == Tile.Ground:
+	if tile.y < stage_size.y - 1 && tile_map[tile.x][tile.y + 1] == Tile.Ground.Type:
 		points_to_connect.append(pathfinding.get_closest_point(Vector3(tile.x, tile.y + 1, 0)))
 
 	for point in points_to_connect:
@@ -313,16 +359,16 @@ func connect_rooms():
 	var point_id = 0
 	for x in range(stage_size.x):
 		for y in range(stage_size.y):
-			if tile_map[x][y] == Tile.Block:
+			if tile_map[x][y] == Tile.Filler.Type:
 				block_graph.add_point(point_id, Vector3(x, y, 0))
 				
-				# Connect to left if also block
-				if x > 0 && tile_map[x - 1][y] == Tile.Block:
+				# Connect to left if also Filler
+				if x > 0 && tile_map[x - 1][y] == Tile.Filler.Type:
 					var left_point = block_graph.get_closest_point(Vector3(x - 1, y, 0))
 					block_graph.connect_points(point_id, left_point)
 					
-				# Connect to above if also block
-				if y > 0 && tile_map[x][y - 1] == Tile.Block:
+				# Connect to above if also Filler
+				if y > 0 && tile_map[x][y - 1] == Tile.Filler.Type:
 					var above_point = block_graph.get_closest_point(Vector3(x, y - 1, 0))
 					block_graph.connect_points(point_id, above_point)
 					
@@ -374,41 +420,41 @@ func add_random_connections(block_graph, room_graph):
 	set_door_tile(end_position.x, end_position.y, false)
 	
 	for position in path:
-		set_tile(position.x, position.y, Tile.Ground)
+		set_tile(position.x, position.y, Tile.Ground.Type)
 
 	room_graph.connect_points(start_room_id, end_room_id)
 
 # set the door tile, open or closed based on the wall orientation next to it
 func set_door_tile(position_x, position_y, open):
-	if Tile.Wall_Half_NE == tile_map[position_x - 1][position_y] || Tile.Wall_Half_NE == tile_map[position_x + 1][position_y]:
+	if Tile.WallNE.Type == tile_map[position_x - 1][position_y] || Tile.WallNE.Type == tile_map[position_x + 1][position_y]:
 		if open:
-			set_tile(position_x, position_y, Tile.Door_Open_NE)
+			set_tile(position_x, position_y, Tile.DoorOpenNE.Type)
 		else:
-			set_tile(position_x, position_y, Tile.Door_NE)
-	elif Tile.Wall_Half_SE == tile_map[position_x][position_y - 1] || Tile.Wall_Half_SE == tile_map[position_x][position_y + 1]:
+			set_tile(position_x, position_y, Tile.DoorNE.Type)
+	elif Tile.WallSE.Type == tile_map[position_x][position_y - 1] || Tile.WallSE.Type == tile_map[position_x][position_y + 1]:
 		if open:
-			set_tile(position_x, position_y, Tile.Door_Open_SE)
+			set_tile(position_x, position_y, Tile.DoorOpenSE.Type)
 		else:
-			set_tile(position_x, position_y, Tile.Door_SE)
-	elif Tile.Wall_Half_SW == tile_map[position_x - 1][position_y] || Tile.Wall_Half_SW == tile_map[position_x + 1][position_y]:
+			set_tile(position_x, position_y, Tile.DoorSE.Type)
+	elif Tile.WallSW.Type == tile_map[position_x - 1][position_y] || Tile.WallSW.Type == tile_map[position_x + 1][position_y]:
 		if open:
-			set_tile(position_x, position_y, Tile.Door_Open_SW)
+			set_tile(position_x, position_y, Tile.DoorOpenSW.Type)
 		else:
-			set_tile(position_x, position_y, Tile.Door_SW)
-	elif Tile.Wall_Half_NW == tile_map[position_x][position_y - 1] || Tile.Wall_Half_NW == tile_map[position_x][position_y + 1]:
+			set_tile(position_x, position_y, Tile.DoorSW.Type)
+	elif Tile.WallNW.Type == tile_map[position_x][position_y - 1] || Tile.WallNW.Type == tile_map[position_x][position_y + 1]:
 		if open:
-			set_tile(position_x, position_y, Tile.Door_Open_NW)
+			set_tile(position_x, position_y, Tile.DoorOpenNW.Type)
 		else:
-			set_tile(position_x, position_y, Tile.Door_NW)
+			set_tile(position_x, position_y, Tile.DoorNW.Type)
 
 func is_door(type):
-	return type == Tile.Door_NE || type == Tile.Door_SE || type == Tile.Door_SW || type == Tile.Door_NW || type == Tile.Door_Open_NE || type == Tile.Door_Open_SE || type == Tile.Door_Open_SW || type == Tile.Door_Open_NW
+	return type == Tile.DoorNE.Type || type == Tile.DoorSE.Type || type == Tile.DoorSW.Type || type == Tile.DoorNW.Type || type == Tile.DoorOpenNE.Type || type == Tile.DoorOpenSE.Type || type == Tile.DoorOpenSW.Type || type == Tile.DoorOpenNW.Type
 
 func is_door_closed(type):
-	return type == Tile.Door_NE || type == Tile.Door_SE || type == Tile.Door_SW || type == Tile.Door_NW
+	return type == Tile.DoorNE.Type || type == Tile.DoorSE.Type || type == Tile.DoorSW.Type || type == Tile.DoorNW.Type
 
 func is_breakable_object(type):
-	return type == Tile.Ceramic_Pot
+	return type == Tile.CeramicPot.Type
 
 func hurt(target):
 	target.health -= 1
@@ -515,7 +561,7 @@ class BreakableObject extends Reference:
 
 	# Called when the object is initialized.
 	func _init(game, x, y, type):
-		node = TileScene[type].instance()
+		node = game.get_tile_by_type(type).Scene.instance()
 		health = 3
 		var world_pos = game.map.map_to_world(Vector2(x, y))
 		node.position.x = world_pos.x
@@ -529,15 +575,7 @@ class BreakableObject extends Reference:
 	func remove():
 		node.queue_free()
 
-# ==============================================================================
-# ----------------------------- Physics Process --------------------------------
-# ==============================================================================
 
-#func _physics_process(delta):
-#	# move all enemies in map
-#	for enemy in enemies:
-#		enemy.move(delta)
-		
 # ==============================================================================
 # ------------------------------- Enemy Class ----------------------------------
 # ==============================================================================
@@ -559,9 +597,9 @@ class Enemy extends Reference:
 	var player_seen = false
 
 	# Called when the object is initialized.
-	func _init(game_state, enemy_level, x, y):
+	func _init(game_state, _enemy_level, x, y):
 		game = game_state
-		level = enemy_level
+		level = 3
 		id = "brown_hellspawn"
 		max_hp = level
 		hp = max_hp
@@ -586,6 +624,8 @@ class Enemy extends Reference:
 			dead = true
 			game.enemies.erase(self)
 			remove()
+			Input.set_default_cursor_shape(0) # reset cursor to normal
+			game.player.target = null
 	
 	# Get instance id
 	func get_instance_id():

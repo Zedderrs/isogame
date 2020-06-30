@@ -34,12 +34,17 @@ var direction
 var current_action
 var current_direction
 
+# player attributes
+var attack_range
+
 # scene vars
 var game
 var space_graph
 var screen_size
 var current_body_animation
 var target
+var interrupt_attack
+var destination
 
 # ==============================================================================
 # ------------------ Player Input and Movement Mechanics -----------------------
@@ -61,44 +66,54 @@ func _ready():
 	current_action = action
 	current_direction = direction
 	velocity = Vector2()
+	destination = position
+	attack_range = 100
 
 func _input(event):
 	if event.is_action_released("left_click"):
-		target = get_global_mouse_position()
+		destination = get_global_mouse_position()
+		if target && 0 == Input.get_current_cursor_shape(): # clear target if clicked to move
+			target = null
+			interrupt_attack = true
 	
 func _physics_process(_delta):
-	if Input.is_mouse_button_pressed(1):
-		target = get_global_mouse_position()
-	move_to_target()
+	if Input.is_mouse_button_pressed(1): # while mouse left click is held down, update the destination
+		destination = get_global_mouse_position()
+	act()
 	direction = get_cardinal_direction(velocity)
 	set_animations()
 
-func move_to_target():
-	if !target: target = position
-	velocity = (target - position).normalized() * SPEED
-	if (target - position).length() > 5:
+func act():
+	if can_attack():
+		action = Action.Attack
+	elif !at_destination() && !is_attacking():
 		var previous_position = position
+		velocity = (destination - position).normalized() * SPEED
 		velocity = move_and_slide(velocity)
 		open_door() # open the door if player collides with a door
 		if previous_position.distance_squared_to(position) < 2:
-			if hit():
-				action = Action.Attack
-			else:
-				action = Action.Idle
+			action = Action.Idle
 		else:
 			action = Action.Run
 	else:
 		action = Action.Idle
 
+func can_attack(): 
+	# can attack if not already attacking, target exists, and target is within range
+	return !is_attacking() && null != target && (target.position - position).length() <= attack_range
+
+func at_destination():
+	return (destination - position).length() < 5
+	
 func set_animations():
 	if change_animation():
 		play_animations()
 
 func change_animation(): # can the animation be changed?
+	if is_attacking(): return false
 	var action_changed = action != current_action
 	var direction_changed = direction != current_direction
 	var no_animation_playing = "" == body_animation_player.get_current_animation()
-	if is_attacking(): return false
 	return action_changed || direction_changed || no_animation_playing
 
 	
@@ -140,24 +155,23 @@ func open_door(): # opens the door if player collides with it
 			game.set_door_tile(map_coords.x, map_coords.y, true)
 
 func is_attacking():
+	if interrupt_attack:
+		return false
 	return -1 != body_animation_player.get_current_animation().find("1h_attack")
 
-func hit():
-	for i in get_slide_count():
-		var collider = get_slide_collision(i).collider
-		for enemy in game.enemies:
-			if enemy.get_instance_id() == collider.get_instance_id():
-				attack(enemy)
-				return true
-		return false
+#func hit():
+#	for i in get_slide_count():
+#		if attack_target:
+#			var collider = get_slide_collision(i).collider
+#			for enemy in game.enemies:
+#				if enemy.get_instance_id() == collider.get_instance_id() && attack_target.get_instance_id() == enemy.get_instance_id():
+#					return true
+#			return false
 
-func attack(enemy):
-	enemy.take_damage(1)
-
-func _on_WeaponCollision_body_entered(collider):
-	#print("area entered: ", collider.get_instance_id(), " body type found: ", game.get_instance_type(collider))
-	if game.is_breakable_object(game.get_instance_type(collider)):
-		game.hurt(game.get_object_by_id(collider.get_instance_id()))
+func attack(tar):
+	for enemy in game.enemies:
+		if enemy.get_instance_id() == tar.get_instance_id():
+			enemy.take_damage(1)
 
 func is_empty_tile(tile):
 	return tile != game.Tile.Block && !game.is_wall(tile) && (game.is_door(tile) && !game.is_closed_door(tile))
