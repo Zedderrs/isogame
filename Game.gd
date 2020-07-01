@@ -2,7 +2,6 @@ extends Node2D
 
 # Scene components 
 onready var map = $Map
-onready var visibility_map = $VisibilityMap
 onready var wall_map = $YSort/WallMap
 onready var player = $YSort/Player
 
@@ -14,7 +13,7 @@ onready var AttackCursor = preload("res://assets/Cursors/attack.png")
 # Enemy Scene
 const EnemyScene = preload("res://Enemy.tscn")
 # Tile scenes
-const Filler = preload("res://dungeon_tiles/Walls/StoneColumn.tscn")
+const Filler = preload("res://dungeon_tiles/Walls/HalfStoneColumn.tscn")
 const StairsNE = preload("res://dungeon_tiles/Stairs/WoodStairsNE.tscn")
 const StairsSE = preload("res://dungeon_tiles/Stairs/WoodStairsNE.tscn")
 const StairsSW = preload("res://dungeon_tiles/Stairs/WoodStairsNE.tscn")
@@ -38,9 +37,9 @@ const WallSW = preload("res://dungeon_tiles/Walls/WoodColumn.tscn")
 const CeramicPot = preload("res://dungeon_tiles/Objects/CeramicPot.tscn")
 # Tile Dictionary
 var Tile = {
-	"Ground": {"Type": 0, "Scene": null, "Offset": Vector2(0,0)},
+	"Ground": {"Type": 2, "Scene": null, "Offset": Vector2(0,0)},
 	"Filler": {"Type": 1, "Scene": Filler, "Offset": Vector2(0,32)},
-	"Fog": {"Type": 2, "Scene": null, "Offset": Vector2(0,0)},
+	"BlankGround": {"Type": 0, "Scene": null, "Offset": Vector2(0,0)},
 	"StairsNE": {"Type": 3, "Scene": StairsNE, "Offset": Vector2(0,32)},
 	"StairsSE": {"Type": 4, "Scene": StairsSE, "Offset": Vector2(0,32)},
 	"StairsSW": {"Type": 5, "Scene": StairsSW, "Offset": Vector2(0,32)},
@@ -61,7 +60,7 @@ var Tile = {
 	"WallSW": {"Type": 20, "Scene": WallSW, "Offset": Vector2(0,32)},
 	"WallW": {"Type": 21, "Scene": WallW, "Offset": Vector2(0,32)},
 	"WallNW": {"Type": 22, "Scene": WallNW, "Offset": Vector2(0,32)},
-	"CeramicPot": {"Type": 23, "Scene": CeramicPot, "Offset": Vector2(0,0)},	
+	"CeramicPot": {"Type": 23, "Scene": CeramicPot, "Offset": Vector2(0,0)},
 }
 # Stage constants
 const TILE_SIZE = {x = 64.0, y = 64.0}
@@ -258,7 +257,7 @@ func add_room(free_regions):
 		set_tile(start_x + size_x -1, y, Tile.WallSE.Type)
 		
 		for x in range(start_x + 1, start_x + size_x - 1):
-			set_tile(x, y, Tile.Ground.Type)
+			set_tile(x, y, Tile.BlankGround.Type)
 
 	cut_regions(free_regions, room)
 
@@ -279,7 +278,7 @@ func set_tile(x, y, type):
 	tile_map[x][y] = type
 	
 	# create tile on position x, y
-	if type == Tile.Ground.Type:
+	if type == Tile.BlankGround.Type:
 		map.set_cell(x, y, type)
 		clear_path(Vector2(x, y))
 	else:
@@ -287,7 +286,7 @@ func set_tile(x, y, type):
 		
 		# fill ground undearneath the wall and tiles
 		if is_wall(type) || is_door(type):
-			map.set_cell(x, y, Tile.Ground.Type)
+			map.set_cell(x, y, Tile.BlankGround.Type)
 
 # Create tile instance from scene and position it on the map
 func create_tile(x, y, type):
@@ -302,6 +301,9 @@ func create_tile(x, y, type):
 	tile.position.x = position.x + tile_offset.x
 	tile.position.y = position.y + tile_offset.y
 	tile_instance_map[x][y] = tile
+	
+	# hide the tile upon creation
+	tile.visible = false
 
 # return the Tile key in the dictionary
 func get_tile_by_type(type):
@@ -337,13 +339,13 @@ func clear_path(tile):
 	pathfinding.add_point(new_point, Vector3(tile.x, tile.y, 0))
 	var points_to_connect = []
 	
-	if tile.x > 0 && tile_map[tile.x -1][tile.y] == Tile.Ground.Type:
+	if tile.x > 0 && tile_map[tile.x -1][tile.y] == Tile.BlankGround.Type:
 		points_to_connect.append(pathfinding.get_closest_point(Vector3(tile.x - 1, tile.y, 0)))
-	if tile.y > 0 && tile_map[tile.x][tile.y - 1] == Tile.Ground.Type:
+	if tile.y > 0 && tile_map[tile.x][tile.y - 1] == Tile.BlankGround.Type:
 		points_to_connect.append(pathfinding.get_closest_point(Vector3(tile.x, tile.y - 1, 0)))
-	if tile.x < stage_size.x - 1 && tile_map[tile.x + 1][tile.y] == Tile.Ground.Type:
+	if tile.x < stage_size.x - 1 && tile_map[tile.x + 1][tile.y] == Tile.BlankGround.Type:
 		points_to_connect.append(pathfinding.get_closest_point(Vector3(tile.x + 1, tile.y, 0)))
-	if tile.y < stage_size.y - 1 && tile_map[tile.x][tile.y + 1] == Tile.Ground.Type:
+	if tile.y < stage_size.y - 1 && tile_map[tile.x][tile.y + 1] == Tile.BlankGround.Type:
 		points_to_connect.append(pathfinding.get_closest_point(Vector3(tile.x, tile.y + 1, 0)))
 
 	for point in points_to_connect:
@@ -420,7 +422,7 @@ func add_random_connections(block_graph, room_graph):
 	set_door_tile(end_position.x, end_position.y, false)
 	
 	for position in path:
-		set_tile(position.x, position.y, Tile.Ground.Type)
+		set_tile(position.x, position.y, Tile.BlankGround.Type)
 
 	room_graph.connect_points(start_room_id, end_room_id)
 
@@ -582,8 +584,6 @@ class BreakableObject extends Reference:
 
 class Enemy extends Reference: 
 
-	# Enemy Constants
-	var SPEED = 100
 	# Enemy variables
 	var game
 	var node
@@ -595,6 +595,7 @@ class Enemy extends Reference:
 	var hp
 	var dead = false
 	var player_seen = false
+	var health_bar_length
 
 	# Called when the object is initialized.
 	func _init(game_state, _enemy_level, x, y):
@@ -608,7 +609,9 @@ class Enemy extends Reference:
 		node.position = game.map.map_to_world(tile)
 		anim_player = node.get_node("EnemySprite/AnimationPlayer")
 		anim_player.play(id + "_idle_s")
-		game.add_child(node)
+		game.wall_map.add_child(node)
+		node.visible = false
+		health_bar_length = node.get_node("EnemySprite/EnemyHP").rect_size.x
 
 	# Remove the item node after processing
 	func remove():
@@ -619,7 +622,7 @@ class Enemy extends Reference:
 		if dead:
 			return
 		hp = max(0, hp - dmg)
-		node.get_node("EnemySprite/EnemyHP").rect_size.x = TILE_SIZE.x * hp / max_hp
+		node.get_node("EnemySprite/EnemyHP").rect_size.x = health_bar_length * hp / max_hp
 		if hp == 0:
 			dead = true
 			game.enemies.erase(self)

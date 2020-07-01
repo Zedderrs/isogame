@@ -70,7 +70,7 @@ func _ready():
 	attack_range = 100
 
 func _input(event):
-	if event.is_action_released("left_click"):
+	if event.is_action_pressed("left_click"):
 		destination = get_global_mouse_position()
 		if target && 0 == Input.get_current_cursor_shape(): # clear target if clicked to move
 			target = null
@@ -104,6 +104,9 @@ func can_attack():
 
 func at_destination():
 	return (destination - position).length() < 5
+
+func tile_to_pixel_center(x, y):
+	return Vector2((x + 0.5) * game.TILE_SIZE.x, (y+ 0.5) * game.TILE_SIZE.y)
 	
 func set_animations():
 	if change_animation():
@@ -116,7 +119,6 @@ func change_animation(): # can the animation be changed?
 	var no_animation_playing = "" == body_animation_player.get_current_animation()
 	return action_changed || direction_changed || no_animation_playing
 
-	
 func play_animations():
 	body_animation_player.play(gender + body + action + direction) # animate body
 	hair_animation_player.play(gender + hair + action + direction) # animate hair
