@@ -1,18 +1,25 @@
 extends Node2D
 
+# debug mode
+var debug_mode = true
+
 # Scene components 
-onready var map = $Map
-onready var wall_map = $YSort/WallMap
-onready var player = $YSort/Player
+onready var map = $Navigation2D/Map
+onready var navigation = $Navigation2D
+onready var floor_map = $Navigation2D/FloorMap
+onready var wall_map = $Navigation2D/AboveFloor/WallMap
+onready var player = $Navigation2D/AboveFloor/Player
+
 
 # Cursors
 onready var NormalCursor = preload("res://assets/Cursors/normal.png")
 onready var AttackCursor = preload("res://assets/Cursors/attack.png")
 
-
 # Enemy Scene
 const EnemyScene = preload("res://Enemy.tscn")
 # Tile scenes
+const GrassFloor = preload("res://dungeon_tiles/Floors/GrassFloor.tscn")
+const BlankFloor = preload("res://dungeon_tiles/Floors/BlankFloor.tscn")
 const Filler = preload("res://dungeon_tiles/Walls/HalfStoneColumn.tscn")
 const StairsNE = preload("res://dungeon_tiles/Stairs/WoodStairsNE.tscn")
 const StairsSE = preload("res://dungeon_tiles/Stairs/WoodStairsNE.tscn")
@@ -37,9 +44,9 @@ const WallSW = preload("res://dungeon_tiles/Walls/WoodColumn.tscn")
 const CeramicPot = preload("res://dungeon_tiles/Objects/CeramicPot.tscn")
 # Tile Dictionary
 var Tile = {
-	"Ground": {"Type": 2, "Scene": null, "Offset": Vector2(0,0)},
+	"Ground": {"Type": 0, "Scene": GrassFloor, "Offset": Vector2(0,32)},
 	"Filler": {"Type": 1, "Scene": Filler, "Offset": Vector2(0,32)},
-	"BlankGround": {"Type": 0, "Scene": null, "Offset": Vector2(0,0)},
+	"BlankGround": {"Type": 2, "Scene": BlankFloor, "Offset": Vector2(0,32)},
 	"StairsNE": {"Type": 3, "Scene": StairsNE, "Offset": Vector2(0,32)},
 	"StairsSE": {"Type": 4, "Scene": StairsSE, "Offset": Vector2(0,32)},
 	"StairsSW": {"Type": 5, "Scene": StairsSW, "Offset": Vector2(0,32)},
@@ -197,8 +204,7 @@ func build_stage():
 
 	# Wait and update stage visuals 	
 	yield(get_tree().create_timer(.1), "timeout") ## gives time to update visuals
-	call_deferred("update_visuals")
-	#update_visuals()
+	call_deferred("update_visuals")	
 
 # Set visuals for current state
 func update_visuals():
@@ -206,7 +212,10 @@ func update_visuals():
 	player.position.x = player_position.x
 	player.position.y = player_position.y
 	player.destination = player.position
-
+	
+	map.clear()
+	populate_floor_map()
+	
 # ==============================================================================
 # ------------------------- Stage Building Mechanics ---------------------------
 # ==============================================================================
@@ -285,22 +294,27 @@ func set_tile(x, y, type):
 		create_tile(x, y, type)
 		
 		# fill ground undearneath the wall and tiles
-		if is_wall(type) || is_door(type):
-			map.set_cell(x, y, Tile.BlankGround.Type)
+#		if is_wall(type) || is_door(type):
+#			map.set_cell(x, y, Tile.BlankGround.Type)
 
 # Create tile instance from scene and position it on the map
-func create_tile(x, y, type):
+func create_tile(x, y, type, to_wall_map = true):
 	
 	# create and add to map
 	var tile = get_tile_by_type(type).Scene.instance()
-	wall_map.add_child(tile)
+	# add to wall_map or floor_map (used in populate_floor_map)
+	if to_wall_map:
+		wall_map.add_child(tile)
+	else:
+		floor_map.add_child(tile)
 	
 	# set tile position with offset
 	var position = map.map_to_world(Vector2(x, y))
 	var tile_offset = get_tile_by_type(type).Offset
 	tile.position.x = position.x + tile_offset.x
 	tile.position.y = position.y + tile_offset.y
-	tile_instance_map[x][y] = tile
+	if to_wall_map:
+		tile_instance_map[x][y] = tile
 	
 	# hide the tile upon creation
 	tile.visible = false
@@ -351,9 +365,7 @@ func clear_path(tile):
 	for point in points_to_connect:
 		pathfinding.connect_points(point, new_point)
 
-func tile_to_pixel_center(x, y):
-	return Vector2((x + 0.5) * TILE_SIZE.x, (y+ 0.5) * TILE_SIZE.y)
-	
+
 func connect_rooms():
 	# Build an AStar graph of the area where we can add corridors
 	
@@ -551,6 +563,13 @@ func cut_regions(free_regions, region_to_remove):
 	for region in addition_queue:
 		free_regions.append(region)
 
+func populate_floor_map():
+	# create a stage of blank floor scenes with collision to be revealed by player
+	for x in stage_size.x:
+		for y in stage_size.y:
+			if tile_map[x][y] == Tile.BlankGround.Type || is_door(tile_map[x][y]):
+				create_tile(x, y, Tile.Ground.Type, false)
+
 # ==============================================================================
 # ------------------------- Breakable Object Class -----------------------------
 # ==============================================================================
@@ -576,7 +595,6 @@ class BreakableObject extends Reference:
 	# Remove the object node
 	func remove():
 		node.queue_free()
-
 
 # ==============================================================================
 # ------------------------------- Enemy Class ----------------------------------

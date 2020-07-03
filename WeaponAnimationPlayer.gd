@@ -23,7 +23,7 @@ func _physics_process(delta):
 		game.player.interrupt_attack = false
 	if is_attack_anim() && is_playing() && is_start_of_attack(delta):
 		damage_dealt = false
-	elif is_attack_anim() && is_playing() && is_middle_of_attack(delta) && game.player.target && !damage_dealt:
+	elif is_attack_anim() && is_playing() && is_point_of_attack(delta) && game.player.target && !damage_dealt:
 		game.player.attack(game.player.target)
 		damage_dealt = true
 	elif is_attack_anim() && is_playing() && is_end_of_attack(delta) && game.player.target:
@@ -32,7 +32,7 @@ func _physics_process(delta):
 func is_start_of_attack(delta):
 	return (current_anim_position - delta) < 0
 	
-func is_middle_of_attack(delta):
+func is_point_of_attack(delta):
 	return ((current_anim_position + delta)/anim_length) > 0.75
 	
 func is_end_of_attack(delta):

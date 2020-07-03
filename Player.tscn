@@ -279,9 +279,7 @@ animations = [ {
 "speed": 5.0
 } ]
 
-[sub_resource type="CapsuleShape2D" id=17]
-radius = 12.0
-height = 12.0
+[sub_resource type="CircleShape2D" id=17]
 
 [node name="Player" type="KinematicBody2D"]
 collision_layer = 2
@@ -468,5 +466,7 @@ anims/slash_s = ExtResource( 123 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0, 4 )
-rotation = 1.5708
 shape = SubResource( 17 )
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+enabled = true

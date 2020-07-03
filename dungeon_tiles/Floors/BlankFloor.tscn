@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://dungeon_tiles/Fog/Fog.png" type="Texture" id=1]
+
+[node name="BlankFloor" type="StaticBody2D"]
+collision_layer = 16
+collision_mask = 0
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PoolVector2Array( -32, 0, 0, -32, 32, 0, 0, 32 )
+
+[node name="Fog" type="Sprite" parent="."]
+texture = ExtResource( 1 )
