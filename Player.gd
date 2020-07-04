@@ -85,16 +85,18 @@ func _ready():
 
 func _input(event):
 	if event.is_action_pressed("left_click"):
-		update_navigation_path(position, get_global_mouse_position())
+		destination = get_global_mouse_position()
+		if is_hovering_over_ground():
+			update_navigation_path(position, get_global_mouse_position())
 		if target && 0 == Input.get_current_cursor_shape(): # clear target if clicked to move
 			target = null
 			interrupt_attack = true
-	elif event.is_action_pressed("right_click"):
-		update_navigation_path(position, get_global_mouse_position())
 	
 func _physics_process(delta):
 	if Input.is_mouse_button_pressed(1): # while mouse left click is held down, update the destination
-		update_navigation_path(position, get_global_mouse_position())
+		destination = get_global_mouse_position()
+		if is_hovering_over_ground():
+			update_navigation_path(position, get_global_mouse_position())
 	act(delta)
 	direction = get_cardinal_direction(velocity)
 	set_animations()
@@ -127,6 +129,10 @@ func act(delta):
 func is_clear_path():
 	raycast.set_cast_to(destination-position)
 	return !raycast.is_colliding()
+
+func is_hovering_over_ground():
+	var tile = game.map.world_to_map(get_global_mouse_position())
+	return game.is_walkable_tile(game.tile_map[tile.x][tile.y])
 
 func can_attack(): 
 	# can attack if not already attacking, target exists, and target is within range
@@ -209,13 +215,13 @@ func move_along_path(distance):
 			var new_position = last_point.linear_interpolate(path[0], distance / distance_between_points)
 			velocity = (new_position - position).normalized()
 
-			if 0 != get_slide_count():
-				var collider = get_slide_collision(0).collider
-				if collider:
-					if !game.is_door(collider.get_instance_id()):
-						avoidance_force = (position - collider.position).normalized()
-						velocity = (avoidance_force * avoidance_weight + velocity * velocity_weight).normalized()
-						path.set(0, path[0] + velocity * distance)
+#			if 0 != get_slide_count():
+#				var collider = get_slide_collision(0).collider
+#				if collider:
+#					if !game.is_door(collider.get_instance_id()):
+#						avoidance_force = (position - collider.position).normalized()
+#						velocity = (avoidance_force * avoidance_weight + velocity * velocity_weight).normalized()
+#						path.set(0, path[0] + velocity * distance)
 			
 #			raycast_path.set_cast_to(path[0] - position)
 #			if raycast_path:
@@ -232,10 +238,16 @@ func move_along_path(distance):
 	position = last_point
 
 func update_navigation_path(start_position, end_position):
-	path = game.navigation.get_simple_path(start_position, end_position, true)
-	path.remove(0) # The first point of the path is always the start_position. remove this
-	# shift all paths to middle of tiles except for final point
-	destination = end_position
+	path = game.map.find_path(start_position, end_position)
+	if path:
+		for i in range(path.size()):
+			var tile_center = path[i]
+			tile_center.x -= 32
+			path[i] = tile_center
+	#	path = game.navigation.get_simple_path(start_position, end_position, true)
+		path.remove(0) # The first point of the path is always the start_position. remove this
+		# shift all paths to middle of tiles except for final point
+
 
 
 

@@ -9,6 +9,7 @@ onready var navigation = $Navigation2D
 onready var floor_map = $Navigation2D/FloorMap
 onready var wall_map = $Navigation2D/AboveFloor/WallMap
 onready var player = $Navigation2D/AboveFloor/Player
+onready var vision = $Navigation2D/AboveFloor/Player/Vision
 
 # Cursors
 onready var NormalCursor = preload("res://assets/Cursors/normal.png")
@@ -201,7 +202,7 @@ func build_stage():
 	var stairs_y = end_room.position.y + 1 + randi() % int(end_room.size.y - 2)
 	set_tile(stairs_x, stairs_y, Tile.StairsNE.Type)
 
-	# Wait and update stage visuals 	
+	# Wait and update stage visuals
 	yield(get_tree().create_timer(.1), "timeout") ## gives time to update visuals
 	call_deferred("update_visuals")	
 
@@ -214,6 +215,7 @@ func update_visuals():
 	
 	map.clear()
 	populate_floor_map()
+	map.initiate_map_details()
 	
 # ==============================================================================
 # ------------------------- Stage Building Mechanics ---------------------------
@@ -569,6 +571,9 @@ func populate_floor_map():
 			if tile_map[x][y] == Tile.BlankGround.Type || is_door(tile_map[x][y]):
 				create_tile(x, y, Tile.Ground.Type, false)
 
+func is_walkable_tile(type):
+	return type == Tile.Ground.Type || type == Tile.BlankGround.Type || is_door(type)
+
 # ==============================================================================
 # ------------------------- Breakable Object Class -----------------------------
 # ==============================================================================
@@ -644,6 +649,7 @@ class Enemy extends Reference:
 		if hp == 0:
 			dead = true
 			game.enemies.erase(self)
+			game.vision.enemies_in_range.erase(self.node)
 			remove()
 			Input.set_default_cursor_shape(0) # reset cursor to normal
 			game.player.target = null
