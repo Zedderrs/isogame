@@ -8,6 +8,7 @@ onready var bottom_animation_player = $BottomSprite/BottomAnimationPlayer
 onready var weapon_animation_player = $WeaponSprite/WeaponAnimationPlayer
 onready var slash_animation_player = $SlashSprite/SlashAnimationPlayer
 onready var raycast = $RayCast2D
+onready var raycast_path = $PathRayCast2D
 
 # animation dictionary
 var Gender = {"Male": "male_"}
@@ -56,7 +57,6 @@ var velocity_weight
 # debug tools
 var from_pt
 var to_pt
-var one_draw = false
 
 # ==============================================================================
 # ------------------ Player Input and Movement Mechanics -----------------------
@@ -103,6 +103,7 @@ func _physics_process(delta):
 		update() #draw debug
 	
 func act(delta):
+	raycast.set_cast_to(destination-position)
 	if can_attack():
 		action = Action.Attack
 	elif !at_destination() && !is_attacking():
@@ -124,8 +125,7 @@ func act(delta):
 		action = Action.Idle
 
 func is_clear_path():
-	raycast.set_cast_to(destination)
-	raycast.force_raycast_update()
+	raycast.set_cast_to(destination-position)
 	return !raycast.is_colliding()
 
 func can_attack(): 
@@ -208,6 +208,7 @@ func move_along_path(distance):
 		if distance <= distance_between_points:
 			var new_position = last_point.linear_interpolate(path[0], distance / distance_between_points)
 			velocity = (new_position - position).normalized()
+
 			if 0 != get_slide_count():
 				var collider = get_slide_collision(0).collider
 				if collider:
@@ -215,6 +216,12 @@ func move_along_path(distance):
 						avoidance_force = (position - collider.position).normalized()
 						velocity = (avoidance_force * avoidance_weight + velocity * velocity_weight).normalized()
 						path.set(0, path[0] + velocity * distance)
+			
+#			raycast_path.set_cast_to(path[0] - position)
+#			if raycast_path:
+#				if raycast_path.is_colliding():
+#					velocity = (raycast_path.get_collision_normal() * 0.5 + velocity).normalized()
+					
 			velocity = move_and_slide(velocity * SPEED)
 			return
 		# The position is past the end of the segment.
@@ -227,6 +234,7 @@ func move_along_path(distance):
 func update_navigation_path(start_position, end_position):
 	path = game.navigation.get_simple_path(start_position, end_position, true)
 	path.remove(0) # The first point of the path is always the start_position. remove this
+	# shift all paths to middle of tiles except for final point
 	destination = end_position
 
 
@@ -241,6 +249,7 @@ func _draw():
 		var from_pt = get_global_transform().xform_inv(path[i])
 		var to_pt = get_global_transform().xform_inv(path[i+1])
 		draw_line(from_pt, to_pt, Color.red, 2.0)
+		
 	for i in get_slide_count():
 		var collision = get_slide_collision(i)
 		var from_pt = get_global_transform().xform_inv(collision.collider.position)
@@ -253,3 +262,17 @@ func _draw():
 	if avoidance_force:
 		var player_pos = get_global_transform().xform_inv(position)
 		draw_line(player_pos, (player_pos + (avoidance_force)*100), Color.yellow, 2)
+	
+	if raycast:
+		if raycast.is_colliding():
+			var col_pt = get_global_transform().xform_inv(raycast.get_collision_point())
+			var col_norm = raycast.get_collision_normal()
+			draw_circle(col_pt, 5, Color.aqua)
+			draw_line(col_pt,(col_pt + col_norm * 50), Color.green, 2)
+			
+	if raycast_path:
+		if raycast_path.is_colliding():
+			var path_col_pt = get_global_transform().xform_inv(raycast_path.get_collision_point())
+			var path_col_norm = raycast_path.get_collision_normal()
+			draw_circle(path_col_pt, 5, Color.brown)
+			draw_line(path_col_pt,(path_col_pt + path_col_norm * 50), Color.green, 2)

@@ -1,7 +1,7 @@
 extends Node2D
 
 # debug mode
-var debug_mode = true
+var debug_mode = false
 
 # Scene components 
 onready var map = $Navigation2D/Map
@@ -9,7 +9,6 @@ onready var navigation = $Navigation2D
 onready var floor_map = $Navigation2D/FloorMap
 onready var wall_map = $Navigation2D/AboveFloor/WallMap
 onready var player = $Navigation2D/AboveFloor/Player
-
 
 # Cursors
 onready var NormalCursor = preload("res://assets/Cursors/normal.png")
@@ -625,6 +624,7 @@ class Enemy extends Reference:
 		tile = Vector2(x, y)
 		node = EnemyScene.instance()
 		node.position = game.map.map_to_world(tile)
+		node.position.y += 32
 		anim_player = node.get_node("EnemySprite/AnimationPlayer")
 		anim_player.play(id + "_idle_s")
 		game.wall_map.add_child(node)
