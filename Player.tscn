@@ -1,4 +1,4 @@
-[gd_scene load_steps=144 format=2]
+[gd_scene load_steps=176 format=2]
 
 [ext_resource path="res://assets/animations/elf/male_elf_body_sprite.tres" type="SpriteFrames" id=1]
 [ext_resource path="res://assets/animations/elf/male_elf_hair_idle_e.tres" type="Animation" id=2]
@@ -125,6 +125,10 @@
 [ext_resource path="res://assets/animations/slash/slash_s.tres" type="Animation" id=123]
 [ext_resource path="res://WeaponAnimationPlayer.gd" type="Script" id=124]
 [ext_resource path="res://assets/animations/weapon/male_weapon_sword_1h_attack_n.tres" type="Animation" id=125]
+[ext_resource path="res://assets/magic/Thunder.png" type="Texture" id=126]
+[ext_resource path="res://assets/magic/explosioneffect.png" type="Texture" id=127]
+[ext_resource path="res://assets/magic/EnergyBall.png" type="Texture" id=128]
+[ext_resource path="res://EffectsAnimationPlayer.gd" type="Script" id=129]
 [ext_resource path="res://Player.gd" type="Script" id=169]
 
 [sub_resource type="Animation" id=1]
@@ -211,6 +215,51 @@ tracks/1/keys = {
 "values": [ 0, 1, 2 ]
 }
 
+[sub_resource type="AtlasTexture" id=27]
+flags = 4
+atlas = ExtResource( 128 )
+region = Rect2( 0, 0, 128, 128 )
+
+[sub_resource type="AtlasTexture" id=28]
+flags = 4
+atlas = ExtResource( 128 )
+region = Rect2( 128, 0, 128, 128 )
+
+[sub_resource type="AtlasTexture" id=29]
+flags = 4
+atlas = ExtResource( 128 )
+region = Rect2( 256, 0, 128, 128 )
+
+[sub_resource type="AtlasTexture" id=30]
+flags = 4
+atlas = ExtResource( 128 )
+region = Rect2( 384, 0, 128, 128 )
+
+[sub_resource type="AtlasTexture" id=31]
+flags = 4
+atlas = ExtResource( 128 )
+region = Rect2( 512, 0, 128, 128 )
+
+[sub_resource type="AtlasTexture" id=32]
+flags = 4
+atlas = ExtResource( 128 )
+region = Rect2( 640, 0, 128, 128 )
+
+[sub_resource type="AtlasTexture" id=33]
+flags = 4
+atlas = ExtResource( 128 )
+region = Rect2( 768, 0, 128, 128 )
+
+[sub_resource type="AtlasTexture" id=34]
+flags = 4
+atlas = ExtResource( 128 )
+region = Rect2( 896, 0, 128, 128 )
+
+[sub_resource type="AtlasTexture" id=35]
+flags = 4
+atlas = ExtResource( 128 )
+region = Rect2( 1024, 0, 128, 128 )
+
 [sub_resource type="AtlasTexture" id=4]
 flags = 4
 atlas = ExtResource( 74 )
@@ -271,13 +320,192 @@ flags = 4
 atlas = ExtResource( 74 )
 region = Rect2( 1760, 0, 160, 160 )
 
+[sub_resource type="AtlasTexture" id=18]
+flags = 4
+atlas = ExtResource( 126 )
+region = Rect2( 0, 0, 64, 256 )
+
+[sub_resource type="AtlasTexture" id=19]
+flags = 4
+atlas = ExtResource( 126 )
+region = Rect2( 64, 0, 64, 256 )
+
+[sub_resource type="AtlasTexture" id=20]
+flags = 4
+atlas = ExtResource( 126 )
+region = Rect2( 128, 0, 64, 256 )
+
+[sub_resource type="AtlasTexture" id=21]
+flags = 4
+atlas = ExtResource( 126 )
+region = Rect2( 192, 0, 64, 256 )
+
+[sub_resource type="AtlasTexture" id=22]
+flags = 4
+atlas = ExtResource( 126 )
+region = Rect2( 256, 0, 64, 256 )
+
+[sub_resource type="AtlasTexture" id=23]
+flags = 4
+atlas = ExtResource( 126 )
+region = Rect2( 320, 0, 64, 256 )
+
+[sub_resource type="AtlasTexture" id=24]
+flags = 4
+atlas = ExtResource( 126 )
+region = Rect2( 384, 0, 64, 256 )
+
+[sub_resource type="AtlasTexture" id=25]
+flags = 4
+atlas = ExtResource( 126 )
+region = Rect2( 448, 0, 64, 256 )
+
+[sub_resource type="AtlasTexture" id=36]
+flags = 4
+atlas = ExtResource( 127 )
+region = Rect2( 0, 0, 128, 128 )
+
+[sub_resource type="AtlasTexture" id=37]
+flags = 4
+atlas = ExtResource( 127 )
+region = Rect2( 0, 128, 128, 128 )
+
+[sub_resource type="AtlasTexture" id=38]
+flags = 4
+atlas = ExtResource( 127 )
+region = Rect2( 0, 256, 128, 128 )
+
+[sub_resource type="AtlasTexture" id=39]
+flags = 4
+atlas = ExtResource( 127 )
+region = Rect2( 0, 384, 128, 128 )
+
+[sub_resource type="AtlasTexture" id=40]
+flags = 4
+atlas = ExtResource( 127 )
+region = Rect2( 0, 512, 128, 128 )
+
+[sub_resource type="AtlasTexture" id=41]
+flags = 4
+atlas = ExtResource( 127 )
+region = Rect2( 0, 640, 128, 128 )
+
+[sub_resource type="AtlasTexture" id=42]
+flags = 4
+atlas = ExtResource( 127 )
+region = Rect2( 0, 768, 128, 128 )
+
+[sub_resource type="AtlasTexture" id=43]
+flags = 4
+atlas = ExtResource( 127 )
+region = Rect2( 0, 896, 128, 128 )
+
 [sub_resource type="SpriteFrames" id=16]
 animations = [ {
+"frames": [ SubResource( 27 ), SubResource( 28 ), SubResource( 29 ), SubResource( 30 ), SubResource( 31 ), SubResource( 32 ), SubResource( 33 ), SubResource( 34 ), SubResource( 35 ) ],
+"loop": true,
+"name": "energyball",
+"speed": 5.0
+}, {
 "frames": [ SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), SubResource( 13 ), SubResource( 14 ), SubResource( 15 ) ],
 "loop": true,
 "name": "slash_s",
 "speed": 5.0
+}, {
+"frames": [ SubResource( 18 ), SubResource( 19 ), SubResource( 20 ), SubResource( 21 ), SubResource( 22 ), SubResource( 23 ), SubResource( 24 ), SubResource( 25 ) ],
+"loop": true,
+"name": "lightning",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 36 ), SubResource( 37 ), SubResource( 38 ), SubResource( 39 ), SubResource( 40 ), SubResource( 41 ), SubResource( 42 ), SubResource( 43 ) ],
+"loop": true,
+"name": "explosion",
+"speed": 5.0
 } ]
+
+[sub_resource type="Animation" id=44]
+resource_name = "energyball"
+step = 0.111111
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 3.72529e-09 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ "energyball" ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 1.11759e-08, 0.111111, 0.222222, 0.333333, 0.444444, 0.555556, 0.666667, 0.777778, 0.888889 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3, 4, 5, 6, 7, 8 ]
+}
+
+[sub_resource type="Animation" id=45]
+resource_name = "explosion"
+step = 0.125
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 2.79397e-07 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ "explosion" ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.125, 0.25, 0.375, 0.5, 0.625, 0.75, 0.875 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3, 4, 5, 6, 7 ]
+}
+
+[sub_resource type="Animation" id=26]
+resource_name = "lightning"
+step = 0.125
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ "firebal_s" ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.125, 0.25, 0.375, 0.5, 0.625, 0.75, 0.875 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3, 4, 5, 6, 7 ]
+}
 
 [sub_resource type="CircleShape2D" id=17]
 
@@ -285,9 +513,6 @@ animations = [ {
 collision_layer = 2
 collision_mask = 3
 script = ExtResource( 169 )
-
-[node name="Camera2D" type="Camera2D" parent="."]
-current = true
 
 [node name="BodySprite" type="AnimatedSprite" parent="."]
 frames = ExtResource( 1 )
@@ -454,15 +679,18 @@ anims/male_weapon_sword_run_sw = ExtResource( 79 )
 anims/male_weapon_sword_run_w = ExtResource( 80 )
 script = ExtResource( 124 )
 
-[node name="SlashSprite" type="AnimatedSprite" parent="."]
-visible = false
+[node name="Effectsprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 16 )
-animation = "slash_s"
-offset = Vector2( 0, -40 )
+animation = "energyball"
+frame = 8
 
-[node name="SlashAnimationPlayer" type="AnimationPlayer" parent="SlashSprite"]
+[node name="EffectsAnimationPlayer" type="AnimationPlayer" parent="Effectsprite"]
 playback_process_mode = 0
+anims/energyball = SubResource( 44 )
+anims/explosion = SubResource( 45 )
+anims/lightning = SubResource( 26 )
 anims/slash_s = ExtResource( 123 )
+script = ExtResource( 129 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0, 4 )
@@ -471,5 +699,6 @@ shape = SubResource( 17 )
 [node name="RayCast2D" type="RayCast2D" parent="."]
 enabled = true
 
-[node name="PathRayCast2D" type="RayCast2D" parent="."]
-enabled = true
+[node name="Camera2D" type="Camera2D" parent="."]
+current = true
+process_mode = 0

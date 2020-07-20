@@ -6,9 +6,8 @@ onready var hair_animation_player = $HairSprite/HairAnimationPlayer
 onready var top_animation_player = $TopSprite/TopAnimationPlayer
 onready var bottom_animation_player = $BottomSprite/BottomAnimationPlayer
 onready var weapon_animation_player = $WeaponSprite/WeaponAnimationPlayer
-onready var slash_animation_player = $SlashSprite/SlashAnimationPlayer
+onready var effects_animation_player = $Effectsprite/EffectsAnimationPlayer
 onready var raycast = $RayCast2D
-onready var raycast_path = $PathRayCast2D
 
 # animation dictionary
 var Gender = {"Male": "male_"}
@@ -23,38 +22,36 @@ var Dir = {"N":"_n", "NE":"_ne", "E":"_e", "SE":"_se", "S":"_s", "SW":"_sw", "W"
 # scene constants
 const SPEED = 250 # How fast the player will move (pixels/sec).
 
-# player state vars
-var velocity
-var avoidance_force
-var gender
-var body
-var hair
-var top
-var bottom
-var weapon
-var action
-var direction
-var current_action
-var current_direction
-
-# player attributes
-var attack_range
-
 # scene vars
-var game
+onready var game = get_tree().get_root().get_node("Game")
 var space_graph
-var screen_size
+
+# player animations
+onready var gender = Gender.Male
+onready var body = Body.Elf
+onready var hair = Hair.Elf
+onready var top = Top.Elf
+onready var bottom = Bottom.Elf
+onready var weapon = Weapon.Sword
 var current_body_animation
+# player state
+onready var action = Action.Idle
+onready var direction = Dir.S
+onready var current_action = action
+onready var current_direction = direction
 var target
 var interrupt_attack
-var destination
-var path
-
-# steering
-var avoidance_weight
-var velocity_weight
-
-# debug tools
+# player attributes
+onready var attack_range = 100
+onready var hp_max = 10
+onready var hp = hp_max
+onready var xp = 2
+onready var xp_max = 10
+# player movement
+onready var path = []
+onready var velocity = Vector2()
+onready var destination = position
+# debug tool vars
 var from_pt
 var to_pt
 
@@ -62,33 +59,13 @@ var to_pt
 # ------------------ Player Input and Movement Mechanics -----------------------
 # ==============================================================================
 
-func _ready():
-	screen_size = OS.get_screen_size()
-	game = get_tree().get_root().get_node("Game")
-	# player animations
-	gender = Gender.Male
-	body = Body.Elf
-	hair = Hair.Elf
-	top = Top.Elf
-	bottom = Bottom.Elf
-	weapon = Weapon.Sword
-	# player state
-	action = Action.Idle
-	direction = Dir.S
-	current_action = action
-	current_direction = direction
-	attack_range = 100
-	# player movement
-	path = []
-	velocity = Vector2()
-	destination = position
-
 func _input(event):
 	if event.is_action_pressed("left_click"):
 		destination = get_global_mouse_position()
 		if is_hovering_over_ground():
 			update_navigation_path(position, get_global_mouse_position())
 		if target && 0 == Input.get_current_cursor_shape(): # clear target if clicked to move
+			target.health_bar.visible = false
 			target = null
 			interrupt_attack = true
 	
@@ -105,7 +82,7 @@ func _physics_process(delta):
 		update() #draw debug
 	
 func act(delta):
-	raycast.set_cast_to(destination-position)
+	raycast.set_cast_to(destination - position)
 	if can_attack():
 		action = Action.Attack
 	elif !at_destination() && !is_attacking():
@@ -132,7 +109,10 @@ func is_clear_path():
 
 func is_hovering_over_ground():
 	var tile = game.map.world_to_map(get_global_mouse_position())
-	return game.is_walkable_tile(game.tile_map[tile.x][tile.y])
+	if tile.x < 0 || tile.y < 0 || tile.x >= game.stage_size.x || tile.y >= game.stage_size.y:
+		return false
+	else:
+		return game.is_walkable_tile(game.tile_map[tile.x][tile.y])
 
 func can_attack(): 
 	# can attack if not already attacking, target exists, and target is within range
@@ -159,11 +139,6 @@ func play_animations():
 	bottom_animation_player.play(gender + bottom + action + direction) # animate bottom
 	weapon_animation_player.play(gender + weapon + action + direction) # animate weapon
 	
-	if is_attacking() && direction == Dir.S:
-		$SlashSprite.visible = true 
-		slash_animation_player.play("slash_s")
-	else:
-		$SlashSprite.visible = false
 	# update action and direction
 	current_action = action
 	current_direction = direction
@@ -204,8 +179,6 @@ func move_direct():
 	velocity = move_and_slide(velocity)
 
 func move_along_path(distance):
-	avoidance_weight = 2
-	velocity_weight = 1
 	var last_point = position
 	while path.size():
 		
@@ -214,20 +187,6 @@ func move_along_path(distance):
 		if distance <= distance_between_points:
 			var new_position = last_point.linear_interpolate(path[0], distance / distance_between_points)
 			velocity = (new_position - position).normalized()
-
-#			if 0 != get_slide_count():
-#				var collider = get_slide_collision(0).collider
-#				if collider:
-#					if !game.is_door(collider.get_instance_id()):
-#						avoidance_force = (position - collider.position).normalized()
-#						velocity = (avoidance_force * avoidance_weight + velocity * velocity_weight).normalized()
-#						path.set(0, path[0] + velocity * distance)
-			
-#			raycast_path.set_cast_to(path[0] - position)
-#			if raycast_path:
-#				if raycast_path.is_colliding():
-#					velocity = (raycast_path.get_collision_normal() * 0.5 + velocity).normalized()
-					
 			velocity = move_and_slide(velocity * SPEED)
 			return
 		# The position is past the end of the segment.
@@ -239,52 +198,35 @@ func move_along_path(distance):
 
 func update_navigation_path(start_position, end_position):
 	path = game.map.find_path(start_position, end_position)
-	if path:
-		for i in range(path.size()):
-			var tile_center = path[i]
-			tile_center.x -= 32
-			path[i] = tile_center
-	#	path = game.navigation.get_simple_path(start_position, end_position, true)
-		path.remove(0) # The first point of the path is always the start_position. remove this
-		# shift all paths to middle of tiles except for final point
 
+func take_damage(dmg):
+	hp = hp - dmg
 
-
-
-
-
-
-
+# ==============================================================================
+# ------------------------------- Debugging ------------------------------------
+# ==============================================================================
 
 func _draw():
+	# pathfinding for character walking
 	for i in range(path.size()-1):
 		var from_pt = get_global_transform().xform_inv(path[i])
 		var to_pt = get_global_transform().xform_inv(path[i+1])
 		draw_line(from_pt, to_pt, Color.red, 2.0)
-		
+	
+	# collision center of object from move_slide
 	for i in get_slide_count():
 		var collision = get_slide_collision(i)
 		var from_pt = get_global_transform().xform_inv(collision.collider.position)
 		draw_circle(from_pt, 5, Color.burlywood)
 
+	# velocity vector
 	if velocity:
 		var player_pos = get_global_transform().xform_inv(position)
 		draw_line(player_pos, (player_pos + (velocity/SPEED)*100), Color.black, 2)
 
-	if avoidance_force:
-		var player_pos = get_global_transform().xform_inv(position)
-		draw_line(player_pos, (player_pos + (avoidance_force)*100), Color.yellow, 2)
-	
 	if raycast:
 		if raycast.is_colliding():
 			var col_pt = get_global_transform().xform_inv(raycast.get_collision_point())
 			var col_norm = raycast.get_collision_normal()
 			draw_circle(col_pt, 5, Color.aqua)
 			draw_line(col_pt,(col_pt + col_norm * 50), Color.green, 2)
-			
-	if raycast_path:
-		if raycast_path.is_colliding():
-			var path_col_pt = get_global_transform().xform_inv(raycast_path.get_collision_point())
-			var path_col_norm = raycast_path.get_collision_normal()
-			draw_circle(path_col_pt, 5, Color.brown)
-			draw_line(path_col_pt,(path_col_pt + path_col_norm * 50), Color.green, 2)

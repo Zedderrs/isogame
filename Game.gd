@@ -4,15 +4,15 @@ extends Node2D
 var debug_mode = false
 
 # Scene components 
-onready var map = $Navigation2D/Map
-onready var navigation = $Navigation2D
-onready var floor_map = $Navigation2D/FloorMap
-onready var wall_map = $Navigation2D/AboveFloor/WallMap
-onready var player = $Navigation2D/AboveFloor/Player
-onready var vision = $Navigation2D/AboveFloor/Player/Vision
+onready var map = $Map
+onready var floor_map = $FloorMap
+onready var wall_map = $AboveFloor/WallMap
+onready var player = $AboveFloor/Player
+onready var vision = $AboveFloor/Player/Vision
 
 # Cursors
 onready var NormalCursor = preload("res://assets/Cursors/normal.png")
+onready var InteractCursor = preload("res://assets/Cursors/interact.png")
 onready var AttackCursor = preload("res://assets/Cursors/attack.png")
 
 # Enemy Scene
@@ -117,6 +117,7 @@ func _ready():
 	player.visible = true
 	# set cursors
 	Input.set_custom_mouse_cursor(NormalCursor, 0)
+	Input.set_custom_mouse_cursor(InteractCursor, 1)
 	Input.set_custom_mouse_cursor(AttackCursor, 2)
 
 
@@ -210,7 +211,7 @@ func build_stage():
 func update_visuals():
 	var player_position = map.map_to_world(player_tile)
 	player.position.x = player_position.x
-	player.position.y = player_position.y
+	player.position.y = player_position.y + 32
 	player.destination = player.position
 	
 	map.clear()
@@ -657,3 +658,20 @@ class Enemy extends Reference:
 	# Get instance id
 	func get_instance_id():
 		return node.get_instance_id()
+
+# ==============================================================================
+# ----------------------------------- Tools ------------------------------------
+# ==============================================================================
+func gen_rand_num(min_range, max_range, return_integer = false):
+	randomize()
+	if return_integer:
+		return rand_range(min_range, max_range)
+	else:
+		return round(rand_range(min_range, max_range))
+
+func get_tile_center_position(position):
+	# global position is translated to map position and then back to global
+	# an offset in y will put it in the center of the tile
+	var middle_of_tile =  map.map_to_world(map.world_to_map(position))
+	middle_of_tile.y  += TILE_SIZE.y / 2
+	return middle_of_tile
