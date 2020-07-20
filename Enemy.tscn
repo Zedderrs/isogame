@@ -1,7 +1,7 @@
 [gd_scene load_steps=144 format=2]
 
-[ext_resource path="res://assets/brown_hellspawn_spritesheet/hellspawn_brown_Run.png" type="Texture" id=1]
-[ext_resource path="res://assets/brown_hellspawn_spritesheet/hellspawn_brown_Idle.png" type="Texture" id=2]
+[ext_resource path="res://assets/spritesheets/enemy/brown_hellspawn/hellspawn_brown_Run.png" type="Texture" id=1]
+[ext_resource path="res://assets/spritesheets/enemy/brown_hellspawn/hellspawn_brown_Idle.png" type="Texture" id=2]
 [ext_resource path="res://assets/animations/enemy/brown_hellspawn/brown_hellspawn_idle_ne.tres" type="Animation" id=3]
 [ext_resource path="res://assets/animations/enemy/brown_hellspawn/brown_hellspawn_idle_se.tres" type="Animation" id=4]
 [ext_resource path="res://assets/animations/enemy/brown_hellspawn/brown_hellspawn_idle_e.tres" type="Animation" id=5]
@@ -27,8 +27,10 @@
 [ext_resource path="res://assets/animations/enemy/brown_hellspawn/brown_hellspawn_attack_e.tres" type="Animation" id=25]
 [ext_resource path="res://assets/animations/enemy/brown_hellspawn/brown_hellspawn_attack_se.tres" type="Animation" id=26]
 [ext_resource path="res://assets/animations/enemy/brown_hellspawn/brown_hellspawn_attack_nw.tres" type="Animation" id=27]
-[ext_resource path="res://assets/brown_hellspawn_spritesheet/hellspawn_brown_Attack 1.png" type="Texture" id=28]
+[ext_resource path="res://assets/spritesheets/enemy/brown_hellspawn/hellspawn_brown_Attack 1.png" type="Texture" id=28]
 [ext_resource path="res://EnemyAnimationPlayer.gd" type="Script" id=29]
+
+
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 48.0
