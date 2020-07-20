@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=2]
+
+[sub_resource type="StreamTexture" id=1]
+load_path = "res://.import/GrassFloor.png-220053a1c26ee33b32a506f5a8e15fcc.stex"
+
+[sub_resource type="NavigationPolygon" id=2]
+vertices = PoolVector2Array( 0, -32, 32, 0, 0, 32, -32, 0 )
+polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
+outlines = [ PoolVector2Array( 0, -32, 32, 0, 0, 32, -32, 0 ) ]
+
+[node name="GrassFloor" type="StaticBody2D"]
+collision_layer = 16
+collision_mask = 0
+
+[node name="GrassFloor" type="Sprite" parent="."]
+texture = SubResource( 1 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PoolVector2Array( -32, 0, 0, -32, 32, 0, 0, 32 )
+
+[node name="NavigationPolygonInstance" type="NavigationPolygonInstance" parent="."]
+navpoly = SubResource( 2 )

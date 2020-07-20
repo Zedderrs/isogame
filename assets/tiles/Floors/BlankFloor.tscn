@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=2]
+
+[sub_resource type="StreamTexture" id=1]
+flags = 4
+load_path = "res://.import/Fog.png-005b4f41b3447481ea1163dad7852b7f.stex"
+
+[node name="BlankFloor" type="StaticBody2D"]
+collision_layer = 16
+collision_mask = 0
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PoolVector2Array( -32, 0, 0, -32, 32, 0, 0, 32 )
+
+[node name="Fog" type="Sprite" parent="."]
+texture = SubResource( 1 )
