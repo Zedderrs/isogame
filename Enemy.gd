@@ -1,6 +1,6 @@
 extends KinematicBody2D
 # scene components
-onready var anim_player = $EnemySprite/AnimationPlayer
+onready var anim_player = $EnemySprite/EnemyAnimationPlayer
 onready var health_bar  = $EnemySprite/EnemyHP
 onready var raycast = $RayCast2D
 onready var game = get_tree().get_root().get_node("Game")

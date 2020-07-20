@@ -11,9 +11,9 @@ onready var player = $AboveFloor/Player
 onready var vision = $AboveFloor/Player/Vision
 
 # Cursors
-onready var NormalCursor = preload("res://assets/Cursors/normal.png")
-onready var InteractCursor = preload("res://assets/Cursors/interact.png")
-onready var AttackCursor = preload("res://assets/Cursors/attack.png")
+onready var NormalCursor = preload("res://assets/UI/cursors/normal.png")
+onready var InteractCursor = preload("res://assets/UI/cursors/interact.png")
+onready var AttackCursor = preload("res://assets/UI/cursors/attack.png")
 
 # Enemy Scene
 const EnemyScene = preload("res://Enemy.tscn")
@@ -631,7 +631,7 @@ class Enemy extends Reference:
 		node = EnemyScene.instance()
 		node.position = game.map.map_to_world(tile)
 		node.position.y += 32
-		anim_player = node.get_node("EnemySprite/AnimationPlayer")
+		anim_player = node.get_node("EnemySprite/EnemyAnimationPlayer")
 		anim_player.play(id + "_idle_s")
 		game.wall_map.add_child(node)
 		node.visible = false
