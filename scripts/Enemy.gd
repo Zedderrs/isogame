@@ -44,7 +44,7 @@ func _physics_process(_delta):
 		act()
 
 	# set enemy as target if hovered and clicked
-	if Input.is_mouse_button_pressed(1) && targeted:
+	if (Input.is_mouse_button_pressed(1) || Input.is_mouse_button_pressed(2)) && targeted:
 		if game.player.target:
 			health_bar.visible = false
 		game.player.target = self

@@ -6,7 +6,7 @@ onready var hair_animation_player = $HairSprite/HairAnimationPlayer
 onready var top_animation_player = $TopSprite/TopAnimationPlayer
 onready var bottom_animation_player = $BottomSprite/BottomAnimationPlayer
 onready var weapon_animation_player = $WeaponSprite/WeaponAnimationPlayer
-onready var effect_animation_player = $Effectsprite/EffectAnimationPlayer
+onready var effect_animation_player = $EffectSprite/EffectAnimationPlayer
 onready var raycast = $RayCast2D
 
 # animation dictionary
@@ -16,7 +16,7 @@ var Top = {"Elf": "elf_top"}
 var Hair = {"Elf": "elf_hair"}
 var Bottom = {"Elf": "elf_bottom"}
 var Weapon = {"Sword": "weapon_sword"}
-var Action = {"Idle": "_idle", "Run": "_run", "Attack": "_1h_attack"} 
+var Action = {"Idle": "_idle", "Run": "_run", "Attack": "_1h_attack", "Cast": "_casting"} 
 var Dir = {"N":"_n", "NE":"_ne", "E":"_e", "SE":"_se", "S":"_s", "SW":"_sw", "W":"_w", "NW":"_nw"}
 
 # scene constants
@@ -39,10 +39,12 @@ onready var action = Action.Idle
 onready var direction = Dir.S
 onready var current_action = action
 onready var current_direction = direction
+onready var melee = true
 var target
-var interrupt_attack
+var interrupt
 # player attributes
 onready var attack_range = 100
+onready var cast_range = 600
 onready var hp_max = 10
 onready var hp = hp_max
 onready var xp = 2
@@ -60,20 +62,23 @@ var to_pt
 # ==============================================================================
 
 func _input(event):
-	if event.is_action_pressed("left_click"):
+	if event.is_action_pressed("left_click") || event.is_action_pressed("right_click"):
 		destination = get_global_mouse_position()
-		if is_hovering_over_ground():
-			update_navigation_path(position, get_global_mouse_position())
+		# Melee mode if last action was a left click
+		melee = event.is_action_pressed("left_click")
+		interrupt = false
+#		if is_hovering_over_ground():
+#			update_navigation_path(position, get_global_mouse_position())
 		if target && 0 == Input.get_current_cursor_shape(): # clear target if clicked to move
 			target.health_bar.visible = false
 			target = null
-			interrupt_attack = true
+			interrupt = true
 	
 func _physics_process(delta):
-	if Input.is_mouse_button_pressed(1): # while mouse left click is held down, update the destination
+	if Input.is_mouse_button_pressed(1) || Input.is_mouse_button_pressed(2): # while mouse left click is held down, update the destination
 		destination = get_global_mouse_position()
-		if is_hovering_over_ground():
-			update_navigation_path(position, get_global_mouse_position())
+#		if is_hovering_over_ground():
+#			update_navigation_path(position, get_global_mouse_position())
 	act(delta)
 	direction = get_cardinal_direction(velocity)
 	set_animations()
@@ -81,20 +86,23 @@ func _physics_process(delta):
 	if game.debug_mode:
 		update() #draw debug
 	
-func act(delta):
+func act(_delta):
 	raycast.set_cast_to(destination - position)
 	if can_attack():
+		velocity = (destination - position).normalized() * SPEED
 		action = Action.Attack
-	elif !at_destination() && !is_attacking():
+	elif can_cast():
+		velocity = (destination - position).normalized() * SPEED
+		action = Action.Cast
+	elif !at_destination() && !is_attacking() && !is_casting():
 		var previous_position = position
-		if Input.is_mouse_button_pressed(1):
+		if Input.is_mouse_button_pressed(1) || Input.is_mouse_button_pressed(2):
 			move_direct()
 		else:
-			if is_clear_path():
+#			if is_clear_path():
 				move_direct()
-			else:
-				move_along_path(delta * SPEED)
-				
+#			else:
+#				move_along_path(delta * SPEED)
 		open_door() # open the door if player collides with a door
 		if previous_position.distance_squared_to(position) < 2:
 			action = Action.Idle
@@ -103,20 +111,13 @@ func act(delta):
 	else:
 		action = Action.Idle
 
-func is_clear_path():
-	raycast.set_cast_to(destination-position)
-	return !raycast.is_colliding()
-
-func is_hovering_over_ground():
-	var tile = game.map.world_to_map(get_global_mouse_position())
-	if tile.x < 0 || tile.y < 0 || tile.x >= game.stage_size.x || tile.y >= game.stage_size.y:
-		return false
-	else:
-		return game.is_walkable_tile(game.tile_map[tile.x][tile.y])
-
 func can_attack(): 
-	# can attack if not already attacking, target exists, and target is within range
-	return !is_attacking() && null != target && (target.position - position).length() <= attack_range
+	# can attack if not already attacking or casting, target exists, and target is within range
+	return melee && !is_attacking() && !is_casting() && null != target && (target.position - position).length() <= attack_range
+
+func can_cast():
+	# can cast if not already attacking or casting, target exists, and target is within range
+	return !melee && !is_attacking() && !is_casting() && null != target && (target.position - position).length() <= cast_range
 
 func at_destination():
 	return (destination - position).length() < 5
@@ -126,7 +127,7 @@ func set_animations():
 		play_animations()
 
 func change_animation(): # can the animation be changed?
-	if is_attacking(): return false
+	if is_attacking() || is_casting(): return false
 	var action_changed = action != current_action
 	var direction_changed = direction != current_direction
 	var no_animation_playing = "" == body_animation_player.get_current_animation()
@@ -165,9 +166,14 @@ func open_door(): # opens the door if player collides with it
 			game.set_door_tile(map_coords.x, map_coords.y, true)
 
 func is_attacking():
-	if interrupt_attack:
+	if interrupt:
 		return false
 	return -1 != body_animation_player.get_current_animation().find("1h_attack")
+
+func is_casting():
+	if interrupt:
+		return false
+	return -1 != body_animation_player.get_current_animation().find("casting")
 
 func attack(tar):
 	for enemy in game.enemies:
@@ -177,6 +183,17 @@ func attack(tar):
 func move_direct():
 	velocity = (destination - position).normalized() * SPEED
 	velocity = move_and_slide(velocity)
+
+func is_clear_path():
+	raycast.set_cast_to(destination-position)
+	return !raycast.is_colliding()
+
+func is_hovering_over_ground():
+	var tile = game.map.world_to_map(get_global_mouse_position())
+	if tile.x < 0 || tile.y < 0 || tile.x >= game.stage_size.x || tile.y >= game.stage_size.y:
+		return false
+	else:
+		return game.is_walkable_tile(game.tile_map[tile.x][tile.y])
 
 func move_along_path(distance):
 	var last_point = position

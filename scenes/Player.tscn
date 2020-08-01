@@ -1,135 +1,175 @@
-[gd_scene load_steps=176 format=2]
+[gd_scene load_steps=216 format=2]
 
 [ext_resource path="res://assets/animations/player/male/body/elf/male_elf_body_sprite.tres" type="SpriteFrames" id=1]
-[ext_resource path="res://assets/animations/player/male/hair/elf/male_elf_hair_idle_e.tres" type="Animation" id=2]
-[ext_resource path="res://assets/animations/player/male/body/elf/male_elf_body_run_nw.tres" type="Animation" id=3]
-[ext_resource path="res://assets/animations/player/male/body/elf/male_elf_body_run_se.tres" type="Animation" id=4]
-[ext_resource path="res://assets/animations/player/male/body/elf/male_elf_body_run_n.tres" type="Animation" id=5]
-[ext_resource path="res://assets/animations/player/male/body/elf/male_elf_body_run_e.tres" type="Animation" id=6]
-[ext_resource path="res://assets/animations/player/male/body/elf/male_elf_body_run_sw.tres" type="Animation" id=7]
-[ext_resource path="res://assets/animations/player/male/body/elf/male_elf_body_idle_ne.tres" type="Animation" id=8]
-[ext_resource path="res://assets/animations/player/male/body/elf/male_elf_body_idle_nw.tres" type="Animation" id=9]
-[ext_resource path="res://assets/animations/player/male/body/elf/male_elf_body_run_s.tres" type="Animation" id=10]
-[ext_resource path="res://assets/animations/player/male/body/elf/male_elf_body_run_w.tres" type="Animation" id=11]
-[ext_resource path="res://assets/animations/player/male/body/elf/male_elf_body_idle_s.tres" type="Animation" id=12]
-[ext_resource path="res://assets/animations/player/male/body/elf/male_elf_body_run_ne.tres" type="Animation" id=13]
-[ext_resource path="res://assets/animations/player/male/body/elf/male_elf_body_idle_se.tres" type="Animation" id=14]
-[ext_resource path="res://assets/animations/player/male/body/elf/male_elf_body_idle_e.tres" type="Animation" id=15]
-[ext_resource path="res://assets/animations/player/male/body/elf/male_elf_body_idle_sw.tres" type="Animation" id=16]
-[ext_resource path="res://assets/animations/player/male/body/elf/male_elf_body_idle_n.tres" type="Animation" id=17]
-[ext_resource path="res://assets/animations/player/male/body/elf/male_elf_body_idle_w.tres" type="Animation" id=18]
-[ext_resource path="res://assets/animations/player/male/hair/elf/male_elf_hair_idle_n.tres" type="Animation" id=19]
-[ext_resource path="res://assets/animations/player/male/hair/elf/male_elf_hair_idle_nw.tres" type="Animation" id=20]
-[ext_resource path="res://assets/animations/player/male/hair/elf/male_elf_hair_idle_ne.tres" type="Animation" id=21]
-[ext_resource path="res://assets/animations/player/male/hair/elf/male_elf_hair_idle_s.tres" type="Animation" id=22]
+[ext_resource path="res://assets/animations/player/male/body/elf/run/male_elf_body_run_s.tres" type="Animation" id=2]
+[ext_resource path="res://assets/animations/player/male/body/elf/run/male_elf_body_run_w.tres" type="Animation" id=3]
+[ext_resource path="res://assets/animations/player/male/bottom/elf/casting/male_elf_bottom_casting_sw.tres" type="Animation" id=4]
+[ext_resource path="res://assets/animations/player/male/bottom/elf/casting/male_elf_bottom_casting_w.tres" type="Animation" id=5]
+[ext_resource path="res://assets/animations/player/male/hair/elf/idle/male_elf_hair_idle_e.tres" type="Animation" id=6]
+[ext_resource path="res://assets/animations/player/male/body/elf/run/male_elf_body_run_nw.tres" type="Animation" id=7]
+[ext_resource path="res://assets/animations/player/male/body/elf/idle/male_elf_body_idle_ne.tres" type="Animation" id=8]
+[ext_resource path="res://assets/animations/player/male/body/elf/idle/male_elf_body_idle_nw.tres" type="Animation" id=9]
+[ext_resource path="res://assets/animations/player/male/body/elf/run/male_elf_body_run_e.tres" type="Animation" id=10]
+[ext_resource path="res://assets/animations/player/male/body/elf/run/male_elf_body_run_sw.tres" type="Animation" id=11]
+[ext_resource path="res://assets/animations/player/male/body/elf/idle/male_elf_body_idle_s.tres" type="Animation" id=12]
+[ext_resource path="res://assets/animations/player/male/body/elf/run/male_elf_body_run_se.tres" type="Animation" id=13]
+[ext_resource path="res://assets/animations/player/male/body/elf/idle/male_elf_body_idle_sw.tres" type="Animation" id=14]
+[ext_resource path="res://assets/animations/player/male/body/elf/idle/male_elf_body_idle_w.tres" type="Animation" id=15]
+[ext_resource path="res://assets/animations/player/male/body/elf/idle/male_elf_body_idle_e.tres" type="Animation" id=16]
+[ext_resource path="res://assets/animations/player/male/body/elf/idle/male_elf_body_idle_n.tres" type="Animation" id=17]
+[ext_resource path="res://assets/animations/player/male/body/elf/idle/male_elf_body_idle_se.tres" type="Animation" id=18]
+[ext_resource path="res://assets/animations/player/male/body/elf/run/male_elf_body_run_n.tres" type="Animation" id=19]
+[ext_resource path="res://assets/animations/player/male/hair/elf/run/male_elf_hair_run_sw.tres" type="Animation" id=20]
+[ext_resource path="res://assets/animations/player/male/hair/elf/idle/male_elf_hair_idle_se.tres" type="Animation" id=21]
+[ext_resource path="res://assets/animations/player/male/hair/elf/idle/male_elf_hair_idle_sw.tres" type="Animation" id=22]
 [ext_resource path="res://assets/animations/player/male/hair/elf/male_elf_hair_sprite.tres" type="SpriteFrames" id=23]
 [ext_resource path="res://assets/animations/player/male/top/elf/male_elf_top_sprite.tres" type="SpriteFrames" id=24]
-[ext_resource path="res://assets/animations/player/male/hair/elf/male_elf_hair_idle_w.tres" type="Animation" id=25]
-[ext_resource path="res://assets/animations/player/male/hair/elf/male_elf_hair_idle_se.tres" type="Animation" id=26]
-[ext_resource path="res://assets/animations/player/male/hair/elf/male_elf_hair_run_e.tres" type="Animation" id=27]
-[ext_resource path="res://assets/animations/player/male/hair/elf/male_elf_hair_idle_sw.tres" type="Animation" id=28]
-[ext_resource path="res://assets/animations/player/male/hair/elf/male_elf_hair_run_n.tres" type="Animation" id=29]
-[ext_resource path="res://assets/animations/player/male/hair/elf/male_elf_hair_run_ne.tres" type="Animation" id=30]
-[ext_resource path="res://assets/animations/player/male/hair/elf/male_elf_hair_run_sw.tres" type="Animation" id=31]
-[ext_resource path="res://assets/animations/player/male/hair/elf/male_elf_hair_run_nw.tres" type="Animation" id=32]
-[ext_resource path="res://assets/animations/player/male/hair/elf/male_elf_hair_run_se.tres" type="Animation" id=33]
-[ext_resource path="res://assets/animations/player/male/hair/elf/male_elf_hair_run_w.tres" type="Animation" id=34]
-[ext_resource path="res://assets/animations/player/male/hair/elf/male_elf_hair_run_s.tres" type="Animation" id=35]
-[ext_resource path="res://assets/animations/player/male/top/elf/male_elf_top_run_se.tres" type="Animation" id=36]
-[ext_resource path="res://assets/animations/player/male/top/elf/male_elf_top_run_ne.tres" type="Animation" id=37]
-[ext_resource path="res://assets/animations/player/male/top/elf/male_elf_top_run_s.tres" type="Animation" id=38]
-[ext_resource path="res://assets/animations/player/male/top/elf/male_elf_top_idle_ne.tres" type="Animation" id=39]
-[ext_resource path="res://assets/animations/player/male/top/elf/male_elf_top_run_nw.tres" type="Animation" id=40]
-[ext_resource path="res://assets/animations/player/male/top/elf/male_elf_top_idle_n.tres" type="Animation" id=41]
-[ext_resource path="res://assets/animations/player/male/top/elf/male_elf_top_idle_se.tres" type="Animation" id=42]
-[ext_resource path="res://assets/animations/player/male/top/elf/male_elf_top_idle_nw.tres" type="Animation" id=43]
-[ext_resource path="res://assets/animations/player/male/top/elf/male_elf_top_idle_s.tres" type="Animation" id=44]
-[ext_resource path="res://assets/animations/player/male/top/elf/male_elf_top_idle_sw.tres" type="Animation" id=45]
-[ext_resource path="res://assets/animations/player/male/top/elf/male_elf_top_idle_e.tres" type="Animation" id=46]
-[ext_resource path="res://assets/animations/player/male/top/elf/male_elf_top_idle_w.tres" type="Animation" id=47]
-[ext_resource path="res://assets/animations/player/male/top/elf/male_elf_top_run_e.tres" type="Animation" id=48]
-[ext_resource path="res://assets/animations/player/male/top/elf/male_elf_top_run_n.tres" type="Animation" id=49]
-[ext_resource path="res://assets/animations/player/male/top/elf/male_elf_top_run_w.tres" type="Animation" id=50]
-[ext_resource path="res://assets/animations/player/male/top/elf/male_elf_top_run_sw.tres" type="Animation" id=51]
+[ext_resource path="res://assets/animations/player/male/hair/elf/idle/male_elf_hair_idle_nw.tres" type="Animation" id=25]
+[ext_resource path="res://assets/animations/player/male/hair/elf/idle/male_elf_hair_idle_ne.tres" type="Animation" id=26]
+[ext_resource path="res://assets/animations/player/male/hair/elf/idle/male_elf_hair_idle_n.tres" type="Animation" id=27]
+[ext_resource path="res://assets/animations/player/male/hair/elf/idle/male_elf_hair_idle_s.tres" type="Animation" id=28]
+[ext_resource path="res://assets/animations/player/male/hair/elf/idle/male_elf_hair_idle_w.tres" type="Animation" id=29]
+[ext_resource path="res://assets/animations/player/male/body/elf/run/male_elf_body_run_ne.tres" type="Animation" id=30]
+[ext_resource path="res://assets/animations/player/male/hair/elf/run/male_elf_hair_run_e.tres" type="Animation" id=31]
+[ext_resource path="res://assets/animations/player/male/hair/elf/run/male_elf_hair_run_n.tres" type="Animation" id=32]
+[ext_resource path="res://assets/animations/player/male/hair/elf/run/male_elf_hair_run_ne.tres" type="Animation" id=33]
+[ext_resource path="res://assets/animations/player/male/hair/elf/run/male_elf_hair_run_nw.tres" type="Animation" id=34]
+[ext_resource path="res://assets/animations/player/male/top/elf/run/male_elf_top_run_se.tres" type="Animation" id=35]
+[ext_resource path="res://assets/animations/player/male/top/elf/idle/male_elf_top_idle_sw.tres" type="Animation" id=36]
+[ext_resource path="res://assets/animations/player/male/top/elf/idle/male_elf_top_idle_e.tres" type="Animation" id=37]
+[ext_resource path="res://assets/animations/player/male/top/elf/idle/male_elf_top_idle_w.tres" type="Animation" id=38]
+[ext_resource path="res://assets/animations/player/male/hair/elf/run/male_elf_hair_run_w.tres" type="Animation" id=39]
+[ext_resource path="res://assets/animations/player/male/top/elf/run/male_elf_top_run_e.tres" type="Animation" id=40]
+[ext_resource path="res://assets/animations/player/male/top/elf/idle/male_elf_top_idle_n.tres" type="Animation" id=41]
+[ext_resource path="res://assets/animations/player/male/top/elf/run/male_elf_top_run_n.tres" type="Animation" id=42]
+[ext_resource path="res://assets/animations/player/male/top/elf/idle/male_elf_top_idle_ne.tres" type="Animation" id=43]
+[ext_resource path="res://assets/animations/player/male/top/elf/run/male_elf_top_run_nw.tres" type="Animation" id=44]
+[ext_resource path="res://assets/animations/player/male/hair/elf/run/male_elf_hair_run_s.tres" type="Animation" id=45]
+[ext_resource path="res://assets/animations/player/male/top/elf/run/male_elf_top_run_ne.tres" type="Animation" id=46]
+[ext_resource path="res://assets/animations/player/male/top/elf/run/male_elf_top_run_s.tres" type="Animation" id=47]
+[ext_resource path="res://assets/animations/player/male/hair/elf/run/male_elf_hair_run_se.tres" type="Animation" id=48]
+[ext_resource path="res://assets/animations/player/male/top/elf/idle/male_elf_top_idle_se.tres" type="Animation" id=49]
+[ext_resource path="res://assets/animations/player/male/top/elf/idle/male_elf_top_idle_nw.tres" type="Animation" id=50]
+[ext_resource path="res://assets/animations/player/male/top/elf/idle/male_elf_top_idle_s.tres" type="Animation" id=51]
 [ext_resource path="res://assets/animations/player/male/bottom/elf/male_elf_bottom_sprite.tres" type="SpriteFrames" id=52]
-[ext_resource path="res://assets/animations/player/male/bottom/elf/male_elf_bottom_idle_e.tres" type="Animation" id=53]
-[ext_resource path="res://assets/animations/player/male/bottom/elf/male_elf_bottom_idle_nw.tres" type="Animation" id=54]
-[ext_resource path="res://assets/animations/player/male/bottom/elf/male_elf_bottom_run_e.tres" type="Animation" id=55]
-[ext_resource path="res://assets/animations/player/male/bottom/elf/male_elf_bottom_run_s.tres" type="Animation" id=56]
-[ext_resource path="res://assets/animations/player/male/bottom/elf/male_elf_bottom_run_ne.tres" type="Animation" id=57]
-[ext_resource path="res://assets/animations/player/male/bottom/elf/male_elf_bottom_run_se.tres" type="Animation" id=58]
-[ext_resource path="res://assets/animations/player/male/bottom/elf/male_elf_bottom_idle_n.tres" type="Animation" id=59]
-[ext_resource path="res://assets/animations/player/male/bottom/elf/male_elf_bottom_idle_ne.tres" type="Animation" id=60]
-[ext_resource path="res://assets/animations/player/male/bottom/elf/male_elf_bottom_idle_w.tres" type="Animation" id=61]
-[ext_resource path="res://assets/animations/player/male/bottom/elf/male_elf_bottom_run_n.tres" type="Animation" id=62]
-[ext_resource path="res://assets/animations/player/male/bottom/elf/male_elf_bottom_idle_s.tres" type="Animation" id=63]
-[ext_resource path="res://assets/animations/player/male/bottom/elf/male_elf_bottom_idle_sw.tres" type="Animation" id=64]
-[ext_resource path="res://assets/animations/player/male/bottom/elf/male_elf_bottom_idle_se.tres" type="Animation" id=65]
-[ext_resource path="res://assets/animations/player/male/bottom/elf/male_elf_bottom_run_sw.tres" type="Animation" id=66]
-[ext_resource path="res://assets/animations/player/male/bottom/elf/male_elf_bottom_run_w.tres" type="Animation" id=67]
-[ext_resource path="res://assets/animations/player/male/bottom/elf/male_elf_bottom_run_nw.tres" type="Animation" id=68]
-[ext_resource path="res://assets/animations/player/male/weapon/sword/male_weapon_sword_idle_w.tres" type="Animation" id=69]
-[ext_resource path="res://assets/animations/player/male/weapon/sword/male_weapon_sword_idle_se.tres" type="Animation" id=70]
-[ext_resource path="res://assets/animations/player/male/weapon/sword/male_weapon_sword_idle_s.tres" type="Animation" id=71]
-[ext_resource path="res://assets/animations/player/male/weapon/sword/male_weapon_sword_1h_attack_e.tres" type="Animation" id=72]
-[ext_resource path="res://assets/animations/player/male/weapon/sword/male_weapon_sword_1h_attack_ne.tres" type="Animation" id=73]
+[ext_resource path="res://assets/animations/player/male/bottom/elf/run/male_elf_bottom_run_ne.tres" type="Animation" id=53]
+[ext_resource path="res://assets/animations/player/male/bottom/elf/run/male_elf_bottom_run_w.tres" type="Animation" id=54]
+[ext_resource path="res://assets/animations/player/male/bottom/elf/run/male_elf_bottom_run_nw.tres" type="Animation" id=55]
+[ext_resource path="res://assets/animations/player/male/bottom/elf/idle/male_elf_bottom_idle_nw.tres" type="Animation" id=56]
+[ext_resource path="res://assets/animations/player/male/top/elf/run/male_elf_top_run_w.tres" type="Animation" id=57]
+[ext_resource path="res://assets/animations/player/male/bottom/elf/run/male_elf_bottom_run_e.tres" type="Animation" id=58]
+[ext_resource path="res://assets/animations/player/male/bottom/elf/run/male_elf_bottom_run_s.tres" type="Animation" id=59]
+[ext_resource path="res://assets/animations/player/male/bottom/elf/idle/male_elf_bottom_idle_n.tres" type="Animation" id=60]
+[ext_resource path="res://assets/animations/player/male/bottom/elf/idle/male_elf_bottom_idle_w.tres" type="Animation" id=61]
+[ext_resource path="res://assets/animations/player/male/bottom/elf/run/male_elf_bottom_run_n.tres" type="Animation" id=62]
+[ext_resource path="res://assets/animations/player/male/bottom/elf/idle/male_elf_bottom_idle_sw.tres" type="Animation" id=63]
+[ext_resource path="res://assets/animations/player/male/bottom/elf/idle/male_elf_bottom_idle_ne.tres" type="Animation" id=64]
+[ext_resource path="res://assets/animations/player/male/bottom/elf/run/male_elf_bottom_run_sw.tres" type="Animation" id=65]
+[ext_resource path="res://assets/animations/player/male/bottom/elf/idle/male_elf_bottom_idle_se.tres" type="Animation" id=66]
+[ext_resource path="res://assets/animations/player/male/top/elf/run/male_elf_top_run_sw.tres" type="Animation" id=67]
+[ext_resource path="res://assets/animations/player/male/bottom/elf/idle/male_elf_bottom_idle_e.tres" type="Animation" id=68]
+[ext_resource path="res://assets/animations/player/male/bottom/elf/idle/male_elf_bottom_idle_s.tres" type="Animation" id=69]
+[ext_resource path="res://assets/animations/player/male/bottom/elf/run/male_elf_bottom_run_se.tres" type="Animation" id=70]
+[ext_resource path="res://assets/animations/player/male/weapon/sword/run/male_weapon_sword_run_sw.tres" type="Animation" id=71]
+[ext_resource path="res://assets/animations/player/male/weapon/sword/run/male_weapon_sword_run_w.tres" type="Animation" id=72]
+[ext_resource path="res://assets/animations/player/male/weapon/sword/idle/male_weapon_sword_idle_s.tres" type="Animation" id=73]
 [ext_resource path="res://assets/spritesheets/player/effect/slash.png" type="Texture" id=74]
-[ext_resource path="res://assets/animations/player/male/weapon/sword/male_weapon_sword_idle_nw.tres" type="Animation" id=75]
-[ext_resource path="res://assets/animations/player/male/weapon/sword/male_weapon_sword_idle_sw.tres" type="Animation" id=76]
+[ext_resource path="res://assets/animations/player/male/weapon/sword/idle/male_weapon_sword_idle_sw.tres" type="Animation" id=75]
+[ext_resource path="res://assets/animations/player/male/weapon/sword/run/male_weapon_sword_run_e.tres" type="Animation" id=76]
 [ext_resource path="res://assets/animations/player/male/weapon/sword/male_weapon_sword_sprite.tres" type="SpriteFrames" id=77]
-[ext_resource path="res://assets/animations/player/male/weapon/sword/male_weapon_sword_run_n.tres" type="Animation" id=78]
-[ext_resource path="res://assets/animations/player/male/weapon/sword/male_weapon_sword_run_sw.tres" type="Animation" id=79]
-[ext_resource path="res://assets/animations/player/male/weapon/sword/male_weapon_sword_run_w.tres" type="Animation" id=80]
-[ext_resource path="res://assets/animations/player/male/weapon/sword/male_weapon_sword_run_se.tres" type="Animation" id=81]
-[ext_resource path="res://assets/animations/player/male/weapon/sword/male_weapon_sword_run_e.tres" type="Animation" id=82]
-[ext_resource path="res://assets/animations/player/male/weapon/sword/male_weapon_sword_run_s.tres" type="Animation" id=83]
-[ext_resource path="res://assets/animations/player/male/weapon/sword/male_weapon_sword_run_ne.tres" type="Animation" id=84]
-[ext_resource path="res://assets/animations/player/male/weapon/sword/male_weapon_sword_run_nw.tres" type="Animation" id=85]
-[ext_resource path="res://assets/animations/player/male/body/elf/male_elf_body_1h_attack_sw.tres" type="Animation" id=86]
-[ext_resource path="res://assets/animations/player/male/body/elf/male_elf_body_1h_attack_w.tres" type="Animation" id=87]
-[ext_resource path="res://assets/animations/player/male/body/elf/male_elf_body_1h_attack_nw.tres" type="Animation" id=88]
-[ext_resource path="res://assets/animations/player/male/body/elf/male_elf_body_1h_attack_ne.tres" type="Animation" id=89]
-[ext_resource path="res://assets/animations/player/male/body/elf/male_elf_body_1h_attack_n.tres" type="Animation" id=90]
-[ext_resource path="res://assets/animations/player/male/body/elf/male_elf_body_1h_attack_se.tres" type="Animation" id=91]
-[ext_resource path="res://assets/animations/player/male/body/elf/male_elf_body_1h_attack_s.tres" type="Animation" id=92]
-[ext_resource path="res://assets/animations/player/male/body/elf/male_elf_body_1h_attack_e.tres" type="Animation" id=93]
-[ext_resource path="res://assets/animations/player/male/hair/elf/male_elf_hair_1h_attack_se.tres" type="Animation" id=94]
-[ext_resource path="res://assets/animations/player/male/hair/elf/male_elf_hair_1h_attack_sw.tres" type="Animation" id=95]
-[ext_resource path="res://assets/animations/player/male/hair/elf/male_elf_hair_1h_attack_s.tres" type="Animation" id=96]
-[ext_resource path="res://assets/animations/player/male/hair/elf/male_elf_hair_1h_attack_w.tres" type="Animation" id=97]
-[ext_resource path="res://assets/animations/player/male/hair/elf/male_elf_hair_1h_attack_nw.tres" type="Animation" id=98]
-[ext_resource path="res://assets/animations/player/male/hair/elf/male_elf_hair_1h_attack_e.tres" type="Animation" id=99]
-[ext_resource path="res://assets/animations/player/male/hair/elf/male_elf_hair_1h_attack_n.tres" type="Animation" id=100]
-[ext_resource path="res://assets/animations/player/male/hair/elf/male_elf_hair_1h_attack_ne.tres" type="Animation" id=101]
-[ext_resource path="res://assets/animations/player/male/top/elf/male_elf_top_1h_attack_s.tres" type="Animation" id=102]
-[ext_resource path="res://assets/animations/player/male/top/elf/male_elf_top_1h_attack_sw.tres" type="Animation" id=103]
-[ext_resource path="res://assets/animations/player/male/top/elf/male_elf_top_1h_attack_n.tres" type="Animation" id=104]
-[ext_resource path="res://assets/animations/player/male/top/elf/male_elf_top_1h_attack_w.tres" type="Animation" id=105]
-[ext_resource path="res://assets/animations/player/male/top/elf/male_elf_top_1h_attack_ne.tres" type="Animation" id=106]
-[ext_resource path="res://assets/animations/player/male/top/elf/male_elf_top_1h_attack_e.tres" type="Animation" id=107]
-[ext_resource path="res://assets/animations/player/male/top/elf/male_elf_top_1h_attack_se.tres" type="Animation" id=108]
-[ext_resource path="res://assets/animations/player/male/top/elf/male_elf_top_1h_attack_nw.tres" type="Animation" id=109]
-[ext_resource path="res://assets/animations/player/male/bottom/elf/male_elf_bottom_1h_attack_se.tres" type="Animation" id=110]
-[ext_resource path="res://assets/animations/player/male/bottom/elf/male_elf_bottom_1h_attack_e.tres" type="Animation" id=111]
-[ext_resource path="res://assets/animations/player/male/bottom/elf/male_elf_bottom_1h_attack_ne.tres" type="Animation" id=112]
-[ext_resource path="res://assets/animations/player/male/bottom/elf/male_elf_bottom_1h_attack_n.tres" type="Animation" id=113]
-[ext_resource path="res://assets/animations/player/male/weapon/sword/male_weapon_sword_1h_attack_sw.tres" type="Animation" id=114]
-[ext_resource path="res://assets/animations/player/male/weapon/sword/male_weapon_sword_1h_attack_se.tres" type="Animation" id=115]
-[ext_resource path="res://assets/animations/player/male/weapon/sword/male_weapon_sword_1h_attack_nw.tres" type="Animation" id=116]
-[ext_resource path="res://assets/animations/player/male/bottom/elf/male_elf_bottom_1h_attack_nw.tres" type="Animation" id=117]
-[ext_resource path="res://assets/animations/player/male/weapon/sword/male_weapon_sword_1h_attack_s.tres" type="Animation" id=118]
-[ext_resource path="res://assets/animations/player/male/bottom/elf/male_elf_bottom_1h_attack_sw.tres" type="Animation" id=119]
-[ext_resource path="res://assets/animations/player/male/weapon/sword/male_weapon_sword_1h_attack_w.tres" type="Animation" id=120]
-[ext_resource path="res://assets/animations/player/male/bottom/elf/male_elf_bottom_1h_attack_w.tres" type="Animation" id=121]
-[ext_resource path="res://assets/animations/player/male/weapon/sword/male_weapon_sword_idle_ne.tres" type="Animation" id=122]
+[ext_resource path="res://assets/animations/player/male/weapon/sword/run/male_weapon_sword_run_nw.tres" type="Animation" id=78]
+[ext_resource path="res://assets/animations/player/male/weapon/sword/idle/male_weapon_sword_idle_w.tres" type="Animation" id=79]
+[ext_resource path="res://assets/animations/player/male/weapon/sword/idle/male_weapon_sword_idle_nw.tres" type="Animation" id=80]
+[ext_resource path="res://assets/animations/player/male/weapon/sword/run/male_weapon_sword_run_se.tres" type="Animation" id=81]
+[ext_resource path="res://assets/animations/player/male/weapon/sword/run/male_weapon_sword_run_s.tres" type="Animation" id=82]
+[ext_resource path="res://assets/animations/player/male/weapon/sword/run/male_weapon_sword_run_ne.tres" type="Animation" id=83]
+[ext_resource path="res://assets/animations/player/male/weapon/sword/1h_attack/male_weapon_sword_1h_attack_e.tres" type="Animation" id=84]
+[ext_resource path="res://assets/animations/player/male/weapon/sword/1h_attack/male_weapon_sword_1h_attack_ne.tres" type="Animation" id=85]
+[ext_resource path="res://assets/animations/player/male/body/elf/1h_attack/male_elf_body_1h_attack_sw.tres" type="Animation" id=86]
+[ext_resource path="res://assets/animations/player/male/body/elf/1h_attack/male_elf_body_1h_attack_w.tres" type="Animation" id=87]
+[ext_resource path="res://assets/animations/player/male/body/elf/1h_attack/male_elf_body_1h_attack_nw.tres" type="Animation" id=88]
+[ext_resource path="res://assets/animations/player/male/body/elf/1h_attack/male_elf_body_1h_attack_ne.tres" type="Animation" id=89]
+[ext_resource path="res://assets/animations/player/male/body/elf/1h_attack/male_elf_body_1h_attack_e.tres" type="Animation" id=90]
+[ext_resource path="res://assets/animations/player/male/body/elf/1h_attack/male_elf_body_1h_attack_se.tres" type="Animation" id=91]
+[ext_resource path="res://assets/animations/player/male/body/elf/1h_attack/male_elf_body_1h_attack_s.tres" type="Animation" id=92]
+[ext_resource path="res://assets/animations/player/male/body/elf/1h_attack/male_elf_body_1h_attack_n.tres" type="Animation" id=93]
+[ext_resource path="res://assets/animations/player/male/weapon/sword/run/male_weapon_sword_run_n.tres" type="Animation" id=94]
+[ext_resource path="res://assets/animations/player/male/weapon/sword/idle/male_weapon_sword_idle_se.tres" type="Animation" id=95]
+[ext_resource path="res://assets/animations/player/male/bottom/elf/1h_attack/male_elf_bottom_1h_attack_sw.tres" type="Animation" id=96]
+[ext_resource path="res://assets/animations/player/male/bottom/elf/1h_attack/male_elf_bottom_1h_attack_w.tres" type="Animation" id=97]
+[ext_resource path="res://assets/animations/player/male/bottom/elf/1h_attack/male_elf_bottom_1h_attack_e.tres" type="Animation" id=98]
+[ext_resource path="res://assets/animations/player/male/bottom/elf/1h_attack/male_elf_bottom_1h_attack_se.tres" type="Animation" id=99]
+[ext_resource path="res://assets/animations/player/male/weapon/sword/idle/male_weapon_sword_idle_ne.tres" type="Animation" id=100]
+[ext_resource path="res://assets/animations/player/male/weapon/sword/1h_attack/male_weapon_sword_1h_attack_s.tres" type="Animation" id=101]
+[ext_resource path="res://assets/animations/player/male/hair/elf/1h_attack/male_elf_hair_1h_attack_n.tres" type="Animation" id=102]
+[ext_resource path="res://assets/animations/player/male/hair/elf/1h_attack/male_elf_hair_1h_attack_ne.tres" type="Animation" id=103]
+[ext_resource path="res://assets/animations/player/male/top/elf/1h_attack/male_elf_top_1h_attack_w.tres" type="Animation" id=104]
+[ext_resource path="res://assets/animations/player/male/hair/elf/1h_attack/male_elf_hair_1h_attack_nw.tres" type="Animation" id=105]
+[ext_resource path="res://assets/animations/player/male/top/elf/1h_attack/male_elf_top_1h_attack_sw.tres" type="Animation" id=106]
+[ext_resource path="res://assets/animations/player/male/bottom/elf/1h_attack/male_elf_bottom_1h_attack_ne.tres" type="Animation" id=107]
+[ext_resource path="res://assets/animations/player/male/weapon/sword/1h_attack/male_weapon_sword_1h_attack_sw.tres" type="Animation" id=108]
+[ext_resource path="res://assets/animations/player/male/weapon/sword/1h_attack/male_weapon_sword_1h_attack_w.tres" type="Animation" id=109]
+[ext_resource path="res://assets/animations/player/male/weapon/sword/1h_attack/male_weapon_sword_1h_attack_nw.tres" type="Animation" id=110]
+[ext_resource path="res://assets/animations/player/male/top/elf/1h_attack/male_elf_top_1h_attack_s.tres" type="Animation" id=111]
+[ext_resource path="res://assets/animations/player/male/top/elf/1h_attack/male_elf_top_1h_attack_ne.tres" type="Animation" id=112]
+[ext_resource path="res://assets/animations/player/male/weapon/sword/1h_attack/male_weapon_sword_1h_attack_n.tres" type="Animation" id=113]
+[ext_resource path="res://assets/animations/player/male/hair/elf/1h_attack/male_elf_hair_1h_attack_se.tres" type="Animation" id=114]
+[ext_resource path="res://assets/animations/player/male/hair/elf/1h_attack/male_elf_hair_1h_attack_s.tres" type="Animation" id=115]
+[ext_resource path="res://assets/animations/player/male/hair/elf/1h_attack/male_elf_hair_1h_attack_w.tres" type="Animation" id=116]
+[ext_resource path="res://assets/animations/player/male/top/elf/1h_attack/male_elf_top_1h_attack_e.tres" type="Animation" id=117]
+[ext_resource path="res://assets/animations/player/male/hair/elf/1h_attack/male_elf_hair_1h_attack_e.tres" type="Animation" id=118]
+[ext_resource path="res://assets/animations/player/male/hair/elf/1h_attack/male_elf_hair_1h_attack_sw.tres" type="Animation" id=119]
+[ext_resource path="res://assets/animations/player/male/top/elf/1h_attack/male_elf_top_1h_attack_nw.tres" type="Animation" id=120]
+[ext_resource path="res://assets/animations/player/male/bottom/elf/1h_attack/male_elf_bottom_1h_attack_n.tres" type="Animation" id=121]
+[ext_resource path="res://assets/animations/player/male/weapon/sword/1h_attack/male_weapon_sword_1h_attack_se.tres" type="Animation" id=122]
 [ext_resource path="res://assets/animations/player/effect/slash.tres" type="Animation" id=123]
 [ext_resource path="res://Scripts/WeaponAnimationPlayer.gd" type="Script" id=124]
-[ext_resource path="res://assets/animations/player/male/weapon/sword/male_weapon_sword_1h_attack_n.tres" type="Animation" id=125]
+[ext_resource path="res://assets/animations/player/male/top/elf/1h_attack/male_elf_top_1h_attack_n.tres" type="Animation" id=125]
 [ext_resource path="res://assets/spritesheets/player/effect/lightning.png" type="Texture" id=126]
 [ext_resource path="res://assets/spritesheets/player/effect/explosion.png" type="Texture" id=127]
 [ext_resource path="res://assets/spritesheets/player/effect/energy_ball.png" type="Texture" id=128]
 [ext_resource path="res://Scripts/EffectsAnimationPlayer.gd" type="Script" id=129]
+[ext_resource path="res://assets/animations/player/male/top/elf/1h_attack/male_elf_top_1h_attack_se.tres" type="Animation" id=130]
+[ext_resource path="res://assets/animations/player/male/bottom/elf/1h_attack/male_elf_bottom_1h_attack_nw.tres" type="Animation" id=131]
+[ext_resource path="res://assets/animations/player/male/hair/elf/casting/male_elf_hair_casting_n.tres" type="Animation" id=132]
+[ext_resource path="res://assets/animations/player/male/hair/elf/casting/male_elf_hair_casting_ne.tres" type="Animation" id=133]
+[ext_resource path="res://assets/animations/player/male/hair/elf/casting/male_elf_hair_casting_s.tres" type="Animation" id=134]
+[ext_resource path="res://assets/animations/player/male/hair/elf/casting/male_elf_hair_casting_se.tres" type="Animation" id=135]
+[ext_resource path="res://assets/animations/player/male/hair/elf/casting/male_elf_hair_casting_e.tres" type="Animation" id=136]
+[ext_resource path="res://assets/animations/player/male/hair/elf/casting/male_elf_hair_casting_sw.tres" type="Animation" id=137]
+[ext_resource path="res://assets/animations/player/male/bottom/elf/casting/male_elf_bottom_casting_ne.tres" type="Animation" id=138]
+[ext_resource path="res://assets/animations/player/male/body/elf/casting/male_elf_body_casting_ne.tres" type="Animation" id=139]
+[ext_resource path="res://assets/animations/player/male/body/elf/casting/male_elf_body_casting_sw.tres" type="Animation" id=140]
+[ext_resource path="res://assets/animations/player/male/hair/elf/casting/male_elf_hair_casting_w.tres" type="Animation" id=141]
+[ext_resource path="res://assets/animations/player/male/bottom/elf/casting/male_elf_bottom_casting_n.tres" type="Animation" id=142]
+[ext_resource path="res://assets/animations/player/male/bottom/elf/casting/male_elf_bottom_casting_e.tres" type="Animation" id=143]
+[ext_resource path="res://assets/animations/player/male/body/elf/casting/male_elf_body_casting_e.tres" type="Animation" id=144]
+[ext_resource path="res://assets/animations/player/male/hair/elf/casting/male_elf_hair_casting_nw.tres" type="Animation" id=145]
+[ext_resource path="res://assets/animations/player/male/bottom/elf/casting/male_elf_bottom_casting_se.tres" type="Animation" id=146]
+[ext_resource path="res://assets/animations/player/male/body/elf/casting/male_elf_body_casting_se.tres" type="Animation" id=147]
+[ext_resource path="res://assets/animations/player/male/bottom/elf/casting/male_elf_bottom_casting_s.tres" type="Animation" id=148]
+[ext_resource path="res://assets/animations/player/male/body/elf/casting/male_elf_body_casting_n.tres" type="Animation" id=149]
+[ext_resource path="res://assets/animations/player/male/body/elf/casting/male_elf_body_casting_w.tres" type="Animation" id=150]
+[ext_resource path="res://assets/animations/player/male/body/elf/casting/male_elf_body_casting_s.tres" type="Animation" id=151]
+[ext_resource path="res://assets/animations/player/male/body/elf/casting/male_elf_body_casting_nw.tres" type="Animation" id=152]
+[ext_resource path="res://assets/animations/player/male/bottom/elf/casting/male_elf_bottom_casting_nw.tres" type="Animation" id=153]
+[ext_resource path="res://assets/animations/player/male/weapon/sword/casting/male_weapon_sword_casting_e.tres" type="Animation" id=154]
+[ext_resource path="res://assets/animations/player/male/weapon/sword/casting/male_weapon_sword_casting_s.tres" type="Animation" id=155]
+[ext_resource path="res://assets/animations/player/male/top/elf/casting/male_elf_top_casting_sw.tres" type="Animation" id=156]
+[ext_resource path="res://assets/animations/player/male/top/elf/casting/male_elf_top_casting_ne.tres" type="Animation" id=157]
+[ext_resource path="res://assets/animations/player/male/weapon/sword/casting/male_weapon_sword_casting_nw.tres" type="Animation" id=158]
+[ext_resource path="res://assets/animations/player/male/top/elf/casting/male_elf_top_casting_se.tres" type="Animation" id=159]
+[ext_resource path="res://assets/animations/player/male/top/elf/casting/male_elf_top_casting_e.tres" type="Animation" id=160]
+[ext_resource path="res://assets/animations/player/male/weapon/sword/casting/male_weapon_sword_casting_sw.tres" type="Animation" id=161]
+[ext_resource path="res://assets/animations/player/male/top/elf/casting/male_elf_top_casting_n.tres" type="Animation" id=162]
+[ext_resource path="res://assets/animations/player/male/weapon/sword/casting/male_weapon_sword_casting_w.tres" type="Animation" id=163]
+[ext_resource path="res://assets/animations/player/male/weapon/sword/casting/male_weapon_sword_casting_ne.tres" type="Animation" id=164]
+[ext_resource path="res://assets/animations/player/male/top/elf/casting/male_elf_top_casting_w.tres" type="Animation" id=165]
+[ext_resource path="res://assets/animations/player/male/weapon/sword/casting/male_weapon_sword_casting_se.tres" type="Animation" id=166]
+[ext_resource path="res://assets/animations/player/male/top/elf/casting/male_elf_top_casting_s.tres" type="Animation" id=167]
+[ext_resource path="res://assets/animations/player/male/weapon/sword/casting/male_weapon_sword_casting_n.tres" type="Animation" id=168]
 [ext_resource path="res://Scripts/Player.gd" type="Script" id=169]
+[ext_resource path="res://assets/animations/player/male/top/elf/casting/male_elf_top_casting_nw.tres" type="Animation" id=170]
 
 [sub_resource type="Animation" id=1]
 resource_name = "male_elf_bottom_1h_attack_s"
@@ -159,8 +199,7 @@ tracks/1/keys = {
 "values": [ 0, 1, 2 ]
 }
 
-[sub_resource type="Animation" id=2]
-resource_name = "male_weapon_sword_idle_e"
+[sub_resource type="Animation" id=3]
 step = 0.333333
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:animation")
@@ -187,8 +226,7 @@ tracks/1/keys = {
 "values": [ 0, 1, 2 ]
 }
 
-[sub_resource type="Animation" id=3]
-resource_name = "male_weapon_sword_idle_n"
+[sub_resource type="Animation" id=4]
 step = 0.333333
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:animation")
@@ -215,50 +253,45 @@ tracks/1/keys = {
 "values": [ 0, 1, 2 ]
 }
 
-[sub_resource type="AtlasTexture" id=4]
-flags = 4
-atlas = ExtResource( 128 )
-region = Rect2( 0, 0, 128, 128 )
-
 [sub_resource type="AtlasTexture" id=5]
 flags = 4
-atlas = ExtResource( 128 )
-region = Rect2( 128, 0, 128, 128 )
+atlas = ExtResource( 127 )
+region = Rect2( 0, 0, 128, 128 )
 
 [sub_resource type="AtlasTexture" id=6]
 flags = 4
-atlas = ExtResource( 128 )
-region = Rect2( 256, 0, 128, 128 )
+atlas = ExtResource( 127 )
+region = Rect2( 0, 128, 128, 128 )
 
 [sub_resource type="AtlasTexture" id=7]
 flags = 4
-atlas = ExtResource( 128 )
-region = Rect2( 384, 0, 128, 128 )
+atlas = ExtResource( 127 )
+region = Rect2( 0, 256, 128, 128 )
 
 [sub_resource type="AtlasTexture" id=8]
 flags = 4
-atlas = ExtResource( 128 )
-region = Rect2( 512, 0, 128, 128 )
+atlas = ExtResource( 127 )
+region = Rect2( 0, 384, 128, 128 )
 
 [sub_resource type="AtlasTexture" id=9]
 flags = 4
-atlas = ExtResource( 128 )
-region = Rect2( 640, 0, 128, 128 )
+atlas = ExtResource( 127 )
+region = Rect2( 0, 512, 128, 128 )
 
 [sub_resource type="AtlasTexture" id=10]
 flags = 4
-atlas = ExtResource( 128 )
-region = Rect2( 768, 0, 128, 128 )
+atlas = ExtResource( 127 )
+region = Rect2( 0, 640, 128, 128 )
 
 [sub_resource type="AtlasTexture" id=11]
 flags = 4
-atlas = ExtResource( 128 )
-region = Rect2( 896, 0, 128, 128 )
+atlas = ExtResource( 127 )
+region = Rect2( 0, 768, 128, 128 )
 
 [sub_resource type="AtlasTexture" id=12]
 flags = 4
-atlas = ExtResource( 128 )
-region = Rect2( 1024, 0, 128, 128 )
+atlas = ExtResource( 127 )
+region = Rect2( 0, 896, 128, 128 )
 
 [sub_resource type="AtlasTexture" id=13]
 flags = 4
@@ -362,49 +395,54 @@ region = Rect2( 448, 0, 64, 256 )
 
 [sub_resource type="AtlasTexture" id=33]
 flags = 4
-atlas = ExtResource( 127 )
+atlas = ExtResource( 128 )
 region = Rect2( 0, 0, 128, 128 )
 
 [sub_resource type="AtlasTexture" id=34]
 flags = 4
-atlas = ExtResource( 127 )
-region = Rect2( 0, 128, 128, 128 )
+atlas = ExtResource( 128 )
+region = Rect2( 128, 0, 128, 128 )
 
 [sub_resource type="AtlasTexture" id=35]
 flags = 4
-atlas = ExtResource( 127 )
-region = Rect2( 0, 256, 128, 128 )
+atlas = ExtResource( 128 )
+region = Rect2( 256, 0, 128, 128 )
 
 [sub_resource type="AtlasTexture" id=36]
 flags = 4
-atlas = ExtResource( 127 )
-region = Rect2( 0, 384, 128, 128 )
+atlas = ExtResource( 128 )
+region = Rect2( 384, 0, 128, 128 )
 
 [sub_resource type="AtlasTexture" id=37]
 flags = 4
-atlas = ExtResource( 127 )
-region = Rect2( 0, 512, 128, 128 )
+atlas = ExtResource( 128 )
+region = Rect2( 512, 0, 128, 128 )
 
 [sub_resource type="AtlasTexture" id=38]
 flags = 4
-atlas = ExtResource( 127 )
-region = Rect2( 0, 640, 128, 128 )
+atlas = ExtResource( 128 )
+region = Rect2( 640, 0, 128, 128 )
 
 [sub_resource type="AtlasTexture" id=39]
 flags = 4
-atlas = ExtResource( 127 )
-region = Rect2( 0, 768, 128, 128 )
+atlas = ExtResource( 128 )
+region = Rect2( 768, 0, 128, 128 )
 
 [sub_resource type="AtlasTexture" id=40]
 flags = 4
-atlas = ExtResource( 127 )
-region = Rect2( 0, 896, 128, 128 )
+atlas = ExtResource( 128 )
+region = Rect2( 896, 0, 128, 128 )
 
-[sub_resource type="SpriteFrames" id=41]
+[sub_resource type="AtlasTexture" id=41]
+flags = 4
+atlas = ExtResource( 128 )
+region = Rect2( 1024, 0, 128, 128 )
+
+[sub_resource type="SpriteFrames" id=42]
 animations = [ {
-"frames": [ SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ) ],
+"frames": [ SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ) ],
 "loop": true,
-"name": "energyball",
+"name": "explosion",
 "speed": 5.0
 }, {
 "frames": [ SubResource( 13 ), SubResource( 14 ), SubResource( 15 ), SubResource( 16 ), SubResource( 17 ), SubResource( 18 ), SubResource( 19 ), SubResource( 20 ), SubResource( 21 ), SubResource( 22 ), SubResource( 23 ), SubResource( 24 ) ],
@@ -417,14 +455,13 @@ animations = [ {
 "name": "lightning",
 "speed": 5.0
 }, {
-"frames": [ SubResource( 33 ), SubResource( 34 ), SubResource( 35 ), SubResource( 36 ), SubResource( 37 ), SubResource( 38 ), SubResource( 39 ), SubResource( 40 ) ],
+"frames": [ SubResource( 33 ), SubResource( 34 ), SubResource( 35 ), SubResource( 36 ), SubResource( 37 ), SubResource( 38 ), SubResource( 39 ), SubResource( 40 ), SubResource( 41 ) ],
 "loop": true,
-"name": "explosion",
+"name": "energyball",
 "speed": 5.0
 } ]
 
-[sub_resource type="Animation" id=42]
-resource_name = "energyball"
+[sub_resource type="Animation" id=43]
 step = 0.111111
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:animation")
@@ -451,8 +488,7 @@ tracks/1/keys = {
 "values": [ 0, 1, 2, 3, 4, 5, 6, 7, 8 ]
 }
 
-[sub_resource type="Animation" id=43]
-resource_name = "explosion"
+[sub_resource type="Animation" id=44]
 step = 0.125
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:animation")
@@ -479,7 +515,7 @@ tracks/1/keys = {
 "values": [ 0, 1, 2, 3, 4, 5, 6, 7 ]
 }
 
-[sub_resource type="Animation" id=44]
+[sub_resource type="Animation" id=45]
 step = 0.125
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:animation")
@@ -506,7 +542,7 @@ tracks/1/keys = {
 "values": [ 0, 1, 2, 3, 4, 5, 6, 7 ]
 }
 
-[sub_resource type="CircleShape2D" id=45]
+[sub_resource type="CircleShape2D" id=46]
 
 [node name="Player" type="KinematicBody2D"]
 collision_layer = 2
@@ -515,184 +551,224 @@ script = ExtResource( 169 )
 
 [node name="BodySprite" type="AnimatedSprite" parent="."]
 frames = ExtResource( 1 )
-animation = "male_elf_body_idle_s"
+animation = "male_elf_body_casting_ne"
+frame = 2
 offset = Vector2( 0, -40 )
 
 [node name="BodyAnimationPlayer" type="AnimationPlayer" parent="BodySprite"]
 playback_process_mode = 0
-anims/male_elf_body_1h_attack_e = ExtResource( 93 )
-anims/male_elf_body_1h_attack_n = ExtResource( 90 )
+anims/male_elf_body_1h_attack_e = ExtResource( 90 )
+anims/male_elf_body_1h_attack_n = ExtResource( 93 )
 anims/male_elf_body_1h_attack_ne = ExtResource( 89 )
 anims/male_elf_body_1h_attack_nw = ExtResource( 88 )
 anims/male_elf_body_1h_attack_s = ExtResource( 92 )
 anims/male_elf_body_1h_attack_se = ExtResource( 91 )
 anims/male_elf_body_1h_attack_sw = ExtResource( 86 )
 anims/male_elf_body_1h_attack_w = ExtResource( 87 )
-anims/male_elf_body_idle_e = ExtResource( 15 )
+anims/male_elf_body_casting_e = ExtResource( 144 )
+anims/male_elf_body_casting_n = ExtResource( 149 )
+anims/male_elf_body_casting_ne = ExtResource( 139 )
+anims/male_elf_body_casting_nw = ExtResource( 152 )
+anims/male_elf_body_casting_s = ExtResource( 151 )
+anims/male_elf_body_casting_se = ExtResource( 147 )
+anims/male_elf_body_casting_sw = ExtResource( 140 )
+anims/male_elf_body_casting_w = ExtResource( 150 )
+anims/male_elf_body_idle_e = ExtResource( 16 )
 anims/male_elf_body_idle_n = ExtResource( 17 )
 anims/male_elf_body_idle_ne = ExtResource( 8 )
 anims/male_elf_body_idle_nw = ExtResource( 9 )
 anims/male_elf_body_idle_s = ExtResource( 12 )
-anims/male_elf_body_idle_se = ExtResource( 14 )
-anims/male_elf_body_idle_sw = ExtResource( 16 )
-anims/male_elf_body_idle_w = ExtResource( 18 )
-anims/male_elf_body_run_e = ExtResource( 6 )
-anims/male_elf_body_run_n = ExtResource( 5 )
-anims/male_elf_body_run_ne = ExtResource( 13 )
-anims/male_elf_body_run_nw = ExtResource( 3 )
-anims/male_elf_body_run_s = ExtResource( 10 )
-anims/male_elf_body_run_se = ExtResource( 4 )
-anims/male_elf_body_run_sw = ExtResource( 7 )
-anims/male_elf_body_run_w = ExtResource( 11 )
+anims/male_elf_body_idle_se = ExtResource( 18 )
+anims/male_elf_body_idle_sw = ExtResource( 14 )
+anims/male_elf_body_idle_w = ExtResource( 15 )
+anims/male_elf_body_run_e = ExtResource( 10 )
+anims/male_elf_body_run_n = ExtResource( 19 )
+anims/male_elf_body_run_ne = ExtResource( 30 )
+anims/male_elf_body_run_nw = ExtResource( 7 )
+anims/male_elf_body_run_s = ExtResource( 2 )
+anims/male_elf_body_run_se = ExtResource( 13 )
+anims/male_elf_body_run_sw = ExtResource( 11 )
+anims/male_elf_body_run_w = ExtResource( 3 )
 
 [node name="HairSprite" type="AnimatedSprite" parent="."]
 frames = ExtResource( 23 )
-animation = "male_elf_hair_idle_s"
+animation = "male_elf_hair_casting_nw"
 frame = 2
 offset = Vector2( 0, -40 )
 
 [node name="HairAnimationPlayer" type="AnimationPlayer" parent="HairSprite"]
 playback_process_mode = 0
-anims/male_elf_hair_1h_attack_e = ExtResource( 99 )
-anims/male_elf_hair_1h_attack_n = ExtResource( 100 )
-anims/male_elf_hair_1h_attack_ne = ExtResource( 101 )
-anims/male_elf_hair_1h_attack_nw = ExtResource( 98 )
-anims/male_elf_hair_1h_attack_s = ExtResource( 96 )
-anims/male_elf_hair_1h_attack_se = ExtResource( 94 )
-anims/male_elf_hair_1h_attack_sw = ExtResource( 95 )
-anims/male_elf_hair_1h_attack_w = ExtResource( 97 )
-anims/male_elf_hair_idle_e = ExtResource( 2 )
-anims/male_elf_hair_idle_n = ExtResource( 19 )
-anims/male_elf_hair_idle_ne = ExtResource( 21 )
-anims/male_elf_hair_idle_nw = ExtResource( 20 )
-anims/male_elf_hair_idle_s = ExtResource( 22 )
-anims/male_elf_hair_idle_se = ExtResource( 26 )
-anims/male_elf_hair_idle_sw = ExtResource( 28 )
-anims/male_elf_hair_idle_w = ExtResource( 25 )
-anims/male_elf_hair_run_e = ExtResource( 27 )
-anims/male_elf_hair_run_n = ExtResource( 29 )
-anims/male_elf_hair_run_ne = ExtResource( 30 )
-anims/male_elf_hair_run_nw = ExtResource( 32 )
-anims/male_elf_hair_run_s = ExtResource( 35 )
-anims/male_elf_hair_run_se = ExtResource( 33 )
-anims/male_elf_hair_run_sw = ExtResource( 31 )
-anims/male_elf_hair_run_w = ExtResource( 34 )
-
-[node name="TopSprite" type="AnimatedSprite" parent="."]
-frames = ExtResource( 24 )
-animation = "male_elf_top_idle_s"
-frame = 2
-offset = Vector2( 0, -40 )
-
-[node name="TopAnimationPlayer" type="AnimationPlayer" parent="TopSprite"]
-playback_process_mode = 0
-anims/male_elf_top_1h_attack_e = ExtResource( 107 )
-anims/male_elf_top_1h_attack_n = ExtResource( 104 )
-anims/male_elf_top_1h_attack_ne = ExtResource( 106 )
-anims/male_elf_top_1h_attack_nw = ExtResource( 109 )
-anims/male_elf_top_1h_attack_s = ExtResource( 102 )
-anims/male_elf_top_1h_attack_se = ExtResource( 108 )
-anims/male_elf_top_1h_attack_sw = ExtResource( 103 )
-anims/male_elf_top_1h_attack_w = ExtResource( 105 )
-anims/male_elf_top_idle_e = ExtResource( 46 )
-anims/male_elf_top_idle_n = ExtResource( 41 )
-anims/male_elf_top_idle_ne = ExtResource( 39 )
-anims/male_elf_top_idle_nw = ExtResource( 43 )
-anims/male_elf_top_idle_s = ExtResource( 44 )
-anims/male_elf_top_idle_se = ExtResource( 42 )
-anims/male_elf_top_idle_sw = ExtResource( 45 )
-anims/male_elf_top_idle_w = ExtResource( 47 )
-anims/male_elf_top_run_e = ExtResource( 48 )
-anims/male_elf_top_run_n = ExtResource( 49 )
-anims/male_elf_top_run_ne = ExtResource( 37 )
-anims/male_elf_top_run_nw = ExtResource( 40 )
-anims/male_elf_top_run_s = ExtResource( 38 )
-anims/male_elf_top_run_se = ExtResource( 36 )
-anims/male_elf_top_run_sw = ExtResource( 51 )
-anims/male_elf_top_run_w = ExtResource( 50 )
+anims/male_elf_hair_1h_attack_e = ExtResource( 118 )
+anims/male_elf_hair_1h_attack_n = ExtResource( 102 )
+anims/male_elf_hair_1h_attack_ne = ExtResource( 103 )
+anims/male_elf_hair_1h_attack_nw = ExtResource( 105 )
+anims/male_elf_hair_1h_attack_s = ExtResource( 115 )
+anims/male_elf_hair_1h_attack_se = ExtResource( 114 )
+anims/male_elf_hair_1h_attack_sw = ExtResource( 119 )
+anims/male_elf_hair_1h_attack_w = ExtResource( 116 )
+anims/male_elf_hair_casting_e = ExtResource( 136 )
+anims/male_elf_hair_casting_n = ExtResource( 132 )
+anims/male_elf_hair_casting_ne = ExtResource( 133 )
+anims/male_elf_hair_casting_nw = ExtResource( 145 )
+anims/male_elf_hair_casting_s = ExtResource( 134 )
+anims/male_elf_hair_casting_se = ExtResource( 135 )
+anims/male_elf_hair_casting_sw = ExtResource( 137 )
+anims/male_elf_hair_casting_w = ExtResource( 141 )
+anims/male_elf_hair_idle_e = ExtResource( 6 )
+anims/male_elf_hair_idle_n = ExtResource( 27 )
+anims/male_elf_hair_idle_ne = ExtResource( 26 )
+anims/male_elf_hair_idle_nw = ExtResource( 25 )
+anims/male_elf_hair_idle_s = ExtResource( 28 )
+anims/male_elf_hair_idle_se = ExtResource( 21 )
+anims/male_elf_hair_idle_sw = ExtResource( 22 )
+anims/male_elf_hair_idle_w = ExtResource( 29 )
+anims/male_elf_hair_run_e = ExtResource( 31 )
+anims/male_elf_hair_run_n = ExtResource( 32 )
+anims/male_elf_hair_run_ne = ExtResource( 33 )
+anims/male_elf_hair_run_nw = ExtResource( 34 )
+anims/male_elf_hair_run_s = ExtResource( 45 )
+anims/male_elf_hair_run_se = ExtResource( 48 )
+anims/male_elf_hair_run_sw = ExtResource( 20 )
+anims/male_elf_hair_run_w = ExtResource( 39 )
 
 [node name="BottomSprite" type="AnimatedSprite" parent="."]
 frames = ExtResource( 52 )
-animation = "male_elf_bottom_idle_s"
+animation = "male_elf_bottom_casting_nw"
 frame = 2
 offset = Vector2( 0, -40 )
 
 [node name="BottomAnimationPlayer" type="AnimationPlayer" parent="BottomSprite"]
 playback_process_mode = 0
-anims/male_elf_bottom_1h_attack_e = ExtResource( 111 )
-anims/male_elf_bottom_1h_attack_n = ExtResource( 113 )
-anims/male_elf_bottom_1h_attack_ne = ExtResource( 112 )
-anims/male_elf_bottom_1h_attack_nw = ExtResource( 117 )
+anims/male_elf_bottom_1h_attack_e = ExtResource( 98 )
+anims/male_elf_bottom_1h_attack_n = ExtResource( 121 )
+anims/male_elf_bottom_1h_attack_ne = ExtResource( 107 )
+anims/male_elf_bottom_1h_attack_nw = ExtResource( 131 )
 anims/male_elf_bottom_1h_attack_s = SubResource( 1 )
-anims/male_elf_bottom_1h_attack_se = ExtResource( 110 )
-anims/male_elf_bottom_1h_attack_sw = ExtResource( 119 )
-anims/male_elf_bottom_1h_attack_w = ExtResource( 121 )
-anims/male_elf_bottom_idle_e = ExtResource( 53 )
-anims/male_elf_bottom_idle_n = ExtResource( 59 )
-anims/male_elf_bottom_idle_ne = ExtResource( 60 )
-anims/male_elf_bottom_idle_nw = ExtResource( 54 )
-anims/male_elf_bottom_idle_s = ExtResource( 63 )
-anims/male_elf_bottom_idle_se = ExtResource( 65 )
-anims/male_elf_bottom_idle_sw = ExtResource( 64 )
+anims/male_elf_bottom_1h_attack_se = ExtResource( 99 )
+anims/male_elf_bottom_1h_attack_sw = ExtResource( 96 )
+anims/male_elf_bottom_1h_attack_w = ExtResource( 97 )
+anims/male_elf_bottom_casting_e = ExtResource( 143 )
+anims/male_elf_bottom_casting_n = ExtResource( 142 )
+anims/male_elf_bottom_casting_ne = ExtResource( 138 )
+anims/male_elf_bottom_casting_nw = ExtResource( 153 )
+anims/male_elf_bottom_casting_s = ExtResource( 148 )
+anims/male_elf_bottom_casting_se = ExtResource( 146 )
+anims/male_elf_bottom_casting_sw = ExtResource( 4 )
+anims/male_elf_bottom_casting_w = ExtResource( 5 )
+anims/male_elf_bottom_idle_e = ExtResource( 68 )
+anims/male_elf_bottom_idle_n = ExtResource( 60 )
+anims/male_elf_bottom_idle_ne = ExtResource( 64 )
+anims/male_elf_bottom_idle_nw = ExtResource( 56 )
+anims/male_elf_bottom_idle_s = ExtResource( 69 )
+anims/male_elf_bottom_idle_se = ExtResource( 66 )
+anims/male_elf_bottom_idle_sw = ExtResource( 63 )
 anims/male_elf_bottom_idle_w = ExtResource( 61 )
-anims/male_elf_bottom_run_e = ExtResource( 55 )
+anims/male_elf_bottom_run_e = ExtResource( 58 )
 anims/male_elf_bottom_run_n = ExtResource( 62 )
-anims/male_elf_bottom_run_ne = ExtResource( 57 )
-anims/male_elf_bottom_run_nw = ExtResource( 68 )
-anims/male_elf_bottom_run_s = ExtResource( 56 )
-anims/male_elf_bottom_run_se = ExtResource( 58 )
-anims/male_elf_bottom_run_sw = ExtResource( 66 )
-anims/male_elf_bottom_run_w = ExtResource( 67 )
+anims/male_elf_bottom_run_ne = ExtResource( 53 )
+anims/male_elf_bottom_run_nw = ExtResource( 55 )
+anims/male_elf_bottom_run_s = ExtResource( 59 )
+anims/male_elf_bottom_run_se = ExtResource( 70 )
+anims/male_elf_bottom_run_sw = ExtResource( 65 )
+anims/male_elf_bottom_run_w = ExtResource( 54 )
+
+[node name="TopSprite" type="AnimatedSprite" parent="."]
+frames = ExtResource( 24 )
+animation = "male_elf_top_casting_nw"
+offset = Vector2( 0, -40 )
+
+[node name="TopAnimationPlayer" type="AnimationPlayer" parent="TopSprite"]
+playback_process_mode = 0
+anims/male_elf_top_1h_attack_e = ExtResource( 117 )
+anims/male_elf_top_1h_attack_n = ExtResource( 125 )
+anims/male_elf_top_1h_attack_ne = ExtResource( 112 )
+anims/male_elf_top_1h_attack_nw = ExtResource( 120 )
+anims/male_elf_top_1h_attack_s = ExtResource( 111 )
+anims/male_elf_top_1h_attack_se = ExtResource( 130 )
+anims/male_elf_top_1h_attack_sw = ExtResource( 106 )
+anims/male_elf_top_1h_attack_w = ExtResource( 104 )
+anims/male_elf_top_casting_e = ExtResource( 160 )
+anims/male_elf_top_casting_n = ExtResource( 162 )
+anims/male_elf_top_casting_ne = ExtResource( 157 )
+anims/male_elf_top_casting_nw = ExtResource( 170 )
+anims/male_elf_top_casting_s = ExtResource( 167 )
+anims/male_elf_top_casting_se = ExtResource( 159 )
+anims/male_elf_top_casting_sw = ExtResource( 156 )
+anims/male_elf_top_casting_w = ExtResource( 165 )
+anims/male_elf_top_idle_e = ExtResource( 37 )
+anims/male_elf_top_idle_n = ExtResource( 41 )
+anims/male_elf_top_idle_ne = ExtResource( 43 )
+anims/male_elf_top_idle_nw = ExtResource( 50 )
+anims/male_elf_top_idle_s = ExtResource( 51 )
+anims/male_elf_top_idle_se = ExtResource( 49 )
+anims/male_elf_top_idle_sw = ExtResource( 36 )
+anims/male_elf_top_idle_w = ExtResource( 38 )
+anims/male_elf_top_run_e = ExtResource( 40 )
+anims/male_elf_top_run_n = ExtResource( 42 )
+anims/male_elf_top_run_ne = ExtResource( 46 )
+anims/male_elf_top_run_nw = ExtResource( 44 )
+anims/male_elf_top_run_s = ExtResource( 47 )
+anims/male_elf_top_run_se = ExtResource( 35 )
+anims/male_elf_top_run_sw = ExtResource( 67 )
+anims/male_elf_top_run_w = ExtResource( 57 )
 
 [node name="WeaponSprite" type="AnimatedSprite" parent="."]
 frames = ExtResource( 77 )
-animation = "male_weapon_sword_1h_attack_w"
-frame = 2
+animation = "male_weapon_sword_1h_attack_e"
 offset = Vector2( 0, -40 )
 
 [node name="WeaponAnimationPlayer" type="AnimationPlayer" parent="WeaponSprite"]
 playback_process_mode = 0
-anims/male_weapon_sword_1h_attack_e = ExtResource( 72 )
-anims/male_weapon_sword_1h_attack_n = ExtResource( 125 )
-anims/male_weapon_sword_1h_attack_ne = ExtResource( 73 )
-anims/male_weapon_sword_1h_attack_nw = ExtResource( 116 )
-anims/male_weapon_sword_1h_attack_s = ExtResource( 118 )
-anims/male_weapon_sword_1h_attack_se = ExtResource( 115 )
-anims/male_weapon_sword_1h_attack_sw = ExtResource( 114 )
-anims/male_weapon_sword_1h_attack_w = ExtResource( 120 )
-anims/male_weapon_sword_idle_e = SubResource( 2 )
-anims/male_weapon_sword_idle_n = SubResource( 3 )
-anims/male_weapon_sword_idle_ne = ExtResource( 122 )
-anims/male_weapon_sword_idle_nw = ExtResource( 75 )
-anims/male_weapon_sword_idle_s = ExtResource( 71 )
-anims/male_weapon_sword_idle_se = ExtResource( 70 )
-anims/male_weapon_sword_idle_sw = ExtResource( 76 )
-anims/male_weapon_sword_idle_w = ExtResource( 69 )
-anims/male_weapon_sword_run_e = ExtResource( 82 )
-anims/male_weapon_sword_run_n = ExtResource( 78 )
-anims/male_weapon_sword_run_ne = ExtResource( 84 )
-anims/male_weapon_sword_run_nw = ExtResource( 85 )
-anims/male_weapon_sword_run_s = ExtResource( 83 )
+anims/male_weapon_sword_1h_attack_e = ExtResource( 84 )
+anims/male_weapon_sword_1h_attack_n = ExtResource( 113 )
+anims/male_weapon_sword_1h_attack_ne = ExtResource( 85 )
+anims/male_weapon_sword_1h_attack_nw = ExtResource( 110 )
+anims/male_weapon_sword_1h_attack_s = ExtResource( 101 )
+anims/male_weapon_sword_1h_attack_se = ExtResource( 122 )
+anims/male_weapon_sword_1h_attack_sw = ExtResource( 108 )
+anims/male_weapon_sword_1h_attack_w = ExtResource( 109 )
+anims/male_weapon_sword_casting_e = ExtResource( 154 )
+anims/male_weapon_sword_casting_n = ExtResource( 168 )
+anims/male_weapon_sword_casting_ne = ExtResource( 164 )
+anims/male_weapon_sword_casting_nw = ExtResource( 158 )
+anims/male_weapon_sword_casting_s = ExtResource( 155 )
+anims/male_weapon_sword_casting_se = ExtResource( 166 )
+anims/male_weapon_sword_casting_sw = ExtResource( 161 )
+anims/male_weapon_sword_casting_w = ExtResource( 163 )
+anims/male_weapon_sword_idle_e = SubResource( 3 )
+anims/male_weapon_sword_idle_n = SubResource( 4 )
+anims/male_weapon_sword_idle_ne = ExtResource( 100 )
+anims/male_weapon_sword_idle_nw = ExtResource( 80 )
+anims/male_weapon_sword_idle_s = ExtResource( 73 )
+anims/male_weapon_sword_idle_se = ExtResource( 95 )
+anims/male_weapon_sword_idle_sw = ExtResource( 75 )
+anims/male_weapon_sword_idle_w = ExtResource( 79 )
+anims/male_weapon_sword_run_e = ExtResource( 76 )
+anims/male_weapon_sword_run_n = ExtResource( 94 )
+anims/male_weapon_sword_run_ne = ExtResource( 83 )
+anims/male_weapon_sword_run_nw = ExtResource( 78 )
+anims/male_weapon_sword_run_s = ExtResource( 82 )
 anims/male_weapon_sword_run_se = ExtResource( 81 )
-anims/male_weapon_sword_run_sw = ExtResource( 79 )
-anims/male_weapon_sword_run_w = ExtResource( 80 )
+anims/male_weapon_sword_run_sw = ExtResource( 71 )
+anims/male_weapon_sword_run_w = ExtResource( 72 )
 script = ExtResource( 124 )
 
-[node name="Effectprite" type="AnimatedSprite" parent="."]
-frames = SubResource( 41 )
-animation = "slash_s"
+[node name="EffectSprite" type="AnimatedSprite" parent="."]
+visible = false
+frames = SubResource( 42 )
+animation = "lightning"
 
-[node name="EffectAnimationPlayer" type="AnimationPlayer" parent="Effectprite"]
+[node name="EffectAnimationPlayer" type="AnimationPlayer" parent="EffectSprite"]
 playback_process_mode = 0
-anims/energyball = SubResource( 42 )
-anims/explosion = SubResource( 43 )
-anims/lightning = SubResource( 44 )
+anims/energyball = SubResource( 43 )
+anims/explosion = SubResource( 44 )
+anims/lightning = SubResource( 45 )
 anims/slash_s = ExtResource( 123 )
 script = ExtResource( 129 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0, 4 )
-shape = SubResource( 45 )
+shape = SubResource( 46 )
 
 [node name="RayCast2D" type="RayCast2D" parent="."]
 enabled = true

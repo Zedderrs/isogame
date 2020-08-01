@@ -2,9 +2,8 @@
 
 [ext_resource path="res://Scripts/WeaponAnimationPlayer.gd" type="Script" id=1]
 
-
 [resource]
-resource_name = "male_weapon_sword_1h_attack_sw"
+resource_name = "male_weapon_sword_1h_attack_ne"
 step = 0.333333
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:animation")
@@ -13,10 +12,10 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0 ),
+"times": PoolRealArray( 2.79397e-07 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ "male_weapon_sword_1h_attack_sw" ]
+"values": [ "male_weapon_sword_1h_attack_ne" ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath(".:frame")
@@ -25,7 +24,7 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 3.72529e-09, 0.333333, 0.666667 ),
+"times": PoolRealArray( 1.11759e-08, 0.333333, 0.666667 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 1,
 "values": [ 0, 1, 2 ]
