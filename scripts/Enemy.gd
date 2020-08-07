@@ -119,8 +119,8 @@ func is_attacking():
 		return false
 	return -1 != anim_player.get_current_animation().find("attack")
 
-func attack(tar):
-	tar.take_damage(1)
+func attack():
+	target.take_damage(1)
 
 func _on_Enemy_mouse_entered():
 	Input.set_default_cursor_shape(2)

@@ -3,36 +3,29 @@ extends AnimationPlayer
 
 # Declare member variables here. Examples:
 onready var game = get_tree().get_root().get_node("Game")
-var anim_length
-var current_anim_position
-var current_anim
-var damage_dealt
-#
-## Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _physics_process(delta):
-#	anim_length = current_animation_length
-#	current_anim_position = get_current_animation_position()
-#	current_anim = get_current_animation()
-#	if game.player.is_attacking() && game.player.interrupt_attack:
-#		if !damage_dealt:
-#			stop()
-#		game.player.interrupt_attack = false
-#	if is_attack_anim() && is_playing() && is_start_of_attack(delta):
-#		damage_dealt = false
-#	elif is_attack_anim() && is_playing() && is_point_of_attack(delta) && game.player.target && !damage_dealt:
-#		game.player.attack(game.player.target)
-#		damage_dealt = true
-#	elif is_attack_anim() && is_playing() && is_end_of_attack(delta) && game.player.target:
-#		damage_dealt = false
-#
-#func is_start_of_attack(delta):
-#	return (current_anim_position - delta) < 0
-#
-#func is_point_of_attack(delta):
-#	return ((current_anim_position + delta)/anim_length) > 0.75
-#
-#func is_end_of_attack(delta):
-#	return (current_anim_position + delta) >= anim_length
-#
-#func is_attack_anim():
-#	return -1 != current_anim.find('attack')
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _physics_process(delta):
+	if is_playing():
+		if is_start_of_attack(delta):
+			game.player.effect.visible = true
+		elif is_end_of_attack(delta):
+			game.player.effect.visible = false
+		if game.player.target:
+			if get_current_animation() == game.player.Spell.Lightning:
+				lightning_spell(delta)
+
+func lightning_spell(delta):
+	game.player.effect.position = game.player.target.position - game.player.position
+	game.player.effect.position.y -= 64
+	if is_point_of_attack(delta):
+		game.player.spell_attack(game.player.target)
+
+func is_start_of_attack(delta):
+	return (current_animation_position - delta) < 0
+	
+func is_point_of_attack(delta):
+	return ((current_animation_position + delta)/current_animation_length) > 0.75
+	
+func is_end_of_attack(delta):
+	return (current_animation_position + delta) >= current_animation_length
