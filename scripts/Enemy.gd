@@ -15,24 +15,35 @@ var Action = {"Idle": "idle", "Run": "run", "Attack": "attack"}
 var Dir = {"N":"_n", "NE":"_ne", "E":"_e", "SE":"_se", "S":"_s", "SW":"_sw", "W":"_w", "NW":"_nw"}
 
 # enemy scene variables
-onready var player_seen = false
-onready var type = Type.Brown
-onready var id = EnemyID.Hellspawn
-onready var action = Action.Idle
-onready var velocity = Vector2()
-onready var destination = position
-onready var direction = Dir.S
-onready var targeted = false
-onready var current_action = action
-onready var current_direction = direction
-onready var interrupt_attack = false
-onready var just_arrived_at_destination = false
-onready var target
-onready var attack_range = 100
+var player_seen = false
+var type = Type.Brown
+var id = EnemyID.Hellspawn
+var action = Action.Idle
+var velocity = Vector2()
+var destination = position
+var direction = Dir.S
+var targeted = false
+var current_action = action
+var current_direction = direction
+var interrupt_attack = false
+var just_arrived_at_destination = false
+var target
+var attack_range = 100
+var is_dead = false
+var level
+var hp
+var max_hp
+var tile = Vector2()
+onready var max_health_bar_length = health_bar.rect_size.x
 # enemy attributes
-onready var lazyness = 50
+var lazyness = 50
 
-
+func _init():
+	level = 3
+	max_hp = level
+	hp = max_hp
+	self.visible = false
+	
 func _physics_process(_delta):
 	if self.visible:
 		player_seen = true
@@ -48,6 +59,7 @@ func _physics_process(_delta):
 		if game.player.target:
 			health_bar.visible = false
 		game.player.target = self
+		game.player.spell_target = self
 		health_bar.visible = true
 	direction = game.player.get_cardinal_direction(velocity)
 	set_animations()
@@ -122,6 +134,23 @@ func is_attacking():
 func attack():
 	target.take_damage(1)
 
+func take_damage(dmg):
+	if is_dead:
+		return
+	hp = max(0, hp - dmg)
+	update_health_bar()
+	if hp == 0:
+		die()
+
+func die():
+	is_dead = true
+	game.enemies.erase(self)
+	game.vision.enemies_in_range.erase(self)
+	queue_free()
+	Input.set_default_cursor_shape(0) # reset cursor to normal
+	game.player.target = null
+	game.player.spell_target = null
+
 func _on_Enemy_mouse_entered():
 	Input.set_default_cursor_shape(2)
 	targeted = true
@@ -129,3 +158,6 @@ func _on_Enemy_mouse_entered():
 func _on_Enemy_mouse_exited():
 	Input.set_default_cursor_shape(0)
 	targeted = false
+
+func update_health_bar():
+	health_bar.rect_size.x = max_health_bar_length * hp / max_hp

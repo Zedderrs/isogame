@@ -45,6 +45,7 @@ onready var current_action = action
 onready var current_direction = direction
 onready var melee = true
 var target
+var spell_target
 var interrupt
 # player attributes
 onready var attack_range = 100
@@ -53,7 +54,6 @@ onready var hp_max = 10
 onready var hp = hp_max
 onready var xp = 2
 onready var xp_max = 10
-onready var spell_cooldown
 # player movement
 onready var path = []
 onready var velocity = Vector2()
@@ -93,7 +93,6 @@ func _physics_process(delta):
 	
 func act(_delta):
 	raycast.set_cast_to(destination - position)
-	spell_cooldown = spell_cooldown_timer.get_time_left()
 	if can_attack():
 		velocity = (destination - position).normalized() * SPEED
 		action = Action.Attack
@@ -123,7 +122,7 @@ func can_attack():
 
 func can_cast():
 	# can cast if not already attacking or casting, target exists, cooldown is at 0, and target is within range
-	return !melee && !is_attacking() && !is_casting() && null != target && (target.position - position).length() <= cast_range && 0 == spell_cooldown
+	return !melee && !is_attacking() && !is_casting() && null != target && (target.position - position).length() <= cast_range && spell_cooldown_timer.is_stopped()
 
 func at_destination():
 	return (destination - position).length() < 5
@@ -167,7 +166,7 @@ func get_cardinal_direction(dir): # returns cardinal direction based on velocity
 func open_door(): # opens the door if player collides with it
 	for i in get_slide_count():
 		var collider = get_slide_collision(i).collider
-		if game.is_door_closed(game.get_instance_type(collider)):
+		if game.is_door_closed(collider.type):
 			var map_coords = game.map.world_to_map(Vector2(collider.position.x, collider.position.y))
 			game.set_door_tile(map_coords.x, map_coords.y, true)
 
@@ -183,21 +182,23 @@ func is_casting():
 
 func attack():
 	for enemy in game.enemies:
-		if enemy.get_instance_id() == target.get_instance_id():
-			enemy.take_damage(1)
+		if target:
+			if enemy.get_instance_id() == target.get_instance_id():
+				enemy.take_damage(1)
 
 func cast():
 	effect_animation_player.play(spell)
 	if spell == Spell.Lightning:
 		spell_cooldown_timer.start(5)
 
-func spell_attack(spell_target):
+func spell_attack():
 	var dmg
 	if spell == Spell.Lightning:
 		dmg = 3
 		for enemy in game.enemies:
-			if enemy.get_instance_id() == spell_target.get_instance_id():
-				enemy.take_damage(dmg)
+			if spell_target:
+				if enemy.get_instance_id() == spell_target.get_instance_id():
+					enemy.take_damage(dmg)
 
 func move_direct():
 	velocity = (destination - position).normalized() * SPEED

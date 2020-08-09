@@ -120,8 +120,8 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 0.0
-margin_top = 0.0
-margin_right = 0.0
-margin_bottom = 0.0
+margin_left = -0.814453
+margin_top = 0.568848
+margin_right = -0.814453
+margin_bottom = 0.568848
 [connection signal="body_exited" from="AboveFloor/Player/Vision" to="AboveFloor/Player/Vision" method="_on_VisionArea2D2_body_exited"]

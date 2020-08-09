@@ -9,6 +9,7 @@ onready var floor_map = $FloorMap
 onready var wall_map = $AboveFloor/WallMap
 onready var player = $AboveFloor/Player
 onready var vision = $AboveFloor/Player/Vision
+onready var ui = $CanvasLayer/UI
 
 # Cursors
 onready var NormalCursor = preload("res://assets/UI/cursors/normal.png")
@@ -91,7 +92,6 @@ var player_tile
 var stage_num = 0
 var tile_map = []
 var tile_instance_map = []
-var object_list = []
 var object_instance_list = []
 var rooms = []
 var enemies = []
@@ -110,7 +110,7 @@ var object_tile
 func _ready():
 	var screen_size = OS.get_screen_size() # get screen size of game
 	var window_size = Vector2(screen_size.x,screen_size.y) # set window size of game
-	OS.set_window_size(window_size) # scale viewport to 1280 x 720
+	OS.set_window_size(window_size) # scale viewport to OS screen size
 	OS.set_window_position(screen_size * 0.5 - window_size * 0.5) # center screen
 	randomize() # randomize seed
 	build_stage() # build the stage
@@ -121,6 +121,9 @@ func _ready():
 	Input.set_custom_mouse_cursor(AttackCursor, 2)
 
 
+func _input(event):
+	if event.is_action_pressed("console_toggle"):
+		ui.msg_log_toggle_visibility()
 # Construct one stage based on the stage number
 func build_stage():
 	
@@ -181,21 +184,18 @@ func build_stage():
 				break
 		
 		if !blocked:
-			var enemy = Enemy.new(self, 3, x, y)
-			enemies.append(enemy)
-
+			create_enemy(x, y)
 	
 	# place an object in the start room
 	var object_x = start_room.position.x + 1 + randi() % int(start_room.size.x - 2)
 	var object_y = start_room.position.y + 1 + randi() % int(start_room.size.y - 2)
-	add_object(object_x, object_y, Tile.CeramicPot.Type)
+	create_breakable_object(object_x, object_y, Tile.CeramicPot.Type)
 	
 	
 	# place an enemy in the start room
 	var enemy_x = start_room.position.x + 1 + randi() % int(start_room.size.x - 2)
 	var enemy_y = start_room.position.y + 1 + randi() % int(start_room.size.y - 2)
-	var enemy = Enemy.new(self, 3, enemy_x, enemy_y)
-	enemies.append(enemy)
+	create_enemy(enemy_x, enemy_y)
 
 	# Place stairs to get to next stage
 	var end_room = rooms.back()
@@ -217,7 +217,7 @@ func update_visuals():
 	map.clear()
 	populate_floor_map()
 	map.initiate_map_details()
-	
+
 # ==============================================================================
 # ------------------------- Stage Building Mechanics ---------------------------
 # ==============================================================================
@@ -272,13 +272,6 @@ func add_room(free_regions):
 
 	cut_regions(free_regions, room)
 
-# Add an object at location 
-func add_object(x, y, type):
-	var new_object = BreakableObject.new(self, x, y, type)
-	# add object to lists
-	object_instance_list.append(new_object)
-	object_list.append(type)
-
 # Place tile type at location
 func set_tile(x, y, type):
 	# delete tile instance at location
@@ -304,6 +297,7 @@ func create_tile(x, y, type, to_wall_map = true):
 	
 	# create and add to map
 	var tile = get_tile_by_type(type).Scene.instance()
+	if null != tile.get("type"): tile.type = type
 	# add to wall_map or floor_map (used in populate_floor_map)
 	if to_wall_map:
 		wall_map.add_child(tile)
@@ -320,30 +314,6 @@ func create_tile(x, y, type, to_wall_map = true):
 	
 	# hide the tile upon creation
 	tile.visible = false
-
-# return the Tile key in the dictionary
-func get_tile_by_type(type):
-	for key in Tile.keys():
-		if Tile[key].Type == type:
-			return Tile[key] 
-	
-# return the Tile type of the given instance
-func get_instance_type(instance):
-	# find location of instance in tile_instance_map or object_instance_map
-	for x in range(stage_size.x):
-		for y in range(stage_size.y):
-			if typeof(tile_instance_map[x][y]) == TYPE_OBJECT:
-				if tile_instance_map[x][y].get_instance_id() == instance.get_instance_id():
-					return tile_map[x][y]
-	for i in range(object_instance_list.size()):
-		if object_instance_list[i].get_instance_id() == instance.get_instance_id():
-			return object_list[i]
-
-# return the object by id
-func get_object_by_id(id):
-	for object in object_instance_list:
-		if object.get_instance_id() == id:
-			return object 
 
 # check if tile is a wall
 func is_wall(type):
@@ -478,7 +448,6 @@ func hurt(target):
 		target.remove()
 		var index = object_instance_list.find(target)
 		object_instance_list.erase(object_instance_list[index])
-		object_list.erase(object_list[index])
 
 func get_least_connected_point(graph):
 	var point_ids = graph.get_points()
@@ -576,92 +545,49 @@ func is_walkable_tile(type):
 	return type == Tile.Ground.Type || type == Tile.BlankGround.Type || is_door(type)
 
 # ==============================================================================
-# ------------------------- Breakable Object Class -----------------------------
+# ---------------------------- Breakable Object -------------------------------
 # ==============================================================================
 
-class BreakableObject extends Reference:
-	
-	# Object variables
-	var node
-	var health
-
-	# Called when the object is initialized.
-	func _init(game, x, y, type):
-		node = game.get_tile_by_type(type).Scene.instance()
-		health = 3
-		var world_pos = game.map.map_to_world(Vector2(x, y))
-		node.position.x = world_pos.x
-		node.position.y = world_pos.y
-		game.wall_map.add_child(node)
-		
-	func get_instance_id():
-		return node.get_instance_id()
-
-	# Remove the object node
-	func remove():
-		node.queue_free()
+func create_breakable_object(x, y, type):
+	var breakable_object = get_tile_by_type(type).Scene.instance(type)
+	var world_pos = map.map_to_world(Vector2(x, y))
+	breakable_object.position.x = world_pos.x
+	breakable_object.position.y = world_pos.y
+	wall_map.add_child(breakable_object)
+	# add object to lists
+	object_instance_list.append(breakable_object)
 
 # ==============================================================================
-# ------------------------------- Enemy Class ----------------------------------
+# ---------------------------------- Enemy -------------------------------------
 # ==============================================================================
 
-class Enemy extends Reference: 
-
-	# Enemy variables
-	var game
-	var node
-	var anim_player
-	var id
-	var level
-	var tile
-	var max_hp
-	var hp
-	var dead = false
-	var player_seen = false
-	var health_bar_length
-
-	# Called when the object is initialized.
-	func _init(game_state, _enemy_level, x, y):
-		game = game_state
-		level = 3
-		id = "brown_hellspawn"
-		max_hp = level
-		hp = max_hp
-		tile = Vector2(x, y)
-		node = EnemyScene.instance()
-		node.position = game.map.map_to_world(tile)
-		node.position.y += 32
-		anim_player = node.get_node("EnemySprite/EnemyAnimationPlayer")
-		anim_player.play(id + "_idle_s")
-		game.wall_map.add_child(node)
-		node.visible = false
-		health_bar_length = node.get_node("EnemySprite/EnemyHP").rect_size.x
-
-	# Remove the item node after processing
-	func remove():
-		node.queue_free()
-
-	# Deal damage to this enemy
-	func take_damage(dmg):
-		if dead:
-			return
-		hp = max(0, hp - dmg)
-		node.get_node("EnemySprite/EnemyHP").rect_size.x = health_bar_length * hp / max_hp
-		if hp == 0:
-			dead = true
-			game.enemies.erase(self)
-			game.vision.enemies_in_range.erase(self.node)
-			remove()
-			Input.set_default_cursor_shape(0) # reset cursor to normal
-			game.player.target = null
-	
-	# Get instance id
-	func get_instance_id():
-		return node.get_instance_id()
+func create_enemy(x, y):
+	var enemy = EnemyScene.instance()
+	enemy.tile = Vector2(x, y)
+	enemy.position = map.map_to_world(enemy.tile)
+	enemy.position.y += 32
+	enemies.append(enemy)
+	self.add_child(enemy)
 
 # ==============================================================================
 # ----------------------------------- Tools ------------------------------------
 # ==============================================================================
+
+# return the Tile key in the dictionary
+func get_tile_by_type(type):
+	for key in Tile.keys():
+		if Tile[key].Type == type:
+			return Tile[key] 
+
+# return the object by id
+func get_object_by_id(id):
+	for object in object_instance_list:
+		if object.get_instance_id() == id:
+			return object 
+
+func print_msg(msg):
+	ui.print_msg(msg)
+	
 func gen_rand_num(min_range, max_range, return_integer = false):
 	randomize()
 	if return_integer:

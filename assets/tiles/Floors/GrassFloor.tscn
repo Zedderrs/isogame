@@ -1,4 +1,6 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://scripts/Objects.gd" type="Script" id=2]
 
 [sub_resource type="StreamTexture" id=1]
 load_path = "res://.import/GrassFloor.png-220053a1c26ee33b32a506f5a8e15fcc.stex"
@@ -11,6 +13,7 @@ outlines = [ PoolVector2Array( 0, -32, 32, 0, 0, 32, -32, 0 ) ]
 [node name="GrassFloor" type="StaticBody2D"]
 collision_layer = 16
 collision_mask = 0
+script = ExtResource( 2 )
 
 [node name="GrassFloor" type="Sprite" parent="."]
 texture = SubResource( 1 )

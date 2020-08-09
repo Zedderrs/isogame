@@ -11,15 +11,15 @@ func _physics_process(delta):
 			game.player.effect.visible = true
 		elif is_end_of_attack(delta):
 			game.player.effect.visible = false
-		if game.player.target:
+		if game.player.spell_target:
 			if get_current_animation() == game.player.Spell.Lightning:
 				lightning_spell(delta)
 
 func lightning_spell(delta):
-	game.player.effect.position = game.player.target.position - game.player.position
+	game.player.effect.position = game.player.spell_target.position - game.player.position
 	game.player.effect.position.y -= 64
 	if is_point_of_attack(delta):
-		game.player.spell_attack(game.player.target)
+		game.player.spell_attack()
 
 func is_start_of_attack(delta):
 	return (current_animation_position - delta) < 0

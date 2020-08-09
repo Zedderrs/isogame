@@ -1,11 +1,13 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://assets/tiles/Doors/WoodDoorSW.png" type="Texture" id=1]
+[ext_resource path="res://scripts/Objects.gd" type="Script" id=2]
 
 [sub_resource type="StreamTexture" id=1]
 load_path = "res://.import/GrassFloor.png-220053a1c26ee33b32a506f5a8e15fcc.stex"
 
 [node name="WoodDoorOpenNW" type="StaticBody2D"]
+script = ExtResource( 2 )
 
 [node name="GrassFloor" type="Sprite" parent="."]
 visible = false
