@@ -18,7 +18,7 @@ var Top = {"Elf": "elf_top"}
 var Hair = {"Elf": "elf_hair"}
 var Bottom = {"Elf": "elf_bottom"}
 var Weapon = {"Sword": "weapon_sword"}
-var Action = {"Idle": "_idle", "Run": "_run", "Attack": "_1h_attack", "Cast": "_casting"} 
+var Action = {"Idle": "_idle", "Run": "_run", "Attack": "_1h_attack", "Cast": "_casting", "Punch":"_punch"} 
 var Dir = {"N":"_n", "NE":"_ne", "E":"_e", "SE":"_se", "S":"_s", "SW":"_sw", "W":"_w", "NW":"_nw"}
 var Spell = {"Lightning": "lightning"}
 
@@ -29,13 +29,13 @@ const SPEED = 250 # How fast the player will move (pixels/sec).
 onready var game = get_tree().get_root().get_node("Game")
 var space_graph
 
-# player animations
+# player animations and inventory
 onready var gender = Gender.Male
 onready var body = Body.Elf
 onready var hair = Hair.Elf
-onready var top = Top.Elf
-onready var bottom = Bottom.Elf
-onready var weapon = Weapon.Sword
+onready var top
+onready var bottom
+onready var weapon
 onready var spell = Spell.Lightning
 var current_body_animation
 # player state
@@ -54,6 +54,7 @@ onready var hp_max = 10
 onready var hp = hp_max
 onready var xp = 2
 onready var xp_max = 10
+
 # player movement
 onready var path = []
 onready var velocity = Vector2()
@@ -95,7 +96,10 @@ func act(_delta):
 	raycast.set_cast_to(destination - position)
 	if can_attack():
 		velocity = (destination - position).normalized() * SPEED
-		action = Action.Attack
+		if is_equipped(weapon):
+			action = Action.Attack
+		else:
+			action = Action.Punch
 	elif can_cast():
 		velocity = (destination - position).normalized() * SPEED
 		action = Action.Cast
@@ -141,13 +145,33 @@ func change_animation(): # can the animation be changed?
 func play_animations():
 	body_animation_player.play(gender + body + action + direction) # animate body
 	hair_animation_player.play(gender + hair + action + direction) # animate hair
-	top_animation_player.play(gender + top + action + direction) # animate top
-	bottom_animation_player.play(gender + bottom + action + direction) # animate bottom
-	weapon_animation_player.play(gender + weapon + action + direction) # animate weapon
+	if is_equipped(top):
+		show_sprite($TopSprite)
+		top_animation_player.play(gender + top + action + direction) # animate top
+	else:
+		hide_sprite($TopSprite)
+	if is_equipped(bottom):
+		show_sprite($BottomSprite)
+		bottom_animation_player.play(gender + bottom + action + direction) # animate bottom
+	else:
+		hide_sprite($BottomSprite)
+	if is_equipped(weapon):
+		show_sprite($WeaponSprite)
+		weapon_animation_player.play(gender + weapon + action + direction) # animate weapon
+	else:
+		# always play weapon animation even if not equipped. This is to trigger the attack at the right time.
+		hide_sprite($WeaponSprite)
+		weapon_animation_player.play(gender + Weapon.Sword + Action.Attack + direction) # animate weapon
 	
 	# update action and direction
 	current_action = action
 	current_direction = direction
+
+func show_sprite(sprite):
+	sprite.visible = true
+	
+func hide_sprite(sprite):
+	sprite.visible = false
 
 func get_cardinal_direction(dir): # returns cardinal direction based on velocity vector
 	var dir_n = dir.normalized()
@@ -163,6 +187,9 @@ func get_cardinal_direction(dir): # returns cardinal direction based on velocity
 	elif x >= cos(deg2rad(292.5)) && x <= cos(deg2rad(337.5)) && y >= sin(deg2rad(292.5)) && y <= sin(deg2rad(337.5)): return Dir.SE
 	else: return current_direction
 
+func is_equipped(item):
+	return null != item
+	
 func open_door(): # opens the door if player collides with it
 	for i in get_slide_count():
 		var collider = get_slide_collision(i).collider
@@ -173,7 +200,7 @@ func open_door(): # opens the door if player collides with it
 func is_attacking():
 	if interrupt:
 		return false
-	return -1 != body_animation_player.get_current_animation().find("1h_attack")
+	return -1 != body_animation_player.get_current_animation().find("1h_attack") || -1 != body_animation_player.get_current_animation().find("punch")
 
 func is_casting():
 	if interrupt:

@@ -1,4 +1,4 @@
-[gd_scene load_steps=216 format=2]
+[gd_scene load_steps=248 format=2]
 
 [ext_resource path="res://assets/animations/player/male/body/elf/male_elf_body_sprite.tres" type="SpriteFrames" id=1]
 [ext_resource path="res://assets/animations/player/male/body/elf/run/male_elf_body_run_s.tres" type="Animation" id=2]
@@ -170,6 +170,38 @@
 [ext_resource path="res://assets/animations/player/male/weapon/sword/casting/male_weapon_sword_casting_n.tres" type="Animation" id=168]
 [ext_resource path="res://Scripts/Player.gd" type="Script" id=169]
 [ext_resource path="res://assets/animations/player/male/top/elf/casting/male_elf_top_casting_nw.tres" type="Animation" id=170]
+[ext_resource path="res://assets/animations/player/male/body/elf/punch/male_elf_body_punch_s.tres" type="Animation" id=171]
+[ext_resource path="res://assets/animations/player/male/hair/elf/punch/male_elf_hair_punch_e.tres" type="Animation" id=172]
+[ext_resource path="res://assets/animations/player/male/bottom/elf/punch/male_elf_bottom_punch_w.tres" type="Animation" id=173]
+[ext_resource path="res://assets/animations/player/male/hair/elf/punch/male_elf_hair_punch_sw.tres" type="Animation" id=174]
+[ext_resource path="res://assets/animations/player/male/bottom/elf/punch/male_elf_bottom_punch_e.tres" type="Animation" id=175]
+[ext_resource path="res://assets/animations/player/male/body/elf/punch/male_elf_body_punch_e.tres" type="Animation" id=176]
+[ext_resource path="res://assets/animations/player/male/bottom/elf/punch/male_elf_bottom_punch_s.tres" type="Animation" id=177]
+[ext_resource path="res://assets/animations/player/male/hair/elf/punch/male_elf_hair_punch_w.tres" type="Animation" id=178]
+[ext_resource path="res://assets/animations/player/male/bottom/elf/punch/male_elf_bottom_punch_nw.tres" type="Animation" id=179]
+[ext_resource path="res://assets/animations/player/male/body/elf/punch/male_elf_body_punch_ne.tres" type="Animation" id=180]
+[ext_resource path="res://assets/animations/player/male/body/elf/punch/male_elf_body_punch_sw.tres" type="Animation" id=181]
+[ext_resource path="res://assets/animations/player/male/bottom/elf/punch/male_elf_bottom_punch_se.tres" type="Animation" id=182]
+[ext_resource path="res://assets/animations/player/male/body/elf/punch/male_elf_body_punch_w.tres" type="Animation" id=183]
+[ext_resource path="res://assets/animations/player/male/body/elf/punch/male_elf_body_punch_n.tres" type="Animation" id=184]
+[ext_resource path="res://assets/animations/player/male/bottom/elf/punch/male_elf_bottom_punch_sw.tres" type="Animation" id=185]
+[ext_resource path="res://assets/animations/player/male/body/elf/punch/male_elf_body_punch_se.tres" type="Animation" id=186]
+[ext_resource path="res://assets/animations/player/male/hair/elf/punch/male_elf_hair_punch_se.tres" type="Animation" id=187]
+[ext_resource path="res://assets/animations/player/male/hair/elf/punch/male_elf_hair_punch_s.tres" type="Animation" id=188]
+[ext_resource path="res://assets/animations/player/male/hair/elf/punch/male_elf_hair_punch_ne.tres" type="Animation" id=189]
+[ext_resource path="res://assets/animations/player/male/body/elf/punch/male_elf_body_punch_nw.tres" type="Animation" id=190]
+[ext_resource path="res://assets/animations/player/male/bottom/elf/punch/male_elf_bottom_punch_n.tres" type="Animation" id=191]
+[ext_resource path="res://assets/animations/player/male/hair/elf/punch/male_elf_hair_punch_n.tres" type="Animation" id=192]
+[ext_resource path="res://assets/animations/player/male/bottom/elf/punch/male_elf_bottom_punch_ne.tres" type="Animation" id=193]
+[ext_resource path="res://assets/animations/player/male/hair/elf/punch/male_elf_hair_punch_nw.tres" type="Animation" id=194]
+[ext_resource path="res://assets/animations/player/male/top/elf/punch/male_elf_top_punch_s.tres" type="Animation" id=195]
+[ext_resource path="res://assets/animations/player/male/top/elf/punch/male_elf_top_punch_ne.tres" type="Animation" id=196]
+[ext_resource path="res://assets/animations/player/male/top/elf/punch/male_elf_bottom_punch_w.tres" type="Animation" id=197]
+[ext_resource path="res://assets/animations/player/male/top/elf/punch/male_elf_top_punch_e.tres" type="Animation" id=198]
+[ext_resource path="res://assets/animations/player/male/top/elf/punch/male_elf_top_punch_se.tres" type="Animation" id=199]
+[ext_resource path="res://assets/animations/player/male/top/elf/punch/male_elf_top_punch_n.tres" type="Animation" id=200]
+[ext_resource path="res://assets/animations/player/male/top/elf/punch/male_elf_top_punch_sw.tres" type="Animation" id=201]
+[ext_resource path="res://assets/animations/player/male/top/elf/punch/male_elf_top_punch_nw.tres" type="Animation" id=202]
 
 [sub_resource type="Animation" id=1]
 resource_name = "male_elf_bottom_1h_attack_s"
@@ -255,209 +287,209 @@ tracks/1/keys = {
 
 [sub_resource type="AtlasTexture" id=4]
 flags = 4
-atlas = ExtResource( 126 )
-region = Rect2( 0, 0, 64, 256 )
-
-[sub_resource type="AtlasTexture" id=5]
-flags = 4
-atlas = ExtResource( 126 )
-region = Rect2( 64, 0, 64, 256 )
-
-[sub_resource type="AtlasTexture" id=6]
-flags = 4
-atlas = ExtResource( 126 )
-region = Rect2( 128, 0, 64, 256 )
-
-[sub_resource type="AtlasTexture" id=7]
-flags = 4
-atlas = ExtResource( 126 )
-region = Rect2( 192, 0, 64, 256 )
-
-[sub_resource type="AtlasTexture" id=8]
-flags = 4
-atlas = ExtResource( 126 )
-region = Rect2( 256, 0, 64, 256 )
-
-[sub_resource type="AtlasTexture" id=9]
-flags = 4
-atlas = ExtResource( 126 )
-region = Rect2( 320, 0, 64, 256 )
-
-[sub_resource type="AtlasTexture" id=10]
-flags = 4
-atlas = ExtResource( 126 )
-region = Rect2( 384, 0, 64, 256 )
-
-[sub_resource type="AtlasTexture" id=11]
-flags = 4
-atlas = ExtResource( 126 )
-region = Rect2( 448, 0, 64, 256 )
-
-[sub_resource type="AtlasTexture" id=12]
-flags = 4
-atlas = ExtResource( 74 )
-region = Rect2( 0, 0, 160, 160 )
-
-[sub_resource type="AtlasTexture" id=13]
-flags = 4
-atlas = ExtResource( 74 )
-region = Rect2( 160, 0, 160, 160 )
-
-[sub_resource type="AtlasTexture" id=14]
-flags = 4
-atlas = ExtResource( 74 )
-region = Rect2( 320, 0, 160, 160 )
-
-[sub_resource type="AtlasTexture" id=15]
-flags = 4
-atlas = ExtResource( 74 )
-region = Rect2( 480, 0, 160, 160 )
-
-[sub_resource type="AtlasTexture" id=16]
-flags = 4
-atlas = ExtResource( 74 )
-region = Rect2( 640, 0, 160, 160 )
-
-[sub_resource type="AtlasTexture" id=17]
-flags = 4
-atlas = ExtResource( 74 )
-region = Rect2( 800, 0, 160, 160 )
-
-[sub_resource type="AtlasTexture" id=18]
-flags = 4
-atlas = ExtResource( 74 )
-region = Rect2( 960, 0, 160, 160 )
-
-[sub_resource type="AtlasTexture" id=19]
-flags = 4
-atlas = ExtResource( 74 )
-region = Rect2( 1120, 0, 160, 160 )
-
-[sub_resource type="AtlasTexture" id=20]
-flags = 4
-atlas = ExtResource( 74 )
-region = Rect2( 1280, 0, 160, 160 )
-
-[sub_resource type="AtlasTexture" id=21]
-flags = 4
-atlas = ExtResource( 74 )
-region = Rect2( 1440, 0, 160, 160 )
-
-[sub_resource type="AtlasTexture" id=22]
-flags = 4
-atlas = ExtResource( 74 )
-region = Rect2( 1600, 0, 160, 160 )
-
-[sub_resource type="AtlasTexture" id=23]
-flags = 4
-atlas = ExtResource( 74 )
-region = Rect2( 1760, 0, 160, 160 )
-
-[sub_resource type="AtlasTexture" id=24]
-flags = 4
-atlas = ExtResource( 127 )
-region = Rect2( 0, 0, 128, 128 )
-
-[sub_resource type="AtlasTexture" id=25]
-flags = 4
-atlas = ExtResource( 127 )
-region = Rect2( 0, 128, 128, 128 )
-
-[sub_resource type="AtlasTexture" id=26]
-flags = 4
-atlas = ExtResource( 127 )
-region = Rect2( 0, 256, 128, 128 )
-
-[sub_resource type="AtlasTexture" id=27]
-flags = 4
-atlas = ExtResource( 127 )
-region = Rect2( 0, 384, 128, 128 )
-
-[sub_resource type="AtlasTexture" id=28]
-flags = 4
-atlas = ExtResource( 127 )
-region = Rect2( 0, 512, 128, 128 )
-
-[sub_resource type="AtlasTexture" id=29]
-flags = 4
-atlas = ExtResource( 127 )
-region = Rect2( 0, 640, 128, 128 )
-
-[sub_resource type="AtlasTexture" id=30]
-flags = 4
-atlas = ExtResource( 127 )
-region = Rect2( 0, 768, 128, 128 )
-
-[sub_resource type="AtlasTexture" id=31]
-flags = 4
-atlas = ExtResource( 127 )
-region = Rect2( 0, 896, 128, 128 )
-
-[sub_resource type="AtlasTexture" id=32]
-flags = 4
 atlas = ExtResource( 128 )
 region = Rect2( 0, 0, 128, 128 )
 
-[sub_resource type="AtlasTexture" id=33]
+[sub_resource type="AtlasTexture" id=5]
 flags = 4
 atlas = ExtResource( 128 )
 region = Rect2( 128, 0, 128, 128 )
 
-[sub_resource type="AtlasTexture" id=34]
+[sub_resource type="AtlasTexture" id=6]
 flags = 4
 atlas = ExtResource( 128 )
 region = Rect2( 256, 0, 128, 128 )
 
-[sub_resource type="AtlasTexture" id=35]
+[sub_resource type="AtlasTexture" id=7]
 flags = 4
 atlas = ExtResource( 128 )
 region = Rect2( 384, 0, 128, 128 )
 
-[sub_resource type="AtlasTexture" id=36]
+[sub_resource type="AtlasTexture" id=8]
 flags = 4
 atlas = ExtResource( 128 )
 region = Rect2( 512, 0, 128, 128 )
 
-[sub_resource type="AtlasTexture" id=37]
+[sub_resource type="AtlasTexture" id=9]
 flags = 4
 atlas = ExtResource( 128 )
 region = Rect2( 640, 0, 128, 128 )
 
-[sub_resource type="AtlasTexture" id=38]
+[sub_resource type="AtlasTexture" id=10]
 flags = 4
 atlas = ExtResource( 128 )
 region = Rect2( 768, 0, 128, 128 )
 
-[sub_resource type="AtlasTexture" id=39]
+[sub_resource type="AtlasTexture" id=11]
 flags = 4
 atlas = ExtResource( 128 )
 region = Rect2( 896, 0, 128, 128 )
 
-[sub_resource type="AtlasTexture" id=40]
+[sub_resource type="AtlasTexture" id=12]
 flags = 4
 atlas = ExtResource( 128 )
 region = Rect2( 1024, 0, 128, 128 )
 
+[sub_resource type="AtlasTexture" id=13]
+flags = 4
+atlas = ExtResource( 127 )
+region = Rect2( 0, 0, 128, 128 )
+
+[sub_resource type="AtlasTexture" id=14]
+flags = 4
+atlas = ExtResource( 127 )
+region = Rect2( 0, 128, 128, 128 )
+
+[sub_resource type="AtlasTexture" id=15]
+flags = 4
+atlas = ExtResource( 127 )
+region = Rect2( 0, 256, 128, 128 )
+
+[sub_resource type="AtlasTexture" id=16]
+flags = 4
+atlas = ExtResource( 127 )
+region = Rect2( 0, 384, 128, 128 )
+
+[sub_resource type="AtlasTexture" id=17]
+flags = 4
+atlas = ExtResource( 127 )
+region = Rect2( 0, 512, 128, 128 )
+
+[sub_resource type="AtlasTexture" id=18]
+flags = 4
+atlas = ExtResource( 127 )
+region = Rect2( 0, 640, 128, 128 )
+
+[sub_resource type="AtlasTexture" id=19]
+flags = 4
+atlas = ExtResource( 127 )
+region = Rect2( 0, 768, 128, 128 )
+
+[sub_resource type="AtlasTexture" id=20]
+flags = 4
+atlas = ExtResource( 127 )
+region = Rect2( 0, 896, 128, 128 )
+
+[sub_resource type="AtlasTexture" id=21]
+flags = 4
+atlas = ExtResource( 126 )
+region = Rect2( 0, 0, 64, 256 )
+
+[sub_resource type="AtlasTexture" id=22]
+flags = 4
+atlas = ExtResource( 126 )
+region = Rect2( 64, 0, 64, 256 )
+
+[sub_resource type="AtlasTexture" id=23]
+flags = 4
+atlas = ExtResource( 126 )
+region = Rect2( 128, 0, 64, 256 )
+
+[sub_resource type="AtlasTexture" id=24]
+flags = 4
+atlas = ExtResource( 126 )
+region = Rect2( 192, 0, 64, 256 )
+
+[sub_resource type="AtlasTexture" id=25]
+flags = 4
+atlas = ExtResource( 126 )
+region = Rect2( 256, 0, 64, 256 )
+
+[sub_resource type="AtlasTexture" id=26]
+flags = 4
+atlas = ExtResource( 126 )
+region = Rect2( 320, 0, 64, 256 )
+
+[sub_resource type="AtlasTexture" id=27]
+flags = 4
+atlas = ExtResource( 126 )
+region = Rect2( 384, 0, 64, 256 )
+
+[sub_resource type="AtlasTexture" id=28]
+flags = 4
+atlas = ExtResource( 126 )
+region = Rect2( 448, 0, 64, 256 )
+
+[sub_resource type="AtlasTexture" id=29]
+flags = 4
+atlas = ExtResource( 74 )
+region = Rect2( 0, 0, 160, 160 )
+
+[sub_resource type="AtlasTexture" id=30]
+flags = 4
+atlas = ExtResource( 74 )
+region = Rect2( 160, 0, 160, 160 )
+
+[sub_resource type="AtlasTexture" id=31]
+flags = 4
+atlas = ExtResource( 74 )
+region = Rect2( 320, 0, 160, 160 )
+
+[sub_resource type="AtlasTexture" id=32]
+flags = 4
+atlas = ExtResource( 74 )
+region = Rect2( 480, 0, 160, 160 )
+
+[sub_resource type="AtlasTexture" id=33]
+flags = 4
+atlas = ExtResource( 74 )
+region = Rect2( 640, 0, 160, 160 )
+
+[sub_resource type="AtlasTexture" id=34]
+flags = 4
+atlas = ExtResource( 74 )
+region = Rect2( 800, 0, 160, 160 )
+
+[sub_resource type="AtlasTexture" id=35]
+flags = 4
+atlas = ExtResource( 74 )
+region = Rect2( 960, 0, 160, 160 )
+
+[sub_resource type="AtlasTexture" id=36]
+flags = 4
+atlas = ExtResource( 74 )
+region = Rect2( 1120, 0, 160, 160 )
+
+[sub_resource type="AtlasTexture" id=37]
+flags = 4
+atlas = ExtResource( 74 )
+region = Rect2( 1280, 0, 160, 160 )
+
+[sub_resource type="AtlasTexture" id=38]
+flags = 4
+atlas = ExtResource( 74 )
+region = Rect2( 1440, 0, 160, 160 )
+
+[sub_resource type="AtlasTexture" id=39]
+flags = 4
+atlas = ExtResource( 74 )
+region = Rect2( 1600, 0, 160, 160 )
+
+[sub_resource type="AtlasTexture" id=40]
+flags = 4
+atlas = ExtResource( 74 )
+region = Rect2( 1760, 0, 160, 160 )
+
 [sub_resource type="SpriteFrames" id=41]
 animations = [ {
-"frames": [ SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ) ],
+"frames": [ SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ) ],
 "loop": true,
-"name": "lightning",
+"name": "energyball",
 "speed": 5.0
 }, {
-"frames": [ SubResource( 12 ), SubResource( 13 ), SubResource( 14 ), SubResource( 15 ), SubResource( 16 ), SubResource( 17 ), SubResource( 18 ), SubResource( 19 ), SubResource( 20 ), SubResource( 21 ), SubResource( 22 ), SubResource( 23 ) ],
-"loop": true,
-"name": "slash_s",
-"speed": 5.0
-}, {
-"frames": [ SubResource( 24 ), SubResource( 25 ), SubResource( 26 ), SubResource( 27 ), SubResource( 28 ), SubResource( 29 ), SubResource( 30 ), SubResource( 31 ) ],
+"frames": [ SubResource( 13 ), SubResource( 14 ), SubResource( 15 ), SubResource( 16 ), SubResource( 17 ), SubResource( 18 ), SubResource( 19 ), SubResource( 20 ) ],
 "loop": true,
 "name": "explosion",
 "speed": 5.0
 }, {
-"frames": [ SubResource( 32 ), SubResource( 33 ), SubResource( 34 ), SubResource( 35 ), SubResource( 36 ), SubResource( 37 ), SubResource( 38 ), SubResource( 39 ), SubResource( 40 ) ],
+"frames": [ SubResource( 21 ), SubResource( 22 ), SubResource( 23 ), SubResource( 24 ), SubResource( 25 ), SubResource( 26 ), SubResource( 27 ), SubResource( 28 ) ],
 "loop": true,
-"name": "energyball",
+"name": "lightning",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 29 ), SubResource( 30 ), SubResource( 31 ), SubResource( 32 ), SubResource( 33 ), SubResource( 34 ), SubResource( 35 ), SubResource( 36 ), SubResource( 37 ), SubResource( 38 ), SubResource( 39 ), SubResource( 40 ) ],
+"loop": true,
+"name": "slash_s",
 "speed": 5.0
 } ]
 
@@ -551,7 +583,7 @@ script = ExtResource( 169 )
 
 [node name="BodySprite" type="AnimatedSprite" parent="."]
 frames = ExtResource( 1 )
-animation = "male_elf_body_casting_ne"
+animation = "male_elf_body_punch_se"
 frame = 2
 offset = Vector2( 0, -40 )
 
@@ -581,6 +613,14 @@ anims/male_elf_body_idle_s = ExtResource( 12 )
 anims/male_elf_body_idle_se = ExtResource( 18 )
 anims/male_elf_body_idle_sw = ExtResource( 14 )
 anims/male_elf_body_idle_w = ExtResource( 15 )
+anims/male_elf_body_punch_e = ExtResource( 176 )
+anims/male_elf_body_punch_n = ExtResource( 184 )
+anims/male_elf_body_punch_ne = ExtResource( 180 )
+anims/male_elf_body_punch_nw = ExtResource( 190 )
+anims/male_elf_body_punch_s = ExtResource( 171 )
+anims/male_elf_body_punch_se = ExtResource( 186 )
+anims/male_elf_body_punch_sw = ExtResource( 181 )
+anims/male_elf_body_punch_w = ExtResource( 183 )
 anims/male_elf_body_run_e = ExtResource( 10 )
 anims/male_elf_body_run_n = ExtResource( 19 )
 anims/male_elf_body_run_ne = ExtResource( 30 )
@@ -592,7 +632,7 @@ anims/male_elf_body_run_w = ExtResource( 3 )
 
 [node name="HairSprite" type="AnimatedSprite" parent="."]
 frames = ExtResource( 23 )
-animation = "male_elf_hair_casting_nw"
+animation = "male_elf_hair_punch_se"
 frame = 2
 offset = Vector2( 0, -40 )
 
@@ -622,6 +662,14 @@ anims/male_elf_hair_idle_s = ExtResource( 28 )
 anims/male_elf_hair_idle_se = ExtResource( 21 )
 anims/male_elf_hair_idle_sw = ExtResource( 22 )
 anims/male_elf_hair_idle_w = ExtResource( 29 )
+anims/male_elf_hair_punch_e = ExtResource( 172 )
+anims/male_elf_hair_punch_n = ExtResource( 192 )
+anims/male_elf_hair_punch_ne = ExtResource( 189 )
+anims/male_elf_hair_punch_nw = ExtResource( 194 )
+anims/male_elf_hair_punch_s = ExtResource( 188 )
+anims/male_elf_hair_punch_se = ExtResource( 187 )
+anims/male_elf_hair_punch_sw = ExtResource( 174 )
+anims/male_elf_hair_punch_w = ExtResource( 178 )
 anims/male_elf_hair_run_e = ExtResource( 31 )
 anims/male_elf_hair_run_n = ExtResource( 32 )
 anims/male_elf_hair_run_ne = ExtResource( 33 )
@@ -633,7 +681,7 @@ anims/male_elf_hair_run_w = ExtResource( 39 )
 
 [node name="BottomSprite" type="AnimatedSprite" parent="."]
 frames = ExtResource( 52 )
-animation = "male_elf_bottom_casting_nw"
+animation = "male_elf_bottom_punch_n"
 frame = 2
 offset = Vector2( 0, -40 )
 
@@ -663,6 +711,14 @@ anims/male_elf_bottom_idle_s = ExtResource( 69 )
 anims/male_elf_bottom_idle_se = ExtResource( 66 )
 anims/male_elf_bottom_idle_sw = ExtResource( 63 )
 anims/male_elf_bottom_idle_w = ExtResource( 61 )
+anims/male_elf_bottom_punch_e = ExtResource( 175 )
+anims/male_elf_bottom_punch_n = ExtResource( 191 )
+anims/male_elf_bottom_punch_ne = ExtResource( 193 )
+anims/male_elf_bottom_punch_nw = ExtResource( 179 )
+anims/male_elf_bottom_punch_s = ExtResource( 177 )
+anims/male_elf_bottom_punch_se = ExtResource( 182 )
+anims/male_elf_bottom_punch_sw = ExtResource( 185 )
+anims/male_elf_bottom_punch_w = ExtResource( 173 )
 anims/male_elf_bottom_run_e = ExtResource( 58 )
 anims/male_elf_bottom_run_n = ExtResource( 62 )
 anims/male_elf_bottom_run_ne = ExtResource( 53 )
@@ -674,7 +730,8 @@ anims/male_elf_bottom_run_w = ExtResource( 54 )
 
 [node name="TopSprite" type="AnimatedSprite" parent="."]
 frames = ExtResource( 24 )
-animation = "male_elf_top_casting_nw"
+animation = "male_elf_top_punch_se"
+frame = 2
 offset = Vector2( 0, -40 )
 
 [node name="TopAnimationPlayer" type="AnimationPlayer" parent="TopSprite"]
@@ -703,6 +760,14 @@ anims/male_elf_top_idle_s = ExtResource( 51 )
 anims/male_elf_top_idle_se = ExtResource( 49 )
 anims/male_elf_top_idle_sw = ExtResource( 36 )
 anims/male_elf_top_idle_w = ExtResource( 38 )
+anims/male_elf_top_punch_e = ExtResource( 198 )
+anims/male_elf_top_punch_n = ExtResource( 200 )
+anims/male_elf_top_punch_ne = ExtResource( 196 )
+anims/male_elf_top_punch_nw = ExtResource( 202 )
+anims/male_elf_top_punch_s = ExtResource( 195 )
+anims/male_elf_top_punch_se = ExtResource( 199 )
+anims/male_elf_top_punch_sw = ExtResource( 201 )
+anims/male_elf_top_punch_w = ExtResource( 197 )
 anims/male_elf_top_run_e = ExtResource( 40 )
 anims/male_elf_top_run_n = ExtResource( 42 )
 anims/male_elf_top_run_ne = ExtResource( 46 )
