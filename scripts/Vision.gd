@@ -35,10 +35,15 @@ func set_object_visible(object):
 	# set the object as visible as well as neighbouring objects
 	object.visible = true
 	var tile = game.map.world_to_map(object.position)
-	set_neighbour_visible(tile.x + 1, tile.y)
-	set_neighbour_visible(tile.x - 1, tile.y)
-	set_neighbour_visible(tile.x, tile.y + 1)
-	set_neighbour_visible(tile.x, tile.y - 1)
+	if null == game.map.map_size: return
+	if (tile.x + 1) <= (game.map.map_size.x - 1):
+		set_neighbour_visible(tile.x + 1, tile.y)
+	if (tile.x - 1) >= 0:
+		set_neighbour_visible(tile.x - 1, tile.y)
+	if (tile.y + 1) <= (game.map.map_size.y - 1):
+		set_neighbour_visible(tile.x, tile.y + 1)
+	if (tile.y - 1) >= 0:
+		set_neighbour_visible(tile.x, tile.y - 1)
 
 func set_neighbour_visible(x, y):
 	if typeof(game.tile_instance_map[x][y]) == TYPE_OBJECT:
