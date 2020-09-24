@@ -1,3 +1,5 @@
+# developed using godot 3.2.1
+https://godotengine.org/download/windows
 # isogame
 isometric test game
 
