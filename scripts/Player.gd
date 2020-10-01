@@ -80,6 +80,23 @@ func _input(event):
 			target = null
 			interrupt = true
 	
+	if event.is_action("left"):
+		destination = destination + Vector2(-1000,0)
+	if event.is_action_released("left"):
+		destination.x = self.position.x
+	if event.is_action_pressed("right"):
+		destination = destination + Vector2(1000,0)
+	if event.is_action_released("right"):
+		destination.x = self.position.x
+	if event.is_action_pressed("up"):
+		destination = destination + Vector2(0,-1000)
+	if event.is_action_released("up"):
+		destination.y = self.position.y
+	if event.is_action_pressed("down"):
+		destination = destination + Vector2(0,1000)
+	if event.is_action_released("down"):
+		destination.y = self.position.y
+	
 func _physics_process(delta):
 	if Input.is_mouse_button_pressed(1) || Input.is_mouse_button_pressed(2): # while mouse left click is held down, update the destination
 		destination = get_global_mouse_position()
