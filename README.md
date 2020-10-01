@@ -7,18 +7,23 @@ testing to make an isometric graphics 2D game.
 
 loosely roguelike/rpg for now. Trying to get it to be like diablo 2.
 
+# Installation
+    - Clone Github repository onto local computer (link: git@github.com:Zedderrs/isogame.git)
+    - Launch Godot. In the Project Manager menu, import the project folder by navigating to the project folder and selecting the *project.godot* file. The project should become available in the Project Manager Menu. Select IsoGame and hit run.
+    - In the editor, run the game by clicking the play button on the top-right.
+
 # Game Design Concept
 After having played Hades I've been inspired to flesh out some ideas for what this game should be about.
 
 # Game
-At it's core, this game is a dungeon crawler with roguelike aspects. 
+At it's core, this game is a dungeon crawler with roguelike aspects.
 
 The first room you start in should always be the same with a randomized buff that get's you started.
 I'm thinking it will be the right click skill (special skill) that will allow the player to begin making
 choices based off what they get.
 
 # Game art
-The art for this game is provided by [PVGames](https://pvgames.itch.io/) 
+The art for this game is provided by [PVGames](https://pvgames.itch.io/)
 I've gotten a few packs so that I can have many many different characters/environments to choose from.
 Visual aspects, from animations to background art, should all be already included here.
 
@@ -39,7 +44,7 @@ items will have status effects and will provide further customization into the c
 - bottom armor
 - accessory (maybe)
 
-All these pieces should show on the character and their sprite sheets are included as separate animations to be drawn over the existing character. 
+All these pieces should show on the character and their sprite sheets are included as separate animations to be drawn over the existing character.
 
 # Hallway exploration
 
