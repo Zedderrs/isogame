@@ -80,21 +80,32 @@ func _input(event):
 			target = null
 			interrupt = true
 	
-	if event.is_action("left"):
+	if event.is_action_pressed("left",true) && !event.is_action_pressed("right",true):
+		game.print_msg('pressed left')
 		destination = destination + Vector2(-1000,0)
-	if event.is_action_released("left"):
-		destination.x = self.position.x
-	if event.is_action_pressed("right"):
+	
+	if event.is_action_pressed("right",true) && !event.is_action_pressed("left",true):
+		game.print_msg('pressed right')
 		destination = destination + Vector2(1000,0)
-	if event.is_action_released("right"):
+	
+	if !event.is_action_pressed("left",true) && !event.is_action_pressed("right",true):
+		game.print_msg('released left and right')
 		destination.x = self.position.x
-	if event.is_action_pressed("up"):
+	
+	if event.is_action_pressed("up") && !event.is_action_pressed("down"):
+		game.print_msg('pressed up')
 		destination = destination + Vector2(0,-1000)
-	if event.is_action_released("up"):
-		destination.y = self.position.y
-	if event.is_action_pressed("down"):
+		
+	if event.is_action_pressed("down") && !event.is_action_pressed("up"):
+		game.print_msg('pressed down')
 		destination = destination + Vector2(0,1000)
-	if event.is_action_released("down"):
+
+	if !event.is_action_pressed("up") && !event.is_action_pressed("down"):
+		game.print_msg('released up and down')
+		destination.y = self.position.y
+	
+	
+	elif event.is_action_released("down"):
 		destination.y = self.position.y
 	
 func _physics_process(delta):
