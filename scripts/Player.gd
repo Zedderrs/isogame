@@ -33,9 +33,9 @@ var space_graph
 onready var gender = Gender.Male
 onready var body = Body.Elf
 onready var hair = Hair.Elf
-onready var top 
-onready var bottom  
-onready var weapon  
+onready var top = Top.Elf
+onready var bottom = Bottom.Elf
+onready var weapon = Weapon.Sword
 onready var spell = Spell.Lightning
 var current_body_animation
 # player state
