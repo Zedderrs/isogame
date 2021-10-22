@@ -52,8 +52,9 @@ onready var attack_range = 100
 onready var cast_range = 600
 onready var hp_max = 10
 onready var hp = hp_max
-onready var xp = 2
+onready var xp = 0
 onready var xp_max = 10
+onready var lvl = 1
 
 # player movement
 onready var path = []
@@ -295,6 +296,13 @@ func take_damage(dmg):
 	hp = hp - dmg
 	if hp <= 0:
 		get_tree().quit()
+
+func take_xp(xp_amount):
+	xp = xp + xp_amount
+	if xp >= xp_max:
+		lvl = lvl + 1
+		xp_max = xp_max + lvl*10
+	
 
 # ==============================================================================
 # ------------------------------- Debugging ------------------------------------
