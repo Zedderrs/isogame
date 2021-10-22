@@ -1,7 +1,6 @@
 [gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://Scripts/Vision.gd" type="Script" id=1]
-
+[ext_resource path="res://scripts/Vision.gd" type="Script" id=1]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 400.0
@@ -16,4 +15,5 @@ shape = SubResource( 1 )
 
 [node name="LineOfSight" type="RayCast2D" parent="."]
 collide_with_areas = true
+
 [connection signal="body_entered" from="." to="." method="_on_Area2D_body_entered"]

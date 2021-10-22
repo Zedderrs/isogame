@@ -10,13 +10,12 @@ config_version=4
 
 _global_script_classes=[  ]
 _global_script_class_icons={
-
 }
 
 [application]
 
 config/name="IsoGame"
-run/main_scene="res://Scenes/Game.tscn"
+run/main_scene="res://scenes/Game.tscn"
 config/icon="res://assets/game_icon/icon.png"
 
 [display]

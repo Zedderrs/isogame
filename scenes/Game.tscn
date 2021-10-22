@@ -1,10 +1,10 @@
 [gd_scene load_steps=14 format=2]
 
-[ext_resource path="res://Scenes/UI.tscn" type="PackedScene" id=1]
-[ext_resource path="res://Scenes/Vision.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Scenes/Player.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Scripts/Game.gd" type="Script" id=4]
-[ext_resource path="res://Scripts/Map.gd" type="Script" id=5]
+[ext_resource path="res://scenes/UI.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scenes/Vision.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scenes/Player.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scripts/Game.gd" type="Script" id=4]
+[ext_resource path="res://scripts/Map.gd" type="Script" id=5]
 [ext_resource path="res://assets/tiles/Floors/GrassFloor.png" type="Texture" id=6]
 [ext_resource path="res://assets/tiles/Fog/Fog.png" type="Texture" id=7]
 [ext_resource path="res://assets/tiles/Walls/StoneColumn.png" type="Texture" id=8]
@@ -124,4 +124,5 @@ margin_left = -0.814453
 margin_top = 0.568848
 margin_right = -0.814453
 margin_bottom = 0.568848
+
 [connection signal="body_exited" from="AboveFloor/Player/Vision" to="AboveFloor/Player/Vision" method="_on_VisionArea2D2_body_exited"]

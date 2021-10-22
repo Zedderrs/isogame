@@ -16,6 +16,8 @@ func _physics_process(delta):
 				lightning_spell(delta)
 
 func lightning_spell(delta):
+	if (not game.player.spell_target):
+		return
 	game.player.effect.position = game.player.spell_target.position - game.player.position
 	game.player.effect.position.y -= 64
 	if is_point_of_attack(delta):

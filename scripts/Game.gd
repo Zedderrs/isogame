@@ -17,7 +17,7 @@ onready var InteractCursor = preload("res://assets/UI/cursors/interact.png")
 onready var AttackCursor = preload("res://assets/UI/cursors/attack.png")
 
 # Enemy Scene
-const EnemyScene = preload("res://Scenes/Enemy.tscn")
+const EnemyScene = preload("res://scenes/Enemy.tscn")
 # Tile scenes
 const GrassFloor = preload("res://assets/tiles/Floors/GrassFloor.tscn")
 const BlankFloor = preload("res://assets/tiles/Floors/BlankFloor.tscn")
@@ -581,9 +581,9 @@ func get_tile_by_type(type):
 
 # return the object by id
 func get_object_by_id(id):
-	for object in object_instance_list:
-		if object.get_instance_id() == id:
-			return object 
+	for obj in object_instance_list:
+		if obj.get_instance_id() == id:
+			return obj 
 
 func print_msg(msg):
 	ui.print_msg(msg)
