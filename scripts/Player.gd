@@ -33,9 +33,9 @@ var space_graph
 onready var gender = Gender.Male
 onready var body = Body.Elf
 onready var hair = Hair.Elf
-onready var top
-onready var bottom
-onready var weapon
+onready var top 
+onready var bottom  
+onready var weapon  
 onready var spell = Spell.Lightning
 var current_body_animation
 # player state
@@ -301,14 +301,14 @@ func take_damage(dmg):
 func _draw():
 	# pathfinding for character walking
 	for i in range(path.size()-1):
-		var from_pt = get_global_transform().xform_inv(path[i])
-		var to_pt = get_global_transform().xform_inv(path[i+1])
+		from_pt = get_global_transform().xform_inv(path[i])
+		to_pt = get_global_transform().xform_inv(path[i+1])
 		draw_line(from_pt, to_pt, Color.red, 2.0)
 	
 	# collision center of object from move_slide
 	for i in get_slide_count():
 		var collision = get_slide_collision(i)
-		var from_pt = get_global_transform().xform_inv(collision.collider.position)
+		from_pt = get_global_transform().xform_inv(collision.collider.position)
 		draw_circle(from_pt, 5, Color.burlywood)
 
 	# velocity vector

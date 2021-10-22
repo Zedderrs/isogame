@@ -1,6 +1,6 @@
 [gd_resource type="Animation" load_steps=2 format=2]
 
-[ext_resource path="res://Scripts/WeaponAnimationPlayer.gd" type="Script" id=1]
+[ext_resource path="res://scripts/WeaponAnimationPlayer.gd" type="Script" id=1]
 
 [resource]
 resource_name = "male_weapon_sword_1h_attack_w"
