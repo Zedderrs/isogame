@@ -293,6 +293,8 @@ func update_navigation_path(start_position, end_position):
 
 func take_damage(dmg):
 	hp = hp - dmg
+	if hp <= 0:
+		get_tree().quit()
 
 # ==============================================================================
 # ------------------------------- Debugging ------------------------------------
