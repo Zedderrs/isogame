@@ -150,6 +150,7 @@ func die():
 	Input.set_default_cursor_shape(0) # reset cursor to normal
 	game.player.target = null
 	game.player.spell_target = null
+	game.player.take_xp(1)
 
 func _on_Enemy_mouse_entered():
 	Input.set_default_cursor_shape(2)
